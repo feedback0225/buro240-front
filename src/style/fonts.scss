@@ -1,0 +1,8 @@
+@font-face{
+  font-weight: 400;
+  font-family: 'UniversityRoman';
+  font-style: normal;
+  src: url('@/assets/fonts/university_roman_regular-webfont.woff2') format("woff2"),
+      url('@/assets/fonts/university_roman_regular-webfont.woff') format("woff");
+  font-display: swap;
+}
