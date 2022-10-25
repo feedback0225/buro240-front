@@ -13,7 +13,7 @@ export default function crateDisk(position, color) {
     new THREE.MeshStandardMaterial({color: parsedColor}),
     new THREE.MeshStandardMaterial({color: parsedColor}),
   ]
-  const diskGeomtry = new THREE.BoxGeometry(9, 0.5, 9);
+  const diskGeomtry = new THREE.BoxGeometry(8, 0.65, 8);
   // const box2Material = new THREE.MeshStandardMaterial({color: 0xFFFFFF});
   const disk = new THREE.Mesh(diskGeomtry, diskMultyMaterial);
   // box2.castShadow = true;

@@ -1,51 +1,49 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-  <!-- <div id='parent'>
   <div class="container">
-    <section class="section section-1">
-      <h1>page one</h1>
-      <div class="blob blob--4">
-        <svg viewBox="0 0 800 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" id="blobSvg">
-          <g transform="translate(215, 10)">
-            <path fill="#fdcb6e">
-              <animate attributeName='d' dur="8000ms" repeatCount="indefinite"
-                values="
-                M345,268Q325,286,364,363.5Q403,441,348,439Q293,437,246.5,452Q200,467,150.5,451.5Q101,436,129.5,365Q158,294,178,272Q198,250,200,238.5Q202,227,152.5,146.5Q103,66,156.5,70Q210,74,237.5,128Q265,182,297.5,166Q330,150,319,186Q308,222,336.5,236Q365,250,345,268Z;
-                  M380,298.5Q452,347,395.5,354Q339,361,301,334Q263,307,235.5,370.5Q208,434,211.5,364Q215,294,193,291Q171,288,128,269Q85,250,90.5,213Q96,176,101.5,123Q107,70,171,127Q235,184,265,118.5Q295,53,330,79.5Q365,106,413.5,127Q462,148,385,199Q308,250,380,298.5Z;
-                  M381,282Q382,314,337,308Q292,302,279.5,314Q267,326,231.5,406.5Q196,487,164,442.5Q132,398,123,356.5Q114,315,98.5,282.5Q83,250,115,225.5Q147,201,158,175Q169,149,183.5,86Q198,23,234.5,90Q271,157,306.5,146Q342,135,386.5,149Q431,163,405.5,206.5Q380,250,381,282Z;
-                  M338,279.5Q373,309,344.5,321Q316,333,294,339Q272,345,254.5,326.5Q237,308,219.5,309Q202,310,153,315.5Q104,321,100,285.5Q96,250,146,237Q196,224,170,170.5Q144,117,176.5,93Q209,69,245.5,89Q282,109,343,83Q404,57,413,112Q422,167,362.5,208.5Q303,250,338,279.5Z;
-                M345,268Q325,286,364,363.5Q403,441,348,439Q293,437,246.5,452Q200,467,150.5,451.5Q101,436,129.5,365Q158,294,178,272Q198,250,200,238.5Q202,227,152.5,146.5Q103,66,156.5,70Q210,74,237.5,128Q265,182,297.5,166Q330,150,319,186Q308,222,336.5,236Q365,250,345,268Z;
-                "
-              ></animate>
-            </path>
-          </g>
-        </svg>
-
-      </div>
-      <marquee direction="right" scrolldelay="25" truespeed="truespeed" class="section-1__marquee">АГЕНСТВО · БЮРО</marquee>
-    </section>
-    <section class="section">
-      <h1>page two</h1>
-      <div class="blob blob--4">
-        <svg viewBox="0 0 800 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" id="blobSvg">
-          <g transform="translate(215, 10)">
-            <path fill="#fdcb6e">
-              <animate attributeName='d' dur="8000ms" repeatCount="indefinite"
-                values="
-                M345,268Q325,286,364,363.5Q403,441,348,439Q293,437,246.5,452Q200,467,150.5,451.5Q101,436,129.5,365Q158,294,178,272Q198,250,200,238.5Q202,227,152.5,146.5Q103,66,156.5,70Q210,74,237.5,128Q265,182,297.5,166Q330,150,319,186Q308,222,336.5,236Q365,250,345,268Z;
-                  M380,298.5Q452,347,395.5,354Q339,361,301,334Q263,307,235.5,370.5Q208,434,211.5,364Q215,294,193,291Q171,288,128,269Q85,250,90.5,213Q96,176,101.5,123Q107,70,171,127Q235,184,265,118.5Q295,53,330,79.5Q365,106,413.5,127Q462,148,385,199Q308,250,380,298.5Z;
-                  M381,282Q382,314,337,308Q292,302,279.5,314Q267,326,231.5,406.5Q196,487,164,442.5Q132,398,123,356.5Q114,315,98.5,282.5Q83,250,115,225.5Q147,201,158,175Q169,149,183.5,86Q198,23,234.5,90Q271,157,306.5,146Q342,135,386.5,149Q431,163,405.5,206.5Q380,250,381,282Z;
-                  M338,279.5Q373,309,344.5,321Q316,333,294,339Q272,345,254.5,326.5Q237,308,219.5,309Q202,310,153,315.5Q104,321,100,285.5Q96,250,146,237Q196,224,170,170.5Q144,117,176.5,93Q209,69,245.5,89Q282,109,343,83Q404,57,413,112Q422,167,362.5,208.5Q303,250,338,279.5Z;
-                M345,268Q325,286,364,363.5Q403,441,348,439Q293,437,246.5,452Q200,467,150.5,451.5Q101,436,129.5,365Q158,294,178,272Q198,250,200,238.5Q202,227,152.5,146.5Q103,66,156.5,70Q210,74,237.5,128Q265,182,297.5,166Q330,150,319,186Q308,222,336.5,236Q365,250,345,268Z;
-                "
-              ></animate>
-            </path>
-          </g>
-        </svg>
-
-      </div>
-    </section>
-    <section class="section">
+    <HeaderPage class="header">
+      <template v-slot:logo-group>
+        <nav class="header__nav">
+          <div class="header__svg-group">
+            <SvgSprite symbol="logo" size="85" />
+            <SvgSprite
+              symbol="decStar"
+              class="header__svg-decoration icon--color-grey"
+              size="41"
+            />
+          </div>
+          <ul class="header__nav-list">
+            <li class="header__nav-item header__nav-item--font-astralaga">
+              SHOOTING
+            </li>
+            <li class="header__nav-item header__nav-item--font-astralaga">
+              DESIGN
+            </li>
+            <li class="header__nav-item header__nav-item--font-astralaga">
+              SOUND
+            </li>
+          </ul>
+        </nav>
+      </template>
+      <template v-slot:header>
+        <h1 class="header__title">
+          <span class="header__title-text">БЮРО 240</span>
+          <span class="header__title-underline"></span>
+        </h1>
+      </template>
+      <template v-slot:header-left-side>
+        <span class="header__subtitle header__subtitle--direction-left"
+          >КРЕАТИВНОЕ</span
+        >
+      </template>
+      <template v-slot:header-right-side>
+        <span class="header__subtitle header__subtitle--direction-right"
+          >ПРОИЗВОДСТВО</span
+        >
+      </template>
+    </HeaderPage>
+    <HeroPage class="hero"></HeroPage>
+    <SpiralDisks class="spiral-disks"></SpiralDisks>
+    <!-- <section class="section">
       <h1>page three</h1>
       <div class="blob blob--3">
         <svg viewBox="0 0 800 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" id="blobSvg">
@@ -92,14 +90,25 @@
         </svg>
       </div>
     </section>
-    <section class="section">
+    <section class="section" id='parent' style="" >
       <h1>four slide</h1>
-    </section>
+    </section> -->
+    <!-- <SvgSprite symbol="blob1" size="500"/> -->
     <div class="blob blob--1">
-      <svg viewBox="0 0 800 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" id="blobSvg">
+      <svg
+        viewBox="0 0 800 500"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="100%"
+        id="blobSvg"
+      >
         <g transform="translate(133.16806030273438, 1.0592498779296875)">
           <path fill="#B53471">
-            <animate attributeName="d" dur="10000ms" repeatCount="indefinite"
+            <animate
+              attributeName="d"
+              dur="10000ms"
+              repeatCount="indefinite"
               values="M473.5,317Q459,384,397.5,411.5Q336,439,282.5,416Q229,393,178,392Q127,391,81,352Q35,313,64,258.5Q93,204,128.5,177Q164,150,194.5,111.5Q225,73,278.5,71.5Q332,70,396,92.5Q460,115,474,182.5Q488,250,473.5,317Z;
                       M409.5,306.5Q425,363,367,371.5Q309,380,267.5,400Q226,420,179.5,402.5Q133,385,130.5,335.5Q128,286,111.5,245Q95,204,105,149.5Q115,95,171,93.5Q227,92,267,108.5Q307,125,382.5,121Q458,117,426,183.5Q394,250,409.5,306.5Z;
                       M418.5,310Q437,370,386,403Q335,436,279.5,434.5Q224,433,176.5,411Q129,389,79,352Q29,315,48,255.5Q67,196,117.5,175.5Q168,155,194,98.5Q220,42,273,62.5Q326,83,388.5,102Q451,121,425.5,185.5Q400,250,418.5,310Z;
@@ -111,10 +120,20 @@
       </svg>
     </div>
     <div class="blob blob--2">
-      <svg viewBox="0 0 800 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" id="blobSvg">
+      <svg
+        viewBox="0 0 800 500"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="100%"
+        id="blobSvg"
+      >
         <g transform="translate(135.680419921875, -5.611244201660156)">
           <path fill="#a29bfe">
-            <animate attributeName="d" dur="10000ms" repeatCount="indefinite"
+            <animate
+              attributeName="d"
+              dur="10000ms"
+              repeatCount="indefinite"
               values="M462,301Q445,352,411,393Q377,434,325.5,441Q274,448,222.5,453.5Q171,459,136,420.5Q101,382,83.5,338.5Q66,295,70.5,251Q75,207,72.5,148.5Q70,90,125.5,78.5Q181,67,227.5,58Q274,49,321,64.5Q368,80,393,121Q418,162,448.5,206Q479,250,462,301Z;
                       M449.5,291Q407,332,381.5,368Q356,404,317.5,448Q279,492,231,460Q183,428,139,408Q95,388,76.5,342.5Q58,297,43.5,246.5Q29,196,61.5,154Q94,112,140,96.5Q186,81,231.5,53.5Q277,26,323.5,51Q370,76,411.5,109.5Q453,143,472.5,196.5Q492,250,449.5,291Z;
                       M469,300Q441,350,412,396.5Q383,443,327.5,438Q272,433,219.5,451.5Q167,470,118,440.5Q69,411,73,352Q77,293,73,249Q69,205,79,156Q89,107,138,96Q187,85,231.5,62Q276,39,316,68Q356,97,391.5,127Q427,157,462,203.5Q497,250,469,300Z;
@@ -124,42 +143,62 @@
           </path>
         </g>
       </svg>
-    </div> -->
-  <!-- </div> -->
-     <canvas id='canvas'></canvas>
+    </div>
+  </div>
 
-  <!-- </div> -->
+  <div>
+    <canvas id="canvas"></canvas>
+  </div>
   <!-- <div class="parent row">
     <section class="one"></section>
     <section class="two"></section>
     <section class="three"></section>
-    <section class="four"></section>
-  </div> -->
+    <section class="four"></section> -->
+  <!-- </div> -->
+  <!-- <SvgSprite></SvgSprite> -->
 </template>
 
 <script>
-import render from './3d/index'
-import {onMounted} from 'vue'
-export default {
-  name: 'App',
-  components: {
+import HeaderPage from "@/components/HeaderPage.vue";
+import HeroPage from "@/components/HeroPage.vue";
+import SpiralDisks from "@/components/SpiralDisks.vue";
+import useApp from "@/hooks/useApp";
+import { onMounted } from "vue";
+// import { SvgSprite } from 'vue-svg-sprite'
 
+export default {
+  name: "App",
+  components: {
+    HeaderPage,
+    HeroPage,
+    SpiralDisks,
+    // SvgSprite
   },
   setup() {
+    const { doAnimate } = useApp();
+    // const title = ref(null);
+    // const subtitleLeft = ref(null);
+    // const subtitleRight = ref(null);
+    // onMounted(() => {
+    //   const canvas = document.querySelector('#canvas');
+    //   const parent = document.querySelector('#parent');
+    //   console.log(canvas)
+    //   render()
+    //   parent.append(canvas);
+    // })
+
     onMounted(() => {
-      const canvas = document.querySelector('#canvas');
-      const parent = document.querySelector('#parent');
-      console.log(canvas)
-      render()
-      parent.append(canvas);
-    })
-  }
-}
+      document.fonts.ready.then(() => {
+        doAnimate();
+      });
+    });
+
+    return {};
+  },
+};
 </script>
 
-<style lang='scss'>
-@import '@/style/section1.scss';
-
+<style lang="scss">
 #app {
   background-color: rgba(255, 255, 255, 0.5);
 }

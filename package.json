@@ -14,7 +14,9 @@
     "gsap": "^3.11.3",
     "normalize-scss": "^7.0.1",
     "three": "^0.145.0",
-    "vue": "^3.2.13"
+    "vue": "^3.2.13",
+    "vue-simple-svg": "^2.0.2",
+    "vue-svg-sprite": "^2.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -23,23 +25,12 @@
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-vue": "^8.7.1",
+    "prettier": "^2.7.1",
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/vue3-essential",
-      "eslint:recommended"
-    ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
-    "rules": {}
   },
   "browserslist": [
     "> 1%",

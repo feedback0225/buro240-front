@@ -1,0 +1,35 @@
+@mixin section {
+  position: relative;
+  overflow-x: hidden;
+  // padding: 30px 50px 0 50px;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+  // flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  background-color: rgba(255, 255,255, 0.7);
+}
+
+
+@mixin section-container {
+  padding: 30px 50px 0 30px;
+}
+
+@mixin title-reset {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+}
+
+@mixin list-reset {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+@mixin font-family-astralaga {
+  font-family: 'Astralaga', 'Arial', 'sans-serif';
+}
