@@ -1,38 +1,46 @@
 <template>
   <section>
     <div class="header__container">
-      <slot name="logo-group"></slot>
-      <!-- <nav class="header__nav">
-        <div class="header__svg-group">
-          <SvgSprite symbol="logo" size="85" />
-          <SvgSprite
-            symbol="decStar"
-            class="header__svg-decoration icon--color-grey"
-            size="41"
-          />
-        </div>
-        <ul class="header__nav-list">
-          <li class="header__nav-item header__nav-item--font-astralaga">
-            SHOOTING
-          </li>
-          <li class="header__nav-item header__nav-item--font-astralaga">
-            DESIGN
-          </li>
-          <li class="header__nav-item header__nav-item--font-astralaga">
-            SOUND
-          </li>
-        </ul>
-      </nav> -->
+      <div class="header__header js-move">
+        <h1 class="header__title">
+          <span class="header__title-text">БЮРО 240</span>
+          <!-- <span class="header__title-underline"></span> -->
+        </h1>
 
-      <slot name="header"></slot>
+        <span class="js-move header__subtitle header__subtitle--direction-left"
+          >КРЕАТИВНОЕ</span
+        >
 
-      <slot name="header-left-side"></slot>
+        <span class="js-move header__subtitle header__subtitle--direction-right"
+          >ПРОИЗВОДСТВО</span
+        >
+      </div>
 
-      <slot name="header-right-side"></slot>
-      <!-- <svg>
-        <use xlink:href="sprite.svg#logo"></use>
-      </svg> -->
+      <div class="header__label">
+        MADE
+        <br />
+        BY
+        <br />
+        BUREAU240
+      </div>
+
+      <marquee
+        class="header__marquee"
+        direction="right"
+        scrolldelay="50"
+        truespeed="truespeed"
+        >АГЕНСТВО · БЮРО</marquee
+      >
     </div>
+    <!-- <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path
+        id="m"
+        fill="#FF0066"
+        d="M32,-33.5C46.5,-26,66.8,-20.7,68.4,-12C70,-3.3,53,8.7,42.5,22.4C32.1,36.2,28.2,51.6,20.5,52.9C12.8,54.3,1.2,41.4,-16.3,38C-33.8,34.5,-57.2,40.5,-68.4,33.5C-79.6,26.4,-78.7,6.4,-66.8,-3.2C-54.8,-12.7,-31.8,-11.6,-18.9,-19.4C-5.9,-27.3,-2.9,-44.1,2.9,-47.5C8.7,-51,17.5,-41.1,32,-33.5Z"
+        transform="translate(100 100)"
+      />
+    </svg> -->
+
     <!-- <div class="blob blob--4">
       <svg viewBox="0 0 800 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" id="blobSvg">
         <g transform="translate(215, 10)">
@@ -50,14 +58,6 @@
         </g>
       </svg>
     </div> -->
-
-    <marquee
-      class="header__marquee"
-      direction="right"
-      scrolldelay="25"
-      truespeed="truespeed"
-      >АГЕНСТВО · БЮРО</marquee
-    >
   </section>
 </template>
 

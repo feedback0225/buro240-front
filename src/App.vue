@@ -1,48 +1,82 @@
 <template>
   <div class="container">
-    <HeaderPage class="header">
-      <template v-slot:logo-group>
-        <nav class="header__nav">
-          <div class="header__svg-group">
-            <SvgSprite symbol="logo" size="85" />
-            <SvgSprite
-              symbol="decStar"
-              class="header__svg-decoration icon--color-grey"
-              size="41"
-            />
-          </div>
-          <ul class="header__nav-list">
-            <li class="header__nav-item header__nav-item--font-astralaga">
-              SHOOTING
-            </li>
-            <li class="header__nav-item header__nav-item--font-astralaga">
-              DESIGN
-            </li>
-            <li class="header__nav-item header__nav-item--font-astralaga">
-              SOUND
-            </li>
-          </ul>
-        </nav>
-      </template>
-      <template v-slot:header>
-        <h1 class="header__title">
-          <span class="header__title-text">БЮРО 240</span>
-          <span class="header__title-underline"></span>
-        </h1>
-      </template>
-      <template v-slot:header-left-side>
-        <span class="header__subtitle header__subtitle--direction-left"
-          >КРЕАТИВНОЕ</span
+    <nav class="header-nav">
+      <div class="header-nav__svg-group">
+        <SvgSprite symbol="logo" size="85" />
+        <SvgSprite
+          symbol="decStar"
+          class="header-nav__svg-decoration icon--color-grey"
+          size="41"
+        />
+      </div>
+      <ul class="header-nav__list">
+        <li
+          class="header-nav__item header-nav__item--active header-nav__item--font-astralaga"
         >
-      </template>
-      <template v-slot:header-right-side>
-        <span class="header__subtitle header__subtitle--direction-right"
-          >ПРОИЗВОДСТВО</span
-        >
-      </template>
-    </HeaderPage>
-    <HeroPage class="hero"></HeroPage>
-    <SpiralDisks class="spiral-disks"></SpiralDisks>
+          SHOOTING
+        </li>
+        <li class="header-nav__item header-nav__item--font-astralaga">
+          DESIGN
+        </li>
+        <li class="header-nav__item header-nav__item--font-astralaga">SOUND</li>
+      </ul>
+    </nav>
+    <HeaderPage class="header" />
+    <HeroPage class="hero" />
+    <SpiralDisks class="spiral-disks" />
+
+    <svg class="svg morth invisible" viewbox="0 0 500 500">
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="9" result="blur" />
+          <feColorMatrix
+            in="blur"
+            mode="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+            result="goo"
+          />
+        </filter>
+      </defs>
+      <g class="goo">
+        <path
+          d="M 100 350 Q 150 50 200 300 Q 250 550 300 350 Q 350 50 400 350 "
+          fill="none"
+          stroke=""
+          stroke-width="3"
+        ></path>
+        <path
+          d="M 100 350 Q 150 50 200 300 Q 250 550 300 350 Q 350 50 400 350 "
+          fill="none"
+          stroke=""
+          stroke-width="3"
+        ></path>
+        <path
+          d="M 100 350 Q 150 50 200 300 Q 250 550 300 350 Q 350 50 400 350 "
+          fill="none"
+          stroke="black"
+          stroke-width="1"
+        ></path>
+        <path
+          d="M 100 350 Q 150 50 200 300 Q 250 550 300 350 Q 350 50 400 350 "
+          fill="none"
+          stroke=""
+          stroke-width="3"
+        ></path>
+        <path
+          d="M 100 350 Q 150 50 200 300 Q 250 550 300 350 Q 350 50 400 350 "
+          fill="none"
+          stroke="white"
+          stroke-width="3"
+        ></path>
+        <path
+          d="M 100 350 Q 150 50 200 300 Q 250 550 300 350 Q 350 50 400 350 "
+          fill="none"
+          stroke="white"
+          stroke-width="3"
+        ></path>
+      </g>
+    </svg>
+
     <!-- <section class="section">
       <h1>page three</h1>
       <div class="blob blob--3">
@@ -94,7 +128,7 @@
       <h1>four slide</h1>
     </section> -->
     <!-- <SvgSprite symbol="blob1" size="500"/> -->
-    <div class="blob blob--1">
+    <!-- <div class="blob blob--1">
       <svg
         viewBox="0 0 800 500"
         preserveAspectRatio="none"
@@ -143,7 +177,7 @@
           </path>
         </g>
       </svg>
-    </div>
+    </div> -->
   </div>
 
   <div>
@@ -176,6 +210,8 @@ export default {
   },
   setup() {
     const { doAnimate } = useApp();
+    // const shape02 =
+    //   "M55,-57.5C69.3,-53.5,77.6,-34.3,74.1,-18.4C70.5,-2.5,55.1,10.2,46.1,27.3C37.1,44.4,34.4,65.9,25,70C15.5,74.1,-0.9,60.7,-16.9,52.4C-33,44,-48.7,40.6,-50.2,31.9C-51.7,23.2,-39.1,9.3,-38.6,-9.1C-38.2,-27.6,-49.9,-50.4,-45.4,-56.2C-41,-62,-20.5,-50.6,-0.1,-50.5C20.3,-50.4,40.6,-61.5,55,-57.5Z";
     // const title = ref(null);
     // const subtitleLeft = ref(null);
     // const subtitleRight = ref(null);
@@ -200,6 +236,92 @@ export default {
 
 <style lang="scss">
 #app {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.morth {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: 35%;
+  left: 30%;
+  z-index: -1;
+}
+
+.invisible {
+  opacity: 0;
+}
+
+.goo {
+  filter: url("#goo");
+}
+
+.header-nav {
+  position: sticky;
+  top: 50px;
+  left: 30px;
+  display: inline-flex;
+  flex-direction: column;
+  height: fit-content;
+  overflow: visible;
+  opacity: 0;
+  z-index: 10;
+
+  &__list {
+    @include list-reset;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    position: relative;
+    display: inline-block;
+    font-size: 18px;
+    transition: font-size 0.3s ease-in-out;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: -30px;
+      top: -4px;
+      width: 120%;
+      z-index: -1;
+      height: 33px;
+      background-color: tomato;
+      transform: translateX(-121%);
+      transition: translate 0.3s ease-in-out;
+    }
+
+    &--active {
+      font-size: 25px;
+
+      &::before {
+        transform: none;
+      }
+    }
+
+    &--font-astralaga {
+      @include font-family-astralaga;
+    }
+  }
+
+  &__svg {
+    &-group {
+      display: flex;
+      justify-content: space-between;
+      width: 150px;
+      margin-bottom: 20px;
+
+      *.icon {
+        &:first-child {
+          margin-right: 8px;
+        }
+      }
+    }
+
+    &-decoration {
+      transform: translateY(-10px);
+    }
+  }
 }
 </style>

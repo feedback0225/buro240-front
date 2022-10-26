@@ -1,7 +1,130 @@
 <template>
-  <section :class="$attrs">
+  <section>
     <h1>page two</h1>
-    <!-- <div class="blob blob--4">
+    <div class="hero__container">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium sint
+      eos magni fugit. Nostrum vel consectetur excepturi ullam quas repellendus,
+      accusamus nesciunt, natus officiis quod quidem suscipit corrupti quasi
+      tempora? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi ullam
+      quas repellendus, accusamus nesciunt, natus officiis quod quidem suscipit
+      corrupti quasi tempora? Lorem ipsum dolor sit amet consectetur adipisicing
+      elit. Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi
+      ullam quas repellendus, accusamus nesciunt, natus officiis quod quidem
+      suscipit corrupti quasi tempora?Lorem ipsum dolor sit amet consectetur
+      adipisicing elit. Accusantium sint eos magni fugit. Nostrum vel
+      consectetur excepturi ullam quas repellendus, accusamus nesciunt, natus
+      officiis quod quidem suscipit corrupti quasi tempora?Lorem ipsum dolor sit
+      amet consectetur adipisicing elit. Accusantium sint eos magni fugit.
+      Nostrum vel consectetur excepturi ullam quas repellendus, accusamus
+      nesciunt, natus officiis quod quidem suscipit corrupti quasi tempora?Lorem
+      ipsum dolor sit amet consectetur adipisicing elit. Accusantium sint eos
+      magni fugit. Nostrum vel consectetur excepturi ullam quas repellendus,
+      accusamus nesciunt, natus officiis quod quidem suscipit corrupti quasi
+      tempora?Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi ullam
+      quas repellendus, accusamus nesciunt, natus officiis quod quidem suscipit
+      corrupti quasi tempora?Lorem ipsum dolor sit amet consectetur adipisicing
+      elit. Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi
+      ullam quas repellendus, accusamus nesciunt, natus officiis quod quidem
+      suscipit corrupti quasi tempora? Lorem ipsum dolor sit amet consectetur
+      adipisicing elit. Accusantium sint eos magni fugit. Nostrum vel
+      consectetur excepturi ullam quas repellendus, accusamus nesciunt, natus
+      officiis quod quidem suscipit corrupti quasi tempora? Lorem ipsum dolor
+      sit amet consectetur adipisicing elit. Accusantium sint eos magni fugit.
+      Nostrum vel consectetur excepturi ullam quas repellendus, accusamus
+      nesciunt, natus officiis quod quidem suscipit corrupti quasi tempora?
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium sint
+      eos magni fugit. Nostrum vel consectetur excepturi ullam quas repellendus,
+      accusamus nesciunt, natus officiis quod quidem suscipit corrupti quasi
+      tempora? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi ullam
+      quas repellendus, accusamus nesciunt, natus officiis quod quidem suscipit
+      corrupti quasi tempora? Lorem ipsum dolor sit amet consectetur adipisicing
+      elit. Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi
+      ullam quas repellendus, accusamus nesciunt, natus officiis quod quidem
+      suscipit corrupti quasi tempora? Lorem ipsum dolor sit amet consectetur
+      adipisicing elit. Accusantium sint eos magni fugit. Nostrum vel
+      consectetur excepturi ullam quas repellendus, accusamus nesciunt, natus
+      officiis quod quidem suscipit corrupti quasi tempora? Lorem ipsum dolor
+      sit amet consectetur adipisicing elit. Accusantium sint eos magni fugit.
+      Nostrum vel consectetur excepturi ullam quas repellendus, accusamus
+      nesciunt, natus officiis quod quidem suscipit corrupti quasi tempora?
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium sint
+      eos magni fugit. Nostrum vel consectetur excepturi ullam quas repellendus,
+      accusamus nesciunt, natus officiis quod quidem suscipit corrupti quasi
+      tempora? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi ullam
+      quas repellendus, accusamus nesciunt, natus officiis quod quidem suscipit
+      corrupti quasi tempora? Lorem ipsum dolor sit amet consectetur adipisicing
+      elit. Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi
+      ullam quas repellendus, accusamus nesciunt, natus officiis quod quidem
+      suscipit corrupti quasi tempora? Lorem ipsum dolor sit amet consectetur
+      adipisicing elit. Accusantium sint eos magni fugit. Nostrum vel
+      consectetur excepturi ullam quas repellendus, accusamus nesciunt, natus
+      officiis quod quidem suscipit corrupti quasi tempora? Lorem ipsum dolor
+      sit amet consectetur adipisicing elit. Accusantium sint eos magni fugit.
+      Nostrum vel consectetur excepturi ullam quas repellendus, accusamus
+      nesciunt, natus officiis quod quidem suscipit corrupti quasi tempora?
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium sint
+      eos magni fugit. Nostrum vel consectetur excepturi ullam quas repellendus,
+      accusamus nesciunt, natus officiis quod quidem suscipit corrupti quasi
+      tempora? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi ullam
+      quas repellendus, accusamus nesciunt, natus officiis quod quidem suscipit
+      corrupti quasi tempora?Lorem ipsum dolor sit amet consectetur adipisicing
+      elit. Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi
+      ullam quas repellendus, accusamus nesciunt, natus officiis quod quidem
+      suscipit corrupti quasi tempora?Lorem ipsum dolor sit amet consectetur
+      adipisicing elit. Accusantium sint eos magni fugit. Nostrum vel
+      consectetur excepturi ullam quas repellendus, accusamus nesciunt, natus
+      officiis quod quidem suscipit corrupti quasi tempora?Lorem ipsum dolor sit
+      amet consectetur adipisicing elit. Accusantium sint eos magni fugit.
+      Nostrum vel consectetur excepturi ullam quas repellendus, accusamus
+      nesciunt, natus officiis quod quidem suscipit corrupti quasi tempora?Lorem
+      ipsum dolor sit amet consectetur adipisicing elit. Accusantium sint eos
+      magni fugit. Nostrum vel consectetur excepturi ullam quas repellendus,
+      accusamus nesciunt, natus officiis quod quidem suscipit corrupti quasi
+      tempora?Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi ullam
+      quas repellendus, accusamus nesciunt, natus officiis quod quidem suscipit
+      corrupti quasi tempora? Lorem ipsum dolor sit amet consectetur adipisicing
+      elit. Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi
+      ullam quas repellendus, accusamus nesciunt, natus officiis quod quidem
+      suscipit corrupti quasi tempora? Lorem ipsum dolor sit amet consectetur
+      adipisicing elit. Accusantium sint eos magni fugit. Nostrum vel
+      consectetur excepturi ullam quas repellendus, accusamus nesciunt, natus
+      officiis quod quidem suscipit corrupti quasi tempora? Lorem ipsum dolor
+      sit amet consectetur adipisicing elit. Accusantium sint eos magni fugit.
+      Nostrum vel consectetur excepturi ullam quas repellendus, accusamus
+      nesciunt, natus officiis quod quidem suscipit corrupti quasi tempora?
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium sint
+      eos magni fugit. Nostrum vel consectetur excepturi ullam quas repellendus,
+      accusamus nesciunt, natus officiis quod quidem suscipit corrupti quasi
+      tempora? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi ullam
+      quas repellendus, accusamus nesciunt, natus officiis quod quidem suscipit
+      corrupti quasi tempora? Lorem ipsum dolor sit amet consectetur adipisicing
+      elit. Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi
+      ullam quas repellendus, accusamus nesciunt, natus officiis quod quidem
+      suscipit corrupti quasi tempora? Lorem ipsum dolor sit amet consectetur
+      adipisicing elit. Accusantium sint eos magni fugit. Nostrum vel
+      consectetur excepturi ullam quas repellendus, accusamus nesciunt, natus
+      officiis quod quidem suscipit corrupti quasi tempora? Lorem ipsum dolor
+      sit amet consectetur adipisicing elit. Accusantium sint eos magni fugit.
+      Nostrum vel consectetur excepturi ullam quas repellendus, accusamus
+      nesciunt, natus officiis quod quidem suscipit corrupti quasi tempora?
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium sint
+      eos magni fugit. Nostrum vel consectetur excepturi ullam quas repellendus,
+      accusamus nesciunt, natus officiis quod quidem suscipit corrupti quasi
+      tempora? Lorem ipsum dolor sit amet consectetur adipisicing elit.
+      Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi ullam
+      quas repellendus, accusamus nesciunt, natus officiis quod quidem suscipit
+      corrupti quasi tempora? Lorem ipsum dolor sit amet consectetur adipisicing
+      elit. Accusantium sint eos magni fugit. Nostrum vel consectetur excepturi
+      ullam quas repellendus, accusamus nesciunt, natus officiis quod quidem
+      suscipit corrupti quasi tempora?
+      <!-- <div class="blob blob--4">
         <svg viewBox="0 0 800 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" id="blobSvg">
           <g transform="translate(215, 10)">
             <path fill="#fdcb6e">
@@ -18,6 +141,7 @@
           </g>
         </svg>
       </div> -->
+    </div>
   </section>
 </template>
 
@@ -27,4 +151,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+@import "@/style/hero.scss";
+</style>

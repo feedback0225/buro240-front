@@ -1,8 +1,13 @@
-@import './mixin';
 
 .hero {
   @include section;
 
-
+  &__container {
+    @include section-container;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  }
 
 }
