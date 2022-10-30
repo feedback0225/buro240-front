@@ -1,12 +1,16 @@
 import gsap from "gsap";
-import * as THREE from "three";
-import { noise } from "@/3d/perlin";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 
 function removeClass(elCls, cls) {
   const el = document.querySelector(elCls);
-  console.log(el);
   el.classList.remove(cls);
 }
+
+// ScrollTrigger.defaults({
+// toggleActions: "play pause restart pause",
+// scroller: ".container",
+// });
 
 export default function useApp() {
   // const shape02 =
@@ -20,8 +24,15 @@ export default function useApp() {
   // const logo = ref(null);
 
   function doAnimate() {
-    const tl = gsap.timeline();
-    tl.fromTo(
+    const navItems = document.querySelectorAll(".header-nav__item");
+    function removeActiveNavItem() {
+      navItems.forEach((item) =>
+        item.classList.remove("header-nav__item--active")
+      );
+    }
+
+    // header
+    gsap.fromTo(
       ".header-nav",
       { x: -100, opacity: 1, ease: "power" },
       {
@@ -29,137 +40,137 @@ export default function useApp() {
         duration: 0.5,
         ease: "power",
       }
-    )
+    );
+
+    // timeline first slide
+    const tl1 = gsap.timeline({
+      scrollTrigger: {
+        scroller: ".container",
+        trigger: ".header",
+        // markers: true,
+        start: "-15% 15%",
+        end: "120% center",
+        toggleActions: "restart reverse restart pause",
+      },
+    });
+
+    tl1
       .fromTo(
         ".header__title",
-        { x: 1500, opacity: 1 },
+        {
+          x: 1900,
+          opacity: 1,
+          duration: 2,
+        },
         {
           x: 0,
-          duration: 1.5,
+          duration: 2,
           ease: "power",
-          onComplete: () => removeClass(".header__header", "js-move"),
+          onStart: () => {
+            removeActiveNavItem();
+          },
+          // onComplete: () => {
+          //   removeClass(".header__header", "js-move");
+          // },
         },
         "-=1"
       )
       .fromTo(
         ".header__subtitle.header__subtitle--direction-left",
-        { x: -1300, opacity: 1 },
+        {
+          x: -1300,
+          duration: 1.5,
+          opacity: 1,
+        },
         {
           x: 0,
           duration: 1.5,
           ease: "power",
-          onComplete: () => removeClass(".header__subtitle", "js-move"),
+          onStart: () => {
+            // removeActiveNavItem();
+            // navItems[1].classList.add("header-nav__item--active");
+          },
+          // onComplete: () =>
+          //   removeClass(
+          //     ".header__subtitle.header__subtitle--direction-left",
+          //     "js-move"
+          //   ),
         },
         "-=0.5"
       )
       .fromTo(
         ".header__subtitle.header__subtitle--direction-right",
-        { x: 1900, opacity: 1 },
+        { x: 1900, duration: 1.5, opacity: 1 },
         {
           x: 0,
           duration: 1.5,
           ease: "power",
-          onComplete: () => {
-            removeClass(".header__subtitle", "js-move");
-            removeClass(".morth", "invisible");
+          onStart: () => {
+            // removeActiveNavItem();
+            // navItems[0].classList.add("header-nav__item--active");
           },
+          // onComplete: () => {
+          //   removeClass(
+          //     ".header__subtitle.header__subtitle--direction-right",
+          //     "js-move"
+          //   );
+          // },
         },
         "-=0.9"
-      )
-      .fromTo(
-        ".svg path",
-        { opacity: 1 },
-        {
-          transformOrigin: "50% 50%",
-          ease: "back",
-          duration: 3,
-          attr: {
-            d: "M random(0,600) random(0,600) Q random(0,500) random(0,500) random(00,600) random(0,600) Q random(0,600) random(0,400) random(0,600) random(0,400) Q random(0,600) random(0,600) random(0,400) random(0,400) z ",
-            fill: "rgba(random(50,155), random(50,155), 150, random(0.58,0.9))",
-          },
-          repeat: -1,
-          repeatRefresh: true,
-          stagger: {
-            each: 1,
-            ease: "none",
-            from: "center",
-          },
-        }
       );
 
-    var renderer = new THREE.WebGLRenderer({
-      canvas: document.getElementById("canvas"),
-      antialias: true,
+    // timeline secons slide
+    const tl2 = gsap.timeline({
+      scrollTrigger: {
+        scroller: ".container",
+        trigger: ".hero",
+        // markers: true,
+        start: "-30% 15%",
+        end: "120% center",
+        toggleActions: "restart reverse restart pause",
+        // scrub: true,
+      },
     });
-    // default bg canvas color //
-    renderer.setClearColor(0x7b7b7b);
-    //  use device aspect ratio //
-    renderer.setPixelRatio(window.devicePixelRatio);
-    // set size of canvas within window //
-    renderer.setSize(window.innerWidth, window.innerHeight);
 
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(
-      45,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    camera.position.z = 5;
+    tl2
+      .fromTo(
+        ".hero__subtitle.hero__subtitle--direction-left",
+        {
+          x: 2000,
+          opacity: 1,
+          duration: 2,
 
-    var sphere_geometry = new THREE.SphereGeometry(1, 128, 128);
-    var material = new THREE.MeshNormalMaterial();
-
-    var sphere = new THREE.Mesh(sphere_geometry, material);
-    scene.add(sphere);
-
-    var update = function () {
-      // change '0.003' for more aggressive animation
-      var time = performance.now() * 0.003;
-      //console.log(time)
-
-      //go through vertices here and reposition them
-
-      // change 'k' value for more spikes
-      var k = 3;
-      for (var i = 0; i < sphere.geometry.vertices.length; i++) {
-        var p = sphere.geometry.vertices[i];
-        p.normalize().multiplyScalar(
-          1 + 0.3 * noise.perlin3(p.x * k + time, p.y * k, p.z * k)
-        );
-      }
-      sphere.geometry.computeVertexNormals();
-      sphere.geometry.normalsNeedUpdate = true;
-      sphere.geometry.verticesNeedUpdate = true;
-    };
-
-    function animate() {
-      //sphere.rotation.x += 0.01;
-      //sphere.rotation.y += 0.01;
-
-      update();
-      /* render scene and camera */
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
-    }
-
-    requestAnimationFrame(animate);
-    // .seek(150);
-    // gsap
-    //   .to("#m", {
-    //     attr: { d: shape02 },
-    //     duration: 3,
-    //     repeat: -1,
-    //     yoyo: true,
-    //     yoyoEase: "power",
-    //   })
-    //   .to("#m", {
-    //     attr: { d: shape03 },
-    //     duration: 3,
-    //     repeat: -1,
-    //     yoyo: true,
-    //     yoyoEase: "power",
-    //   });
+          onComplete: function () {
+            removeClass(".hero__container", "js-move");
+          },
+        },
+        {
+          x: 0,
+          duration: 2,
+          ease: "power",
+          onStart: function () {
+            // removeActiveNavItem();
+            // navItems[0].classList.add("header-nav__item--active");
+          },
+          onComplete: function () {
+            // navItems[0].classList.add("header-nav__item--active");
+          },
+        }
+      )
+      .fromTo(
+        ".hero__subtitle.hero__subtitle--direction-right",
+        {
+          x: -2000,
+          opacity: 1,
+          duration: 2,
+        },
+        {
+          x: 0,
+          duration: 2,
+          ease: "power",
+        },
+        "-=0.5"
+      );
   }
 
   return {

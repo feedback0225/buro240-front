@@ -6,8 +6,31 @@
     @include section-container;
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     height: 100%;
+  }
+
+
+  &__subtitle {
+    @include subtitle;
+    opacity: 0;
+    
+    &--direction-left {
+      text-align: center;
+
+      &::before {
+        width: 65%;
+      }
+    }
+
+    &--direction-right {
+      text-align: center;
+
+      &::before {
+        width: 65%;
+      }
+    }
   }
 
 }
