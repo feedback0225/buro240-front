@@ -2,41 +2,38 @@ import * as THREE from "three";
 // import * as dat from 'dat.gui';
 // import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls.js'
 import { gsap } from "gsap";
+// import { useRouter } from "vue-router";
 import { CustomEase } from "gsap/CustomEase";
 import crateDisk from "./createDisk";
-const COLORS = [
-  "#503F65",
-  "#6C4644",
-  "#454C65",
-  "#E3BEBC",
-  "#EEEEEE",
-  "#C1C6C9",
-  "#C0C5AC",
-  "#A2C2CE",
-  "#F5CBB4",
-  "#CAD2DC",
-].reverse();
+import { COLORS, QUANTITY_DISKS, TEXTURES } from "@/constants";
 
-export default function render(elContainer) {
+// eslint-disable-next-line no-unused-vars
+export default function render(elContainer, emit) {
   gsap.registerPlugin(CustomEase);
 
   const canvas = document.createElement("canvas");
+  canvas.style.overflow = "scroll";
   elContainer.append(canvas);
 
-  const renderer = new THREE.WebGLRenderer({ alpha: true, canvas });
-  console.log(elContainer);
+  const renderer = new THREE.WebGLRenderer({
+    alpha: true,
+    canvas,
+    antialias: true,
+  });
+
   const sizes = {
     width: window.innerWidth,
     height: window.innerHeight,
   };
 
   let disksIsMove = true;
-
+  // renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(sizes.width, sizes.height);
-  renderer.shadowMap.enabled = true;
+  // renderer.shadowMap.enabled = true;
 
-  // document.body.appendChild(renderer.domElement);
   const scene = new THREE.Scene();
+  // const gridHelper = new THREE.GridHelper(30);
+  // scene.add(gridHelper);
 
   const fov = 45;
   const aspect = sizes.width / sizes.height;
@@ -52,9 +49,9 @@ export default function render(elContainer) {
 
   const spotLight = new THREE.SpotLight(0xffffff);
   scene.add(spotLight);
-  spotLight.position.set(0, 20, 100);
+  spotLight.position.set(0, 0, 90);
 
-  spotLight.castShadow = true;
+  // spotLight.castShadow = true;
   spotLight.angle = 0.1;
   // ----
 
@@ -67,10 +64,10 @@ export default function render(elContainer) {
 
   const collectionDisk = [];
   const collectionDiskPosition = [];
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < QUANTITY_DISKS; i++) {
     const position = { x: 0, y: i + 4 - 8, z: 0 };
     collectionDiskPosition.push(position);
-    const currentDisk = crateDisk(position, COLORS[i]);
+    const currentDisk = crateDisk(position, COLORS[i], TEXTURES[i]);
     collectionDisk.push(currentDisk);
     scene.add(currentDisk);
   }
@@ -99,28 +96,50 @@ export default function render(elContainer) {
     collectionTween.push({ disk, tween: currentTween });
   });
 
+  let canScroll = true;
+  let canPickDisk = true;
   let selectedDiskUuid = null;
   let y = 0;
   let position = 0;
 
-  addEventListener("wheel", (event) => {
-    y = event.deltaY * 0.0055;
-    if (selectedDiskUuid) {
-      backToCommonFlow(collectionTween);
-      doFlow();
-      selectedDiskUuid = null;
+  function doScroll(event) {
+    if (canScroll) {
+      y = event.deltaY * 0.0055;
+      if (selectedDiskUuid) {
+        backToCommonFlow(collectionTween);
+        setTimeout(() => {
+          doFlow();
+          selectedDiskUuid = null;
+          canPickDisk = true;
+        }, 2000);
+      }
     }
-  });
+  }
+
+  // addEventListener("wheel", doScroll);
 
   let toVertialTween;
+  // let toHorizontalTween;
 
   function pickDisk() {
+    if (!canPickDisk) return false;
     rayCaster.setFromCamera(mousePositon, camera);
     const intersects = rayCaster.intersectObjects(scene.children);
 
     if (intersects.length > 0) {
-      if (disksIsMove) stopFlow();
+      // console.log(selectedDiskUuid);
       if (selectedDiskUuid === intersects[0].object.uuid) return;
+      if (selectedDiskUuid) {
+        canPickDisk = false;
+        backToCommonFlow(collectionTween);
+        setTimeout(() => {
+          doFlow();
+          selectedDiskUuid = null;
+          canPickDisk = true;
+        }, 2000);
+        return;
+      }
+      if (disksIsMove) stopFlow();
       selectedDiskUuid = intersects[0].object.uuid;
 
       let selectedDiskIsFouneded = false;
@@ -136,7 +155,35 @@ export default function render(elContainer) {
           toVertialTween = gsap.to(instance.disk.rotation, {
             duration: 0.8,
             z: 1.5,
+            y: 1.5,
           });
+          // console.log(instance.disk.position);
+          // console.log(instance.disk.position.y, instance.disk.position.z);
+          gsap
+            .to(camera.position, {
+              duration: 3,
+              y: instance.disk.position.y,
+              z: 1,
+            })
+            .to(instance.disk.material[2].color, {
+              b: 1,
+              g: 1,
+              r: 1,
+            });
+          // instance.disk.material[2].color.b = 1;
+          // instance.disk.material[2].color.g = 1;
+          // instance.disk.material[2].color.r = 1;
+          // console.log(instance.disk.material);
+          stopFlow();
+          canScroll = false;
+          // setTimeout(() => {
+          //   $router.push({ name: "cart", params: { id: index } });
+          //   return;
+          // }, 3000);
+          // toHorizontalTween = gsap.to(instance.disk.rotation, {
+          //   duration: 1,
+          //   y: 1.5,
+          // });
           selectedDiskIsFouneded = true;
         }
       });
@@ -147,22 +194,48 @@ export default function render(elContainer) {
 
   window.addEventListener("resize", () => {
     sizes.width = window.innerWidth;
-    sizes.height = 500;
+    sizes.height = window.innerHeight;
     camera.aspect = sizes.width / sizes.height;
     camera.updateProjectionMatrix();
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   });
 
+  // eslint-disable-next-line no-unused-vars
+  function smoothScroll(cls) {
+    console.log(
+      document.querySelector(cls).scrollIntoView({
+        behavior: "smooth",
+      })
+    );
+  }
+
   function tick() {
     position += y;
     y *= 0.9;
     if (position <= topEdge) {
-      camera.position.y = bottomEdge;
-      position = topEdge;
+      // camera.position.y = topEdge;
+      // emit("unlockScrollMain", true);
+      // smoothScroll(".hero");
+
+      // position *= 0.0001;
+      // setTimeout(() => {
+      position = 0;
+      // }, 200);
+      // position = topEdge + 1;
+      // emit("lockScrollSpiral", true);
     } else if (position >= bottomEdge) {
-      camera.position.y = topEdge;
-      position = bottomEdge;
+      // camera.position.y = bottomEdge;
+      // position = bottomEdge;
+
+      // emit("unlockScrollMain", true);
+      // smoothScroll(".projects");
+
+      position = 0;
+      // setTimeout(() => {
+      // position *= 0.0001;
+      // }, 200);
+      // emit("lockScrollSpiral", true);
     }
     camera.position.y = -position;
 
@@ -181,22 +254,30 @@ export default function render(elContainer) {
 
   function backToCommonFlow(collection) {
     // let diskIsFound = false;
+    // return new Promise((resolve) => {
     for (let i = 0; i < collection.length; i++) {
       const currentDisk = collection[i].disk;
-
       if (currentDisk.uuid === selectedDiskUuid) {
-        console.log("change disk");
-
         toVertialTween.reverse();
+        // toHorizontalTween.reverse();
+        selectedDiskUuid = null;
         // diskIsFound = true;
       }
       gsap.to(currentDisk.position, {
-        duration: 3,
+        duration: 2,
         y: collectionDiskPosition[i].y,
         x: collectionDiskPosition[i].x,
+        // onComplete: () => {
+        //   console.log("comlete");
+        //   return resolve();
+        // },
       });
     }
+    // resolve();
+    // });
   }
 
   renderer.setAnimationLoop(tick);
+
+  return doScroll;
 }

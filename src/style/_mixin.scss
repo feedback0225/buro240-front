@@ -41,6 +41,10 @@
   font-weight: 400;
 }
 
+@mixin p-reset {
+  margin: 0;
+}
+
 @mixin background-blob {
   display: flex;
   justify-content: center;
@@ -54,12 +58,12 @@
 
   &-canvas {
     position: absolute;
-    bottom: 5%;
-    top: 5%;
-    left: 5%;
-    width: calc(100% - 10%);
-    right: 5%;
-    height: calc(100% - 10%);
+    bottom: 0%;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    right: 0%;
+    height: 100%;
     display: inline-block;
     margin-top: auto;
     z-index: -10;

@@ -6,13 +6,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-weight: 700;
+  font-family: 'UniversityRoman';
+  font-style: normal;
+  src: url('@/assets/fonts/university_roman_bold_plain-webfont.woff') format("woff"),
+       url('@/assets/fonts/university_roman_bold_plain-webfont.woff2') format("woff2");
+  font-display: swap;
+}
+
 
 @font-face {
   font-weight: 400;
   font-family: 'Astralaga';
   font-style: normal;
   src: url('@/assets/fonts/astralaga_medium-webfont.woff2') format("woff2"),
-      url('@/assets/fonts/astralaga_medium-webfont.woff') format("woff");
+       url('@/assets/fonts/astralaga_medium-webfont.woff') format("woff");
   font-display: swap;
 }
 

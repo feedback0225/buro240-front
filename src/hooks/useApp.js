@@ -23,14 +23,7 @@ export default function useApp() {
   // const subtitleRight = ref(null);
   // const logo = ref(null);
 
-  function doAnimate() {
-    const navItems = document.querySelectorAll(".header-nav__item");
-    function removeActiveNavItem() {
-      navItems.forEach((item) =>
-        item.classList.remove("header-nav__item--active")
-      );
-    }
-
+  function doAnimate(slide) {
     // header
     gsap.fromTo(
       ".header-nav",
@@ -60,14 +53,14 @@ export default function useApp() {
         {
           x: 1900,
           opacity: 1,
-          duration: 2,
+          duration: 1,
         },
         {
           x: 0,
-          duration: 2,
+          duration: 1,
           ease: "power",
           onStart: () => {
-            removeActiveNavItem();
+            slide.value = 1;
           },
           // onComplete: () => {
           //   removeClass(".header__header", "js-move");
@@ -103,7 +96,7 @@ export default function useApp() {
         { x: 1900, duration: 1.5, opacity: 1 },
         {
           x: 0,
-          duration: 1.5,
+          duration: 1,
           ease: "power",
           onStart: () => {
             // removeActiveNavItem();
@@ -119,7 +112,7 @@ export default function useApp() {
         "-=0.9"
       );
 
-    // timeline secons slide
+    // timeline second slide
     const tl2 = gsap.timeline({
       scrollTrigger: {
         scroller: ".container",
@@ -127,7 +120,7 @@ export default function useApp() {
         // markers: true,
         start: "-30% 15%",
         end: "120% center",
-        toggleActions: "restart reverse restart pause",
+        toggleActions: "restart reverse restart reverse",
         // scrub: true,
       },
     });
@@ -138,20 +131,22 @@ export default function useApp() {
         {
           x: 2000,
           opacity: 1,
-          duration: 2,
-
+          duration: 1,
           onComplete: function () {
             removeClass(".hero__container", "js-move");
           },
         },
         {
           x: 0,
-          duration: 2,
+          duration: 1,
           ease: "power",
-          onStart: function () {
-            // removeActiveNavItem();
-            // navItems[0].classList.add("header-nav__item--active");
+          onStart: () => {
+            slide.value = 2;
           },
+          // onStart: function () {
+          //   // removeActiveNavItem();
+          //   // navItems[0].classList.add("header-nav__item--active");
+          // },
           onComplete: function () {
             // navItems[0].classList.add("header-nav__item--active");
           },
@@ -162,15 +157,116 @@ export default function useApp() {
         {
           x: -2000,
           opacity: 1,
-          duration: 2,
         },
         {
           x: 0,
-          duration: 2,
+          duration: 1,
+          ease: "power",
+        },
+        "-=0.5"
+      )
+      .fromTo(
+        ".hero__label",
+        {
+          x: -800,
+        },
+        {
+          x: 0,
+          duration: 1,
           ease: "power",
         },
         "-=0.5"
       );
+
+    // eslint-disable-next-line no-unused-vars
+    const tl3 = gsap.timeline({
+      scrollTrigger: {
+        scroller: ".container",
+        trigger: ".spiral-disks",
+        markers: true,
+        start: "14.8% 15%",
+        end: "60% center",
+        toggleActions: "restart reverse restart reverse",
+        onEnter: () => {
+          console.log("enter spiral-disks");
+          slide.value = 3;
+        },
+        onEnterBack: () => {
+          console.log("onEnterLeave spiral-disks");
+          slide.value = 3;
+        },
+        onLeave: () => {
+          console.log("leave spiral-disks");
+        },
+        onLeaveBack: () => {
+          console.log("onLeaveBack spiral-disks");
+          // slide.value = 3;
+        },
+        onToggle: () => {
+          // console.log("toggle");
+        },
+        onRefresh: () => {
+          console.log("refresh spiral-disks");
+        },
+        // scrub: true,
+      },
+    });
+
+    tl3
+      .fromTo(
+        ".spiral-disks__svg.spiral-disks__svg--1",
+        {
+          opacity: 1,
+          x: 200,
+        },
+        {
+          x: 0,
+          duration: 1,
+        }
+      )
+      .fromTo(
+        ".spiral-disks__svg.spiral-disks__svg--2",
+        {
+          opacity: 1,
+          x: -300,
+        },
+        {
+          x: 0,
+          duration: 1,
+        },
+        "-=0.4"
+      );
+
+    // eslint-disable-next-line no-unused-vars
+    const tl4 = gsap.timeline({
+      scrollTrigger: {
+        scroller: ".container",
+        trigger: ".projects",
+        // markers: true,
+        start: "-30% 15%",
+        end: "100% center",
+        toggleActions: "restart reverse restart pause",
+        onEnter: () => {
+          // console.log("enter");
+          slide.value = 4;
+        },
+        onEnterBack: () => {
+          // console.log("onEnterLeave");
+          slide.value = 4;
+        },
+        onLeave: () => {
+          // console.log("leave projects");
+        },
+        onLeaveBack: () => {
+          // console.log("onLeaveBack");
+          // slide.value = 4;
+        },
+        onToggle: () => {
+          // console.log("toggle");
+        },
+        // scrub: true,
+      },
+    });
   }
 
   return {

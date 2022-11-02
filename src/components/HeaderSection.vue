@@ -19,15 +19,19 @@
         BY
         <br />
         BUREAU240
+        <SvgSprite symbol="snowflake" class="header__label-svg" size="85" />
       </div>
 
-      <marquee
+      <!-- <marquee
         class="header__marquee"
         direction="right"
         scrolldelay="50"
         truespeed="truespeed"
         >АГЕНСТВО · БЮРО</marquee
-      >
+      > -->
+      <RunningLine direction="right" class="header__marquee">
+        АГЕНСТВО · БЮРО
+      </RunningLine>
 
       <div class="header__blob header__blob--1">
         <svg
@@ -137,8 +141,10 @@
 import useBlobsFlight from "@/hooks/useHeaderBlobsFlight";
 import { onMounted, ref } from "vue";
 import useGlobalBlob from "@/3d/blob";
+import RunningLine from "@/components/RunningLine.vue";
 export default {
   inheritAttrs: true,
+  components: { RunningLine },
   setup() {
     const backgroundCanvasContainer = ref(null);
     const { animateBlobs } = useBlobsFlight();

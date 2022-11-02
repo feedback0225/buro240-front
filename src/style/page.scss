@@ -47,6 +47,10 @@ svg:not(:root) {
   scroll-snap-type: y mandatory;
   overflow-x: hidden;
   overflow-y: scroll;
+
+  &--fixed {
+    overflow-y: hidden;
+  }
 }
 
 
