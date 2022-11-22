@@ -1,36 +1,5 @@
 <template>
-  <div class="container" ref="mainContainer">
-    <nav class="header-nav">
-      <div class="header-nav__svg-group">
-        <SvgSprite symbol="logo" :size="iconState.logo" />
-        <SvgSprite
-          symbol="decStar"
-          class="header-nav__svg-decoration icon--color-grey"
-          :size="iconState.decorationLogo"
-        />
-      </div>
-      <ul class="header-nav__list">
-        <li
-          ref="firstTab"
-          class="header-nav__item header-nav__item--font-astralaga header-nav__item--color-grey"
-        >
-          SHOOTING
-        </li>
-        <li
-          ref="secondTab"
-          class="header-nav__item header-nav__item--font-astralaga header-nav__item--color-blue"
-        >
-          DESIGN
-        </li>
-        <li
-          ref="thirdTab"
-          class="header-nav__item header-nav__item--font-astralaga header-nav__item--color-turquoise"
-        >
-          SOUND
-        </li>
-      </ul>
-      <!-- <span class="header-nav__label">CREATIVE AGENCY</span> -->
-    </nav>
+  <div class="container">
     <HeaderSection class="header" />
     <HeroSection class="hero" />
     <SpiralDisks :can-pick-disk="canPickDisk" class="spiral-disks" />
@@ -38,10 +7,12 @@
     <ChessSection class="chess" />
     <SoundsSection class="sounds" />
   </div>
+  <div ref="backgroundCanvasContainer" class="background-blob"></div>
 </template>
 
 <script>
-import useBreakpoints from "@/hooks/useBreakpoints";
+// import useBreakpoints from "@/hooks/useBreakpoints";
+import useGlobalBlob from "@/3d/blob";
 import HeaderSection from "@/components/HeaderSection.vue";
 import HeroSection from "@/components/HeroSection.vue";
 import SpiralDisks from "@/components/SpiralDisks.vue";
@@ -62,60 +33,18 @@ export default {
   },
   setup(props, { emit }) {
     const slide = ref(null);
-    const firstTab = ref(null);
-    const secondTab = ref(null);
-    const thirdTab = ref(null);
-    const mainContainer = ref(null);
     const { doAnimate } = useApp();
     const canPickDisk = ref(false);
-    const activeClass = "header-nav__item--active";
-    // eslint-disable-next-line no-unused-vars
-    const currentWidthWP = ref(null);
-
-    const width = useBreakpoints();
-
-    function removeActiveNavItem() {
-      [firstTab.value, secondTab.value, thirdTab.value].forEach((item) =>
-        item.classList.remove(activeClass)
-      );
-    }
-
-    watch(slide, () => {
-      removeActiveNavItem();
-      emit("slideChange", slide.value);
-      switch (slide.value) {
-        case 1:
-          removeActiveSpiral();
-          break;
-        case 2:
-          firstTab.value.classList.add(activeClass);
-          removeActiveSpiral();
-          break;
-        case 3:
-          firstTab.value.classList.add(activeClass);
-          doActiveSpiral();
-          break;
-        case 4:
-          secondTab.value.classList.add(activeClass);
-          removeActiveSpiral();
-          break;
-        case 5:
-          secondTab.value.classList.add(activeClass);
-          removeActiveSpiral();
-          break;
-        case 6:
-          thirdTab.value.classList.add(activeClass);
-          removeActiveSpiral();
-          break;
-      }
+    const backgroundCanvasContainer = ref(null);
+    onMounted(() => {
+      useGlobalBlob(backgroundCanvasContainer.value, slide);
     });
 
-    // function bindScroll(event) {
-    //   // console.log(event.fn);
-    //   wheelScroll.value = function (ev) {
-    //     event.fn(ev);
-    //   };
-    // }
+    watch(slide, () => {
+      emit("slideChange", slide.value);
+      if (slide.value === 3) doActiveSpiral();
+      else removeActiveSpiral();
+    });
 
     // eslint-disable-next-line no-unused-vars
     function doActiveSpiral() {
@@ -132,48 +61,16 @@ export default {
       canPickDisk.value = false;
       // document.removeEventListener("wheel", wheelScroll.value);
     }
-    const iconState = computed(() => {
-      if (width.value < 821)
-        return {
-          logo: 50,
-          decorationLogo: 21,
-        };
-      else
-        return {
-          logo: 85,
-          decorationLogo: 41,
-        };
-    });
-
-    // const iconState = computed(() => {});
-    // function addListener() {
-    //   document.addEventListener("resize", () => {
-    //     console.log("resize");
-    //   });
-    // }
 
     onMounted(() => {
-      // addListener();
-      // useGlobalBlob(colorBlobs.value);
-
-      // document
-      //   .querySelectorAll(".global-blob")
-      //   .forEach((blob) => animateBlobsMinimalRadius(blob));
-      // animateBlobsMinimalRadius(document.querySelector(".container__blob"));
       document.fonts.ready.then(() => {
         doAnimate(slide);
       });
     });
 
     return {
-      slide,
+      backgroundCanvasContainer,
       canPickDisk,
-      mainContainer,
-      removeActiveSpiral,
-      firstTab,
-      secondTab,
-      thirdTab,
-      iconState,
     };
   },
 };
@@ -205,108 +102,6 @@ export default {
     left: 4%;
     width: 4000px;
     height: 4000px;
-  }
-}
-
-.header-nav {
-  position: fixed;
-  top: 40px;
-  left: 30px;
-  display: inline-flex;
-  flex-direction: column;
-  height: fit-content;
-  overflow: visible;
-  opacity: 0;
-  z-index: 10;
-
-  &__list {
-    @include list-reset;
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__item {
-    position: relative;
-    display: inline-block;
-    font-size: 18px;
-    transition: font-size 0.3s ease-in-out;
-
-    &::before {
-      content: "";
-      position: absolute;
-      left: -30px;
-      top: -4px;
-      width: 120%;
-      z-index: -1;
-      height: 33px;
-      transform: translateX(-121%);
-      transition: transform 0.3s ease-in-out;
-      transform-origin: left;
-    }
-
-    &--active {
-      font-size: 25px;
-
-      &::before {
-        transform: translateX(0);
-      }
-    }
-
-    &--color-grey {
-      &::before {
-        background-color: #c6ceda;
-      }
-    }
-
-    &--color-blue {
-      &::before {
-        background-color: #9dc0ff;
-      }
-    }
-
-    &--color-turquoise {
-      &::before {
-        background-color: #dae5e8;
-      }
-    }
-
-    &--font-astralaga {
-      @include font-family-astralaga;
-    }
-  }
-
-  &__svg {
-    &-group {
-      display: flex;
-      justify-content: space-between;
-      width: 150px;
-      margin-bottom: 20px;
-
-      &.icon {
-        &:first-child {
-          margin-right: 8px;
-        }
-      }
-
-      @media (max-width: 820px) {
-        width: 80px;
-      }
-    }
-
-    &-decoration {
-      transform: translateY(-10px);
-    }
-  }
-
-  &__label {
-    display: none;
-    @include font-family-astralaga;
-
-    @media (max-width: 820px) {
-      &__label {
-        display: block;
-      }
-    }
   }
 }
 

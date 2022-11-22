@@ -22,6 +22,8 @@
 <script>
 import render from "@/3d/index";
 import { onMounted, ref, watch } from "vue";
+import { useRouter } from "vue-router";
+import { gsap } from "gsap";
 // import useGlobalBlob from "@/3d/blob";
 export default {
   inheritAttrs: true,
@@ -30,9 +32,11 @@ export default {
   },
   // eslint-disable-next-line no-unused-vars
   setup(props, { emit }) {
+    const $router = useRouter();
     const backgroundCanvasContainer = ref(null);
     const containerSpiralDisks = ref(null);
     const cPickDisk = ref(null);
+    const chooseDisk = ref(null);
 
     onMounted(() => {
       // console.log(containerSpiralDisks.value);
@@ -40,8 +44,8 @@ export default {
       //   "vec4(0.87, 0.87, 0.95, 1.0)",
       //   backgroundCanvasContainer.value
       // );
-      console.log(cPickDisk.value);
-      render(containerSpiralDisks.value, cPickDisk);
+      // console.log(cPickDisk.value);
+      render(containerSpiralDisks.value, cPickDisk, chooseDisk);
     });
 
     watch(
@@ -56,6 +60,21 @@ export default {
         deep: true,
       }
     );
+
+    watch(chooseDisk, (value) => {
+      if (value) {
+        const root = document.querySelector(".container");
+        const backgroundBlob = document.querySelector(".background-blob");
+        gsap.to([root, backgroundBlob], {
+          opacity: 0,
+          duration: 1.5,
+          onComplete: () =>
+            $router.push({ name: "disk", params: { id: value } }),
+        });
+        // $router.push({ name: "disk", params: { id: value } });
+        // console.log(value);
+      }
+    });
 
     return { containerSpiralDisks, backgroundCanvasContainer, cPickDisk };
   },

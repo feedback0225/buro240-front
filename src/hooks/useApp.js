@@ -24,23 +24,12 @@ export default function useApp() {
   // const logo = ref(null);
 
   function doAnimate(slide) {
-    // header
-    gsap.fromTo(
-      ".header-nav",
-      { x: -100, opacity: 1, ease: "power" },
-      {
-        x: 0,
-        duration: 0.5,
-        ease: "power",
-      }
-    );
-
     // timeline first slide
     const slide1 = gsap.timeline({
       scrollTrigger: {
         scroller: ".container",
         trigger: ".header",
-        markers: true,
+        // markers: true,
         start: "-15% 15%",
         end: "120% center",
         toggleActions: "restart reverse restart pause",
@@ -183,7 +172,7 @@ export default function useApp() {
       scrollTrigger: {
         scroller: ".container",
         trigger: ".spiral-disks",
-        markers: true,
+        // markers: true,
         start: "10% 15%",
         end: "60% center",
         toggleActions: "restart reverse restart reverse",

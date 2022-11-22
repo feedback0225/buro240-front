@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import MainPage from "@/views/MainPage.vue";
-import DiskPage from "@/views/DiskPage.vue";
+import DiskPage from "@/views/DiskPage/DiskPage.vue";
 
 // import NotFoundPage from "@/views/NotFoundPage.vue";
 
@@ -12,7 +12,7 @@ const routes = [
   },
   {
     path: "/disk/:id",
-    name: "cart",
+    name: "disk",
     component: DiskPage,
   },
 

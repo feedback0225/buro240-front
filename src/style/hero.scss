@@ -1,9 +1,8 @@
-
 .hero {
   @include section;
 
   @media (max-width: 820px) {
-    height: 130vh;
+    height: 100vh;
   }
 
   &__container {
@@ -31,9 +30,6 @@
     
     &--direction-left {
       text-align: center;
-
-      &::before {
-      }
     }
     
     &--direction-right {

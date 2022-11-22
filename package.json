@@ -12,6 +12,7 @@
     "core-js": "^3.8.3",
     "dat.gui": "^0.7.9",
     "gsap": "^3.11.3",
+    "interactjs": "^1.10.17",
     "normalize-scss": "^7.0.1",
     "three": "^0.145.0",
     "vue": "^3.2.13",

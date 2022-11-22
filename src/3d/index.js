@@ -9,7 +9,7 @@ import { COLORS, QUANTITY_DISKS, TEXTURES } from "@/constants";
 import { watch } from "vue";
 
 // eslint-disable-next-line no-unused-vars
-export default function render(elContainer, canPickDisk) {
+export default function render(elContainer, canPickDisk, chooseDisk) {
   gsap.registerPlugin(CustomEase);
 
   const canvas = document.createElement("canvas");
@@ -24,8 +24,10 @@ export default function render(elContainer, canPickDisk) {
 
   const sizes = {
     width: window.innerWidth,
-    height: window.innerHeight,
+    height: document.querySelector(".spiral-disks").clientHeight,
   };
+
+  // console.log(sizes);
 
   let disksIsMove = true;
   // renderer.setPixelRatio(window.devicePixelRatio);
@@ -42,7 +44,7 @@ export default function render(elContainer, canPickDisk) {
   const far = 1000;
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
-  camera.position.set(0, 0, 20);
+  camera.position.set(0, 0, sizes.width > 820 ? 20 : 10);
 
   // light
   const ambientLight = new THREE.AmbientLight(0x333333);
@@ -65,8 +67,13 @@ export default function render(elContainer, canPickDisk) {
 
   const collectionDisk = [];
   const collectionDiskPosition = [];
+  const interval = sizes.width > 850 ? 1 : 0.4;
+  const baseOffsetY = sizes.width > 850 ? 9.5 : 6;
+  let positionInternal = 0;
+  console.log(baseOffsetY);
   for (let i = 0; i < QUANTITY_DISKS; i++) {
-    const position = { x: 0, y: i + 4 - 8, z: 0 };
+    positionInternal += interval;
+    const position = { x: 0, y: positionInternal + 4 - baseOffsetY, z: 0 };
     collectionDiskPosition.push(position);
     const currentDisk = crateDisk(position, COLORS[i], TEXTURES[i]);
     collectionDisk.push(currentDisk);
@@ -128,7 +135,6 @@ export default function render(elContainer, canPickDisk) {
 
   function pickDisk() {
     if (!canPickDisk.value) return false;
-    console.log("pickDisk");
     rayCaster.setFromCamera(mousePositon, camera);
     const intersects = rayCaster.intersectObjects(scene.children);
 
@@ -149,7 +155,7 @@ export default function render(elContainer, canPickDisk) {
       selectedDiskUuid = intersects[0].object.uuid;
 
       let selectedDiskIsFouneded = false;
-      collectionTween.forEach((instance) => {
+      collectionTween.forEach((instance, index) => {
         if (instance.disk.uuid !== selectedDiskUuid) {
           gsap.to(instance.disk.position, {
             duration: 1,
@@ -180,27 +186,10 @@ export default function render(elContainer, canPickDisk) {
           // canScroll = false;
           toVertialTween = gsap.to(instance.disk.rotation, {
             duration: 0.8,
-            z: 3.148, // 1.55
-            y: 3.148, // 1.58
+            z: 3.14, // 1.55
+            y: 3.14, // 1.58
             x: -1.6,
           });
-
-          // gsap.to(instance.disk.material, {
-          //   opacity: 0,
-          //   duration: 4,
-          // });
-
-          // gsap.to(instance.disk.rotation, {
-          //   duration: 0.8,
-          //   y: 0.9,
-          //   x: 0.9,
-          //   z: 0.9,
-          // });
-          // console.log(instance.disk.position);
-          // console.log(instance.disk.position.y, instance.disk.position.z);
-          // console.log(instance.disk.position.y);
-          // translateDisks(instance.disk.position.y);
-          // opaictyDisks(index);
           gsap
             .timeline()
             .to(instance.disk.position, {
@@ -212,32 +201,14 @@ export default function render(elContainer, canPickDisk) {
             })
             .to(camera.position, {
               duration: 3,
-              z: 11,
+              z: sizes.width > 850 ? 11 : 6,
               y: instance.disk.position.y,
+              onComplete: () => {
+                chooseDisk.value = index;
+              },
             });
-          // camera.position.y = -10;
-          // camera.position.z = -10;
-          // camera.position.set(0, instance.disk.position.y - 100, 9);
-          // .to(instance.disk.material[2].color, {
-          //   b: 1,
-          //   g: 1,
-          //   r: 1,
-          // });
-          // instance.disk.material[2].color.b = 1;
-          // instance.disk.material[2].color.g = 1;
-          // instance.disk.material[2].color.r = 1;
-          // console.log(instance.disk.material);
+
           stopFlow();
-          // canScroll = false;
-          // setTimeout(() => {
-          //   $router.push({ name: "cart", params: { id: index } });
-          //   return;
-          // }, 3000);
-          // toHorizontalTween = gsap.to(instance.disk.rotation, {
-          //   duration: 1,
-          //   y: 1.5,
-          // });
-          // selectedDiskIsFouneded = true;
         }
       });
     }

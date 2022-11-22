@@ -36,7 +36,12 @@
 
 
 @mixin section-container {
-  padding: 30px 50px 0 30px;
+  padding: 30px 30px 0 30px;
+
+  
+  @media (max-width: 820px) {
+    padding: 10px 10px 0 15px;
+  }
 }
 
 @mixin title-reset {
@@ -59,7 +64,7 @@
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 
   &__canvas {
     position: absolute;
@@ -80,7 +85,7 @@
 @mixin subtitle {
   position: relative;
   display: block;
-  font-size: max(9vw, 70px);
+  font-size: max(9vw, 50px);
   &:not(:last-child) {
     margin-bottom: 40px;
   }
