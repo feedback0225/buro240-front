@@ -3,20 +3,21 @@
     <div class="hero__container js-move">
       <h2 class="visually-hidden">Производство кино и рекламы</h2>
 
-      <span class="hero__subtitle hero__subtitle--direction-left"
-        >ПРОИЗВОДСТВО</span
-      >
-      <span class="hero__subtitle hero__subtitle--direction-right"
-        >КИНО И РЕКЛАМЫ</span
-      >
+      <div class="hero__subtitle-group">
+        <span class="hero__subtitle hero__subtitle--direction-left"
+          >ПРОИЗВОДСТВО</span
+        >
+        <span class="hero__subtitle hero__subtitle--direction-right"
+          >КИНО И РЕКЛАМЫ</span
+        >
 
-      <div class="hero__label">
-        <span class="hero__label-text">МАРКЕТИНГ</span>
-        <span class="hero__label-text">ДИСТРИБУЦИЯ</span>
-        <SvgSprite symbol="snowflake" class="hero__label-svg" size="85" />
+        <div class="hero__label">
+          <span class="hero__label-text">МАРКЕТИНГ</span>
+          <span class="hero__label-text">ДИСТРИБУЦИЯ</span>
+          <SvgSprite symbol="snowflake" class="hero__label-svg" size="85" />
+        </div>
       </div>
-
-      <div ref="backgroundCanvasContainer" class="hero__background"></div>
+      <!-- <div ref="backgroundCanvasContainer" class="hero__background"></div> -->
 
       <div class="hero__blob hero__blob--1">
         <svg
@@ -74,7 +75,7 @@
 <script>
 import useBlobsFlight from "@/hooks/useHeaderBlobsFlight";
 import { ref, onMounted } from "vue";
-import useGlobalBlob from "@/3d/blob";
+// import useGlobalBlob from "@/3d/blob";
 export default {
   inheritAttrs: true,
   setup() {
@@ -82,10 +83,10 @@ export default {
     const { animateBlobs } = useBlobsFlight();
 
     onMounted(() => {
-      useGlobalBlob(
-        "vec4(0.85, 0.90, 0.91, 1.0)",
-        backgroundCanvasContainer.value
-      );
+      // useGlobalBlob(
+      //   "vec4(0.85, 0.90, 0.91, 1.0)",
+      //   backgroundCanvasContainer.value
+      // );
 
       document.querySelectorAll(".hero__blob").forEach((blob) => {
         animateBlobs(blob);

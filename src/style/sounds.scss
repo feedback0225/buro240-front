@@ -1,0 +1,71 @@
+
+.sounds {
+  @include section;
+
+  &__container {
+    @include section-container;
+    padding: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+
+  &__marquee-container {
+    @include font-family-astralaga;
+    position: absolute;
+    width: 100vw;
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  &__marquee {
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 100%;
+    color: #000000;
+    white-space: nowrap;
+    font-size: 12vh; 
+    animation: marquee 25.5s infinite linear;
+  }
+
+  &__marquee::after {
+    content: "SOUNDSSOUNDSOUNDSSOUNDSOUNDSSOUNDSOUNDSSOUND";
+  }
+
+  @keyframes marquee{
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  // &__subtitle {
+  //   @include subtitle;
+  //   opacity: 0;
+    
+  //   &--direction-left {
+  //     text-align: center;
+
+  //     &::before {
+  //       width: 65%;
+  //     }
+  //   }
+
+  //   &--direction-right {
+  //     text-align: center;
+
+  //     &::before {
+  //       width: 65%;
+  //     }
+  //   }
+  // }
+
+}

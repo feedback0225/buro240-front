@@ -6,9 +6,10 @@ import { gsap } from "gsap";
 import { CustomEase } from "gsap/CustomEase";
 import crateDisk from "./createDisk";
 import { COLORS, QUANTITY_DISKS, TEXTURES } from "@/constants";
+import { watch } from "vue";
 
 // eslint-disable-next-line no-unused-vars
-export default function render(elContainer, emit) {
+export default function render(elContainer, canPickDisk) {
   gsap.registerPlugin(CustomEase);
 
   const canvas = document.createElement("canvas");
@@ -72,9 +73,9 @@ export default function render(elContainer, emit) {
     scene.add(currentDisk);
   }
 
-  const topEdge = collectionDiskPosition[0].y - 0.5;
-  const bottomEdge =
-    collectionDiskPosition[collectionDiskPosition.length - 1].y + 0.5;
+  // const topEdge = collectionDiskPosition[0].y - 0.5;
+  // const bottomEdge =
+  //   collectionDiskPosition[collectionDiskPosition.length - 1].y + 0.5;
 
   let delay = 0;
 
@@ -96,33 +97,38 @@ export default function render(elContainer, emit) {
     collectionTween.push({ disk, tween: currentTween });
   });
 
-  let canScroll = true;
-  let canPickDisk = true;
+  // let canScroll = true;
+  // let canPickDisk = true;
   let selectedDiskUuid = null;
   let y = 0;
   let position = 0;
 
-  function doScroll(event) {
-    if (canScroll) {
-      y = event.deltaY * 0.0055;
-      if (selectedDiskUuid) {
-        backToCommonFlow(collectionTween);
-        setTimeout(() => {
-          doFlow();
-          selectedDiskUuid = null;
-          canPickDisk = true;
-        }, 2000);
-      }
-    }
-  }
+  // function doScroll(event) {
+  //   if (canScroll) {
+  //     y = event.deltaY * 0.0055;
+  //     if (selectedDiskUuid) {
+  //       backToCommonFlow(collectionTween);
+  //       setTimeout(() => {
+  //         doFlow();
+  //         selectedDiskUuid = null;
+  //         canPickDisk = true;
+  //       }, 2000);
+  //     }
+  //   }
+  // }
 
   // addEventListener("wheel", doScroll);
 
   let toVertialTween;
   // let toHorizontalTween;
 
+  watch(canPickDisk, () => {
+    console.log("canChangeDisk is changed");
+  });
+
   function pickDisk() {
-    if (!canPickDisk) return false;
+    if (!canPickDisk.value) return false;
+    console.log("pickDisk");
     rayCaster.setFromCamera(mousePositon, camera);
     const intersects = rayCaster.intersectObjects(scene.children);
 
@@ -130,12 +136,12 @@ export default function render(elContainer, emit) {
       // console.log(selectedDiskUuid);
       if (selectedDiskUuid === intersects[0].object.uuid) return;
       if (selectedDiskUuid) {
-        canPickDisk = false;
+        canPickDisk.value = false;
         backToCommonFlow(collectionTween);
         setTimeout(() => {
           doFlow();
           selectedDiskUuid = null;
-          canPickDisk = true;
+          canPickDisk.value = true;
         }, 2000);
         return;
       }
@@ -148,34 +154,81 @@ export default function render(elContainer, emit) {
           gsap.to(instance.disk.position, {
             duration: 1,
             y: selectedDiskIsFouneded
-              ? instance.disk.position.y + 4.5
-              : instance.disk.position.y - 4.5,
+              ? instance.disk.position.y + 8.5
+              : instance.disk.position.y - 8.5,
           });
+          instance.disk.material.forEach((material) => {
+            // console.log(material);
+            gsap.to(material, {
+              opacity: 0,
+              duration: 4,
+            });
+            // console.log(material);
+            if (material) {
+              // material.transparent = true;
+              // material.visible = false;
+            }
+            // gsap.to(material, {
+            //   transparent: true,
+            // });
+          });
+          // gsap.to(instance.disk.color, {
+          //   a: 0,
+          // });
         } else if (instance.disk.uuid === selectedDiskUuid) {
+          selectedDiskIsFouneded = true;
+          // canScroll = false;
           toVertialTween = gsap.to(instance.disk.rotation, {
             duration: 0.8,
-            z: 1.5,
-            y: 1.5,
+            z: 3.148, // 1.55
+            y: 3.148, // 1.58
+            x: -1.6,
           });
+
+          // gsap.to(instance.disk.material, {
+          //   opacity: 0,
+          //   duration: 4,
+          // });
+
+          // gsap.to(instance.disk.rotation, {
+          //   duration: 0.8,
+          //   y: 0.9,
+          //   x: 0.9,
+          //   z: 0.9,
+          // });
           // console.log(instance.disk.position);
           // console.log(instance.disk.position.y, instance.disk.position.z);
+          // console.log(instance.disk.position.y);
+          // translateDisks(instance.disk.position.y);
+          // opaictyDisks(index);
           gsap
+            .timeline()
+            .to(instance.disk.position, {
+              duration: 0.8,
+              z: 0,
+              y: 0,
+              x: 0,
+              delay: 0.5,
+            })
             .to(camera.position, {
               duration: 3,
+              z: 11,
               y: instance.disk.position.y,
-              z: 1,
-            })
-            .to(instance.disk.material[2].color, {
-              b: 1,
-              g: 1,
-              r: 1,
             });
+          // camera.position.y = -10;
+          // camera.position.z = -10;
+          // camera.position.set(0, instance.disk.position.y - 100, 9);
+          // .to(instance.disk.material[2].color, {
+          //   b: 1,
+          //   g: 1,
+          //   r: 1,
+          // });
           // instance.disk.material[2].color.b = 1;
           // instance.disk.material[2].color.g = 1;
           // instance.disk.material[2].color.r = 1;
           // console.log(instance.disk.material);
           stopFlow();
-          canScroll = false;
+          // canScroll = false;
           // setTimeout(() => {
           //   $router.push({ name: "cart", params: { id: index } });
           //   return;
@@ -184,10 +237,23 @@ export default function render(elContainer, emit) {
           //   duration: 1,
           //   y: 1.5,
           // });
-          selectedDiskIsFouneded = true;
+          // selectedDiskIsFouneded = true;
         }
       });
     }
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  function opaictyDisks(exceptIndex) {
+    // console.log(y);
+    // console.log(camera.position);
+    // console.log(collectionDisk);
+    // collectionDisk.forEach((disk, index) => {
+    //   if (index === exceptIndex) return;
+    //   gsap.to(disk.color, {
+    //     a: 0,
+    //   });
+    // });
   }
 
   window.addEventListener("click", pickDisk);
@@ -213,30 +279,28 @@ export default function render(elContainer, emit) {
   function tick() {
     position += y;
     y *= 0.9;
-    if (position <= topEdge) {
-      // camera.position.y = topEdge;
-      // emit("unlockScrollMain", true);
-      // smoothScroll(".hero");
-
-      // position *= 0.0001;
-      // setTimeout(() => {
-      position = 0;
-      // }, 200);
-      // position = topEdge + 1;
-      // emit("lockScrollSpiral", true);
-    } else if (position >= bottomEdge) {
-      // camera.position.y = bottomEdge;
-      // position = bottomEdge;
-
-      // emit("unlockScrollMain", true);
-      // smoothScroll(".projects");
-
-      position = 0;
-      // setTimeout(() => {
-      // position *= 0.0001;
-      // }, 200);
-      // emit("lockScrollSpiral", true);
-    }
+    // console.log(position, topEdge, bottomEdge);
+    // if (position <= topEdge) {
+    // camera.position.y = topEdge;
+    // emit("unlockScrollMain", true);
+    // smoothScroll(".hero");
+    // position *= 0.0001;
+    // setTimeout(() => {
+    // position = topEdge + 1;
+    // }, 200);
+    // position = topEdge + 1;
+    // emit("lockScrollSpiral", true);
+    // } else if (position >= bottomEdge) {
+    // camera.position.y = bottomEdge;
+    // position = bottomEdge;
+    // emit("unlockScrollMain", true);
+    // smoothScroll(".projects");
+    // position = topEdge - 1;
+    // setTimeout(() => {
+    // position *= 0.0001;
+    // }, 200);
+    // emit("lockScrollSpiral", true);
+    // }
     camera.position.y = -position;
 
     renderer.render(scene, camera);
@@ -279,5 +343,5 @@ export default function render(elContainer, emit) {
 
   renderer.setAnimationLoop(tick);
 
-  return doScroll;
+  // return doScroll;
 }

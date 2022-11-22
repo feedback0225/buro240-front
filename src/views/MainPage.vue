@@ -2,11 +2,11 @@
   <div class="container" ref="mainContainer">
     <nav class="header-nav">
       <div class="header-nav__svg-group">
-        <SvgSprite symbol="logo" size="85" />
+        <SvgSprite symbol="logo" :size="iconState.logo" />
         <SvgSprite
           symbol="decStar"
           class="header-nav__svg-decoration icon--color-grey"
-          size="41"
+          :size="iconState.decorationLogo"
         />
       </div>
       <ul class="header-nav__list">
@@ -29,90 +29,131 @@
           SOUND
         </li>
       </ul>
+      <!-- <span class="header-nav__label">CREATIVE AGENCY</span> -->
     </nav>
     <HeaderSection class="header" />
     <HeroSection class="hero" />
-    <SpiralDisks
-      @wheelScroll="bindScroll"
-      @unlockScrollMain="removeActiveSpiral"
-      class="spiral-disks"
-    />
+    <SpiralDisks :can-pick-disk="canPickDisk" class="spiral-disks" />
     <ProjectsPage class="projects" />
+    <ChessSection class="chess" />
+    <SoundsSection class="sounds" />
   </div>
 </template>
 
 <script>
+import useBreakpoints from "@/hooks/useBreakpoints";
 import HeaderSection from "@/components/HeaderSection.vue";
 import HeroSection from "@/components/HeroSection.vue";
 import SpiralDisks from "@/components/SpiralDisks.vue";
 import ProjectsPage from "@/components/ProjectsPage.vue";
+import ChessSection from "@/components/СhessSection.vue";
+import SoundsSection from "@/components/SoundsSection.vue";
 import useApp from "@/hooks/useApp";
-import { onMounted, ref, watch } from "vue";
+// eslint-disable-next-line no-unused-vars
+import { computed, onMounted, onUpdated, reactive, ref, watch } from "vue";
 export default {
   components: {
     HeaderSection,
     HeroSection,
     SpiralDisks,
     ProjectsPage,
-    // SvgSprite
+    ChessSection,
+    SoundsSection,
   },
-  setup() {
+  setup(props, { emit }) {
     const slide = ref(null);
     const firstTab = ref(null);
     const secondTab = ref(null);
     const thirdTab = ref(null);
     const mainContainer = ref(null);
     const { doAnimate } = useApp();
-    const wheelScroll = ref(null);
+    const canPickDisk = ref(false);
+    const activeClass = "header-nav__item--active";
+    // eslint-disable-next-line no-unused-vars
+    const currentWidthWP = ref(null);
+
+    const width = useBreakpoints();
 
     function removeActiveNavItem() {
       [firstTab.value, secondTab.value, thirdTab.value].forEach((item) =>
-        item.classList.remove("header-nav__item--active")
+        item.classList.remove(activeClass)
       );
     }
 
     watch(slide, () => {
       removeActiveNavItem();
+      emit("slideChange", slide.value);
       switch (slide.value) {
         case 1:
-          // removeActiveSpiral();
+          removeActiveSpiral();
           break;
         case 2:
-          firstTab.value.classList.add("header-nav__item--active");
-          // removeActiveSpiral();
+          firstTab.value.classList.add(activeClass);
+          removeActiveSpiral();
           break;
         case 3:
-          firstTab.value.classList.add("header-nav__item--active");
-          // doActiveSpiral();
+          firstTab.value.classList.add(activeClass);
+          doActiveSpiral();
           break;
         case 4:
-          secondTab.value.classList.add("header-nav__item--active");
-          // removeActiveSpiral();
+          secondTab.value.classList.add(activeClass);
+          removeActiveSpiral();
+          break;
+        case 5:
+          secondTab.value.classList.add(activeClass);
+          removeActiveSpiral();
+          break;
+        case 6:
+          thirdTab.value.classList.add(activeClass);
+          removeActiveSpiral();
           break;
       }
     });
 
-    function bindScroll(event) {
-      // console.log(event.fn);
-      wheelScroll.value = function (ev) {
-        event.fn(ev);
-      };
-    }
+    // function bindScroll(event) {
+    //   // console.log(event.fn);
+    //   wheelScroll.value = function (ev) {
+    //     event.fn(ev);
+    //   };
+    // }
 
     // eslint-disable-next-line no-unused-vars
     function doActiveSpiral() {
       console.log("doActiveSpiral");
-      mainContainer.value.classList.add("container--fixed");
+      // mainContainer.value.classList.add("container--fixed");
+      canPickDisk.value = true;
+      console.log("canPickDisk in spiral component is", canPickDisk.value);
       // document.addEventListener("wheel", wheelScroll.value);
     }
 
     function removeActiveSpiral() {
       console.log("removeActiveSpiral");
-      mainContainer.value.classList.remove("container--fixed");
-      document.removeEventListener("wheel", wheelScroll.value);
+      // mainContainer.value.classList.remove("container--fixed");
+      canPickDisk.value = false;
+      // document.removeEventListener("wheel", wheelScroll.value);
     }
+    const iconState = computed(() => {
+      if (width.value < 821)
+        return {
+          logo: 50,
+          decorationLogo: 21,
+        };
+      else
+        return {
+          logo: 85,
+          decorationLogo: 41,
+        };
+    });
+
+    // const iconState = computed(() => {});
+    // function addListener() {
+    //   document.addEventListener("resize", () => {
+    //     console.log("resize");
+    //   });
+    // }
 
     onMounted(() => {
+      // addListener();
       // useGlobalBlob(colorBlobs.value);
 
       // document
@@ -126,13 +167,13 @@ export default {
 
     return {
       slide,
-      wheelScroll,
+      canPickDisk,
       mainContainer,
       removeActiveSpiral,
-      bindScroll,
       firstTab,
       secondTab,
       thirdTab,
+      iconState,
     };
   },
 };
@@ -241,15 +282,30 @@ export default {
       width: 150px;
       margin-bottom: 20px;
 
-      *.icon {
+      &.icon {
         &:first-child {
           margin-right: 8px;
         }
+      }
+
+      @media (max-width: 820px) {
+        width: 80px;
       }
     }
 
     &-decoration {
       transform: translateY(-10px);
+    }
+  }
+
+  &__label {
+    display: none;
+    @include font-family-astralaga;
+
+    @media (max-width: 820px) {
+      &__label {
+        display: block;
+      }
     }
   }
 }

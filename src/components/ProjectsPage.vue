@@ -30,42 +30,35 @@
           </g>
         </svg>
       </div>
+    </div>
+    <div class="projects__marquee-container">
       <div class="projects__marquee">
-        <div class="projects__right-half">
-          <div class="projects__marquee-container">
-            <span class="projects__marquee-left"> DESIGN </span>
-            <p class="projects__marquee-right">
-              ТУТ РАБОТЫ ХОРОШИЕ ТАКИЕ БУДУТ ЭТО НЕ МОЖЕТ НЕ РАДОВАТЬ ВОТ ПРИМЕР
-              ТУТ ЕЩЕ ЧЕТ НАПИСАТЬ НАДО НУ КАК У ВАС ДЕЛА КАК ЖИЗНЬ В ЦЕЛОМ И
-              ОБЩЕМ
-            </p>
-          </div>
-          <div class="projects__marquee-container">
-            <span class="projects__marquee-left"> DESIGN </span>
-            <p class="projects__marquee-right">
-              ТУТ РАБОТЫ ХОРОШИЕ ТАКИЕ БУДУТ ЭТО НЕ МОЖЕТ НЕ РАДОВАТЬ ВОТ ПРИМЕР
-              ТУТ ЕЩЕ ЧЕТ НАПИСАТЬ НАДО НУ КАК У ВАС ДЕЛА КАК ЖИЗНЬ В ЦЕЛОМ И
-              ОБЩЕМ
-            </p>
-          </div>
+        <span class="projects__marquee-left"> DESIGN </span>
+        <div class="projects__marquee-right">
+          <span class="projects__marquee-text">
+            ТУТ РАБОТЫ ХОРОШИЕ ТАКИЕ БУДУТ ЭТО НЕ МОЖЕТ НЕ РАДОВАТЬ
+          </span>
+          <span class="projects__marquee-text">
+            ЕЩЕ ЧЕТ НАПИСАТЬ НАДО НУ КАК У ВАС ДЕЛА КАК ЖИЗНЬ В
+          </span>
         </div>
-        <div class="projects__left-half">
-          <div class="projects__marquee-container">
-            <span class="projects__marquee-left"> DESIGN </span>
-            <p class="projects__marquee-right">
-              ТУТ РАБОТЫ ХОРОШИЕ ТАКИЕ БУДУТ ЭТО НЕ МОЖЕТ НЕ РАДОВАТЬ ВОТ ПРИМЕР
-              ТУТ ЕЩЕ ЧЕТ НАПИСАТЬ НАДО НУ КАК У ВАС ДЕЛА КАК ЖИЗНЬ В ЦЕЛОМ И
-              ОБЩЕМ
-            </p>
-          </div>
-          <div class="projects__marquee-container">
-            <span class="projects__marquee-left"> DESIGN </span>
-            <p class="projects__marquee-right">
-              ТУТ РАБОТЫ ХОРОШИЕ ТАКИЕ БУДУТ ЭТО НЕ МОЖЕТ НЕ РАДОВАТЬ ВОТ ПРИМЕР
-              ТУТ ЕЩЕ ЧЕТ НАПИСАТЬ НАДО НУ КАК У ВАС ДЕЛА КАК ЖИЗНЬ В ЦЕЛОМ И
-              ОБЩЕМ
-            </p>
-          </div>
+        <span class="projects__marquee-left"> DESIGN </span>
+        <div class="projects__marquee-right">
+          <span class="projects__marquee-text">
+            ТУТ РАБОТЫ ХОРОШИЕ ТАКИЕ БУДУТ ЭТО НЕ МОЖЕТ НЕ РАДОВАТЬ
+          </span>
+          <span class="projects__marquee-text">
+            ЕЩЕ ЧЕТ НАПИСАТЬ НАДО НУ КАК У ВАС ДЕЛА КАК ЖИЗНЬ В
+          </span>
+        </div>
+        <span class="projects__marquee-left"> DESIGN </span>
+        <div class="projects__marquee-right">
+          <span class="projects__marquee-text">
+            ТУТ РАБОТЫ ХОРОШИЕ ТАКИЕ БУДУТ ЭТО НЕ МОЖЕТ НЕ РАДОВАТЬ
+          </span>
+          <span class="projects__marquee-text">
+            ЕЩЕ ЧЕТ НАПИСАТЬ НАДО НУ КАК У ВАС ДЕЛА КАК ЖИЗНЬ В
+          </span>
         </div>
       </div>
     </div>

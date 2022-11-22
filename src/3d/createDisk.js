@@ -16,29 +16,41 @@ export default function crateDisk(position, color, texture) {
   const diskMultyMaterial = [
     new THREE.MeshStandardMaterial({
       color: parsedColor,
+      alphaTest: 0,
+      transparent: true,
       // map: texture?.top ? textureLoader.load(texture?.top) ,
     }),
     new THREE.MeshStandardMaterial({
       color: parsedColor,
+      alphaTest: 0,
+      transparent: true,
       // map: textureLoader.load(texture?.top) || null,
     }),
     new THREE.MeshStandardMaterial({
       color: parsedColor,
-      // map: textureLoader.load(texture?.top),
+      map: textureLoader.load(texture?.top),
+      alphaTest: 0,
+      // transparent: true,
     }), // верхняя грань
     new THREE.MeshStandardMaterial({
       color: parsedColor,
+      alphaTest: 0,
+      // transparent: true,
       // map: textureLoader.load(texture?.top) || null,
     }), // нижняя грань
     new THREE.MeshStandardMaterial({
       color: parsedColor,
+      alphaTest: 0,
+      // transparent: true,
       // map: textureLoader.load(texture?.top) || null,
     }),
     new THREE.MeshStandardMaterial({
       color: parsedColor,
+      alphaTest: 0,
+      transparent: true,
       // map: textureLoader.load(texture?.top) || null,
     }),
-    console.log("createDisk"),
+    // console.log("createDisk"),
   ];
   const diskGeomtry = new THREE.BoxGeometry(
     DISK_WIDTH,

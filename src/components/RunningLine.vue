@@ -1,12 +1,48 @@
 <template>
-  <marquee
-    class="running-line"
-    :direction="direction"
-    scrolldelay="50"
-    truespeed="truespeed"
-  >
-    <slot></slot>
-  </marquee>
+  <div class="running-line">
+    <div class="running-line__marquee">
+      <div class="running-line__right-half">
+        <div class="running-line__marquee-container">
+          <slot name="left-side"></slot>
+          <!-- <span class="running-line__marquee-left"> DESIGN </span>
+          <p class="running-line__marquee-right">
+            ТУТ РАБОТЫ ХОРОШИЕ ТАКИЕ БУДУТ ЭТО НЕ МОЖЕТ НЕ РАДОВАТЬ ВОТ ПРИМЕР
+            ТУТ ЕЩЕ ЧЕТ НАПИСАТЬ НАДО НУ КАК У ВАС ДЕЛА КАК ЖИЗНЬ В ЦЕЛОМ И
+            ОБЩЕМ
+          </p> -->
+        </div>
+        <div class="running-line__marquee-container">
+          <slot name="right-side"></slot>
+          <!-- <span class="running-line__marquee-left"> DESIGN </span>
+          <p class="running-line__marquee-right">
+            ТУТ РАБОТЫ ХОРОШИЕ ТАКИЕ БУДУТ ЭТО НЕ МОЖЕТ НЕ РАДОВАТЬ ВОТ ПРИМЕР
+            ТУТ ЕЩЕ ЧЕТ НАПИСАТЬ НАДО НУ КАК У ВАС ДЕЛА КАК ЖИЗНЬ В ЦЕЛОМ И
+            ОБЩЕМ
+          </p> -->
+        </div>
+      </div>
+      <div class="running-line__left-half">
+        <div class="running-line__marquee-container">
+          <slot name="left-side"></slot>
+          <!-- <span class="running-line__marquee-left"> DESIGN </span>
+          <p class="running-line__marquee-right">
+            ТУТ РАБОТЫ ХОРОШИЕ ТАКИЕ БУДУТ ЭТО НЕ МОЖЕТ НЕ РАДОВАТЬ ВОТ ПРИМЕР
+            ТУТ ЕЩЕ ЧЕТ НАПИСАТЬ НАДО НУ КАК У ВАС ДЕЛА КАК ЖИЗНЬ В ЦЕЛОМ И
+            ОБЩЕМ
+          </p> -->
+        </div>
+        <div class="running-line__marquee-container">
+          <slot name="right-side"></slot>
+          <!-- <span class="running-line__left"> DESIGN </span>
+          <p class="running-line__right">
+            ТУТ РАБОТЫ ХОРОШИЕ ТАКИЕ БУДУТ ЭТО НЕ МОЖЕТ НЕ РАДОВАТЬ ВОТ ПРИМЕР
+            ТУТ ЕЩЕ ЧЕТ НАПИСАТЬ НАДО НУ КАК У ВАС ДЕЛА КАК ЖИЗНЬ В ЦЕЛОМ И
+            ОБЩЕМ
+          </p> -->
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -39,4 +75,6 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+@import "@/style/running-line.scss";
+</style>

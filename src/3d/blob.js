@@ -1,9 +1,12 @@
-export default function useGlobalBlob(colorBlobs, container) {
+import changeValueOfUniform4f from "@/handlers/rAFChangeUniform4f";
+import { watch, ref } from "vue";
+
+export default function useGlobalBlob(container, slide) {
   var canvas = document.createElement("canvas");
   var width = (canvas.width = window.innerWidth * 0.75);
   var height = (canvas.height = window.innerHeight * 0.75);
-  const section = container.classList.value.split("__")[0];
-  canvas.classList.add(`${section}__background-canvas`);
+  // const section = container.classList.value.split("__")[0];
+  canvas.classList.add(`background-blob__canvas`);
   container.append(canvas);
 
   var gl = canvas.getContext("webgl");
@@ -17,11 +20,11 @@ export default function useGlobalBlob(colorBlobs, container) {
 
   // var mouse = { x: 0, y: 0 };
 
-  var numMetaballs = 14;
+  var numMetaballs = 10;
   var metaballs = [];
 
   for (var i = 0; i < numMetaballs; i++) {
-    var radius = Math.random() * 60 + 40;
+    var radius = Math.random() * 60 + 20;
     metaballs.push({
       x: Math.random() * (width - 2 * radius) + radius,
       y: Math.random() * (height - 2 * radius) + radius,
@@ -55,6 +58,7 @@ const float HEIGHT = ` +
 uniform vec3 metaballs[` +
     numMetaballs +
     `];
+uniform vec4 u_FragColor;
 
 void main(){
 float x = gl_FragCoord.x;
@@ -72,7 +76,7 @@ float radius = metaball.z;
 sum += (radius * radius) / (dx * dx + dy * dy);
 }
 if (sum >= 0.99) {
-gl_FragColor = ${colorBlobs};
+gl_FragColor = u_FragColor;
 return;
 }
 
@@ -146,8 +150,101 @@ gl_FragColor = vec4(1.0, 1.0, 1.0, 0);
   );
 
   var metaballsHandle = getUniformLocation(program, "metaballs");
+  var u_FragColor = getUniformLocation(program, "u_FragColor");
+  var currentColor = ref({ r: 0.85, g: 0.9, b: 0.91, a: 1.0 });
+  var lastColor = ref(null);
+  gl.uniform4f(
+    u_FragColor,
+    currentColor.value.r,
+    currentColor.value.g,
+    currentColor.value.b,
+    currentColor.value.a
+  );
+
+  function normilizeValue(initial4fValue, target4fValue) {
+    function colorLoop() {
+      // console.log("tick");
+      requestAnimationFrame(() => {
+        initial4fValue.r = changeValueOfUniform4f(
+          initial4fValue.r,
+          target4fValue.r
+        );
+        initial4fValue.g = changeValueOfUniform4f(
+          initial4fValue.g,
+          target4fValue.g
+        );
+        initial4fValue.b = changeValueOfUniform4f(
+          initial4fValue.b,
+          target4fValue.b
+        );
+        gl.uniform4f(
+          u_FragColor,
+          initial4fValue.r,
+          initial4fValue.g,
+          initial4fValue.b,
+          1.0
+        );
+        if (initial4fValue.r.toFixed(1) !== target4fValue.r.toFixed(1))
+          colorLoop();
+        else if (initial4fValue.g.toFixed(1) !== target4fValue.g.toFixed(1))
+          colorLoop();
+        else if (initial4fValue.b.toFixed(1) !== target4fValue.b.toFixed(1))
+          colorLoop();
+        else return;
+      });
+    }
+    colorLoop();
+    // if (
+    //   initial4fValue.r === target4fValue.r &&
+    //   initial4fValue.g === target4fValue.g &&
+    //   initial4fValue.b === target4fValue.b
+    // )
+    //   return;
+    // else colorLoop();
+  }
 
   loop();
+  //{ r: 0.87, g: 0.87, b: 0.87, a: 1.0 };
+  //{ r: 0.89, g: 0.91, b: 0.9, a: 1.0 };
+  //{ r: 0.78, g: 0.81, b: 0.85, a: 1.0 };
+  //{ r: 0.68, g: 0.81, b: 0.85, a: 1.0 };
+  //{ r: 0.85, g: 0.9, b: 0.91, a: 1.0 };
+  watch(slide, () => {
+    if (slide.value) {
+      lastColor.value = currentColor.value;
+      switch (slide.value) {
+        case 1:
+          currentColor.value = { r: 0.4, g: 0.87, b: 0.87, a: 1.0 };
+          break;
+        case 2:
+          currentColor.value = { r: 0.89, g: 0.4, b: 0.9, a: 1.0 };
+          break;
+        case 3:
+          currentColor.value = { r: 0.78, g: 0.81, b: 0.4, a: 1.0 };
+          break;
+        case 4:
+          currentColor.value = { r: 0.9, g: 0.81, b: 0.85, a: 1.0 };
+          break;
+        default:
+          currentColor.value = { r: 0.1, g: 0.9, b: 0.91, a: 1.0 };
+          break;
+      }
+      normilizeValue(
+        {
+          r: lastColor.value.r,
+          g: lastColor.value.g,
+          b: lastColor.value.b,
+          a: lastColor.value.a,
+        },
+        {
+          r: currentColor.value.r,
+          g: currentColor.value.g,
+          b: currentColor.value.b,
+          a: currentColor.value.a,
+        }
+      );
+    }
+  });
   function loop() {
     for (var i = 0; i < numMetaballs; i++) {
       var metaball = metaballs[i];

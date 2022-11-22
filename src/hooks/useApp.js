@@ -36,18 +36,18 @@ export default function useApp() {
     );
 
     // timeline first slide
-    const tl1 = gsap.timeline({
+    const slide1 = gsap.timeline({
       scrollTrigger: {
         scroller: ".container",
         trigger: ".header",
-        // markers: true,
+        markers: true,
         start: "-15% 15%",
         end: "120% center",
         toggleActions: "restart reverse restart pause",
       },
     });
 
-    tl1
+    slide1
       .fromTo(
         ".header__title",
         {
@@ -113,7 +113,7 @@ export default function useApp() {
       );
 
     // timeline second slide
-    const tl2 = gsap.timeline({
+    const slide2 = gsap.timeline({
       scrollTrigger: {
         scroller: ".container",
         trigger: ".hero",
@@ -125,7 +125,7 @@ export default function useApp() {
       },
     });
 
-    tl2
+    slide2
       .fromTo(
         ".hero__subtitle.hero__subtitle--direction-left",
         {
@@ -179,12 +179,12 @@ export default function useApp() {
       );
 
     // eslint-disable-next-line no-unused-vars
-    const tl3 = gsap.timeline({
+    const slide3 = gsap.timeline({
       scrollTrigger: {
         scroller: ".container",
         trigger: ".spiral-disks",
         markers: true,
-        start: "14.8% 15%",
+        start: "10% 15%",
         end: "60% center",
         toggleActions: "restart reverse restart reverse",
         onEnter: () => {
@@ -200,7 +200,7 @@ export default function useApp() {
         },
         onLeaveBack: () => {
           console.log("onLeaveBack spiral-disks");
-          // slide.value = 3;
+          slide.value = 3;
         },
         onToggle: () => {
           // console.log("toggle");
@@ -212,7 +212,7 @@ export default function useApp() {
       },
     });
 
-    tl3
+    slide3
       .fromTo(
         ".spiral-disks__svg.spiral-disks__svg--1",
         {
@@ -238,7 +238,7 @@ export default function useApp() {
       );
 
     // eslint-disable-next-line no-unused-vars
-    const tl4 = gsap.timeline({
+    const slide4 = gsap.timeline({
       scrollTrigger: {
         scroller: ".container",
         trigger: ".projects",
@@ -265,6 +265,64 @@ export default function useApp() {
           // console.log("toggle");
         },
         // scrub: true,
+      },
+    });
+
+    // eslint-disable-next-line no-unused-vars
+    const slide5 = gsap.timeline({
+      scrollTrigger: {
+        scroller: ".container",
+        trigger: ".chess",
+        start: "-30% 15%",
+        end: "100% center",
+        toggleActions: "restart reverse restart pause",
+        onEnter: () => {
+          // console.log("enter");
+          slide.value = 5;
+        },
+        onEnterBack: () => {
+          // console.log("onEnterLeave");
+          slide.value = 5;
+        },
+        onLeave: () => {
+          // console.log("leave projects");
+        },
+        onLeaveBack: () => {
+          // console.log("onLeaveBack");
+          // slide.value = 5;
+        },
+        onToggle: () => {
+          // console.log("toggle");
+        },
+      },
+    });
+
+    // eslint-disable-next-line no-unused-vars
+    const slide6 = gsap.timeline({
+      scrollTrigger: {
+        scroller: ".container",
+        trigger: ".sounds",
+        start: "-30% 15%",
+        end: "100% center",
+        toggleActions: "restart reverse restart pause",
+        onEnter: () => {
+          // console.log("enter");
+          slide.value = 6;
+        },
+        onEnterBack: () => {
+          // console.log("onEnterLeave");
+          slide.value = 6;
+        },
+        onLeave: () => {
+          // console.log("leave projects");
+        },
+        onLeaveBack: () => {
+          // console.log("onLeaveBack");
+          // slide.value = 6;
+        },
+        onToggle: () => {
+          // console.log("toggle");
+        },
       },
     });
   }

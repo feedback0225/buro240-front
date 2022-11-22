@@ -22,29 +22,42 @@
 <script>
 import render from "@/3d/index";
 import { onMounted, ref, watch } from "vue";
-import useGlobalBlob from "@/3d/blob";
+// import useGlobalBlob from "@/3d/blob";
 export default {
   inheritAttrs: true,
-
+  props: {
+    canPickDisk: Boolean,
+  },
+  // eslint-disable-next-line no-unused-vars
   setup(props, { emit }) {
     const backgroundCanvasContainer = ref(null);
     const containerSpiralDisks = ref(null);
-    const canScrollMainPage = ref(null);
-    let wheelScroll;
+    const cPickDisk = ref(null);
 
     onMounted(() => {
-      console.log(containerSpiralDisks.value);
-      useGlobalBlob(
-        "vec4(0.87, 0.87, 0.95, 1.0)",
-        backgroundCanvasContainer.value
-      );
-      wheelScroll = render(containerSpiralDisks.value, emit);
-      emit("wheelScroll", { fn: wheelScroll });
+      // console.log(containerSpiralDisks.value);
+      // useGlobalBlob(
+      //   "vec4(0.87, 0.87, 0.95, 1.0)",
+      //   backgroundCanvasContainer.value
+      // );
+      console.log(cPickDisk.value);
+      render(containerSpiralDisks.value, cPickDisk);
     });
 
-    watch(canScrollMainPage, () => {});
+    watch(
+      () => props.canPickDisk,
+      (value) => {
+        console.log("changeCanPickDisk");
+        console.log(value);
+        cPickDisk.value = props.canPickDisk;
+      },
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
 
-    return { containerSpiralDisks, backgroundCanvasContainer };
+    return { containerSpiralDisks, backgroundCanvasContainer, cPickDisk };
   },
 };
 </script>
