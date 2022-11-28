@@ -1,8 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import MainPage from "@/views/MainPage.vue";
+import MainPage from "@/views/MainPage/MainPage.vue";
 import DiskPage from "@/views/DiskPage/DiskPage.vue";
-
-// import NotFoundPage from "@/views/NotFoundPage.vue";
 
 const routes = [
   {
@@ -15,8 +13,6 @@ const routes = [
     name: "disk",
     component: DiskPage,
   },
-
-  // { name: "not-found", component: NotFoundPage, path: "/:pathMatch(.*)*" },
 ];
 
 const router = createRouter({

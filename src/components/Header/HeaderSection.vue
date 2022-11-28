@@ -40,11 +40,6 @@
         <SvgSprite symbol="snowflake" class="header__label-svg" size="85" />
       </div>
 
-      <!-- <RunningLine class="header__marquee">
-        <template #lift-side> АГЕНСТВО · БЮРО </template>
-        <template #right-side> АГЕНСТВО · БЮРО </template>
-      </RunningLine> -->
-
       <div class="header__blob header__blob--1">
         <svg
           class="header__blob-svg"
@@ -150,26 +145,19 @@
         · АГЕНСТВО · БЮРО · АГЕНСТВО · БЮРО · АГЕНСТВО · БЮРО
       </p>
     </div>
-    <!-- <div ref="backgroundCanvasContainer" class="header__background"></div> -->
   </section>
 </template>
 
 <script>
 import useBlobsFlight from "@/hooks/useHeaderBlobsFlight";
 import { onMounted, ref } from "vue";
-// import useGlobalBlob from "@/3d/blob";
-// import RunningLine from "@/components/RunningLine.vue";
 export default {
   inheritAttrs: true,
-  // components: { RunningLine },
+
   setup() {
     const backgroundCanvasContainer = ref(null);
     const { animateBlobs } = useBlobsFlight();
     onMounted(() => {
-      // useGlobalBlob(
-      //   "vec4(0.87, 0.87, 0.87, 1.0)",
-      //   backgroundCanvasContainer.value
-      // );
       document.querySelectorAll(".header__blob").forEach((blob) => {
         animateBlobs(blob);
       });
@@ -182,18 +170,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "@/style/header.scss";
-
-.green {
-  fill: green;
-}
-
-.blob {
-  &--4 {
-    z-index: -1;
-    top: calc(50% - 250px);
-    left: calc(50% - 250px);
-  }
-}
-</style>
+<style lang="scss" src="./Header.scss" />

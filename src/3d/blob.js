@@ -24,7 +24,7 @@ export default function useGlobalBlob(container, slide) {
   var metaballs = [];
 
   for (var i = 0; i < numMetaballs; i++) {
-    var radius = Math.random() * 60 + 20;
+    var radius = Math.random() * 60 + 25;
     metaballs.push({
       x: Math.random() * (width - 2 * radius) + radius,
       y: Math.random() * (height - 2 * radius) + radius,
@@ -214,19 +214,19 @@ gl_FragColor = vec4(1.0, 1.0, 1.0, 0);
       lastColor.value = currentColor.value;
       switch (slide.value) {
         case 1:
-          currentColor.value = { r: 0.4, g: 0.87, b: 0.87, a: 1.0 };
+          currentColor.value = { r: 0.87, g: 0.87, b: 0.87, a: 1.0 };
           break;
         case 2:
-          currentColor.value = { r: 0.89, g: 0.4, b: 0.9, a: 1.0 };
+          currentColor.value = { r: 0.89, g: 0.91, b: 0.9, a: 1.0 };
           break;
         case 3:
-          currentColor.value = { r: 0.78, g: 0.81, b: 0.4, a: 1.0 };
+          currentColor.value = { r: 0.78, g: 0.81, b: 0.85, a: 1.0 };
           break;
         case 4:
-          currentColor.value = { r: 0.9, g: 0.81, b: 0.85, a: 1.0 };
+          currentColor.value = { r: 0.68, g: 0.81, b: 0.85, a: 1.0 };
           break;
         default:
-          currentColor.value = { r: 0.1, g: 0.9, b: 0.91, a: 1.0 };
+          currentColor.value = { r: 0.85, g: 0.9, b: 0.91, a: 1.0 };
           break;
       }
       normilizeValue(

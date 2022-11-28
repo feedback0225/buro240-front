@@ -1,0 +1,43 @@
+.locked {
+  @include section;
+  padding: 100px 50px 50px 50px;
+  background-image: url('@/assets/Rectangle35.png'), url('@/assets/soundRow.svg');
+  background-size: cover, 100%;
+  background-position: center, top center;
+  background-repeat: no-repeat;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__img {
+    max-width: 298px;
+    max-height: 298px;
+  }
+
+  &__title {
+    @include title-reset;
+    display: block;
+    text-align: center;
+    font-size: max(9vw, 50px);
+    color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-image: linear-gradient(95deg, rgba(205,205,205,1) 0%, rgba(90,90,90,1) 63%, rgba(94,94,94,1) 70%, rgba(0,0,0,1) 93%);
+  }
+
+
+  &__paragraph {
+    @include p-reset;
+    color: transparent;
+    align-self: flex-start;
+    max-width: 900px;
+    font-weight: 700;
+    font-size: 25px;
+    color: #fff;
+    margin-bottom: 40px;
+  } 
+
+}

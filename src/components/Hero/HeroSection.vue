@@ -17,7 +17,6 @@
           <SvgSprite symbol="snowflake" class="hero__label-svg" size="85" />
         </div>
       </div>
-      <!-- <div ref="backgroundCanvasContainer" class="hero__background"></div> -->
 
       <div class="hero__blob hero__blob--1">
         <svg
@@ -75,7 +74,6 @@
 <script>
 import useBlobsFlight from "@/hooks/useHeaderBlobsFlight";
 import { ref, onMounted } from "vue";
-// import useGlobalBlob from "@/3d/blob";
 export default {
   inheritAttrs: true,
   setup() {
@@ -83,11 +81,6 @@ export default {
     const { animateBlobs } = useBlobsFlight();
 
     onMounted(() => {
-      // useGlobalBlob(
-      //   "vec4(0.85, 0.90, 0.91, 1.0)",
-      //   backgroundCanvasContainer.value
-      // );
-
       document.querySelectorAll(".hero__blob").forEach((blob) => {
         animateBlobs(blob);
       });
@@ -100,10 +93,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "@/style/hero.scss";
-
-.hero__background {
-  @include background-blob;
-}
-</style>
+<style lang="scss" src="./Hero.scss" />

@@ -1,0 +1,31 @@
+.global-blob {
+    filter: blur(0.5em);
+    z-index: -1;
+    position: absolute;
+  
+    &--1 {
+      top: 67%;
+      left: 34%;
+    }
+  
+    &--2 {
+      top: 60%;
+      left: 55%;
+    }
+  }
+  
+  .container__blob {
+    @include blob;
+    z-index: -1;
+  
+    &--1 {
+      top: 67%;
+      left: 4%;
+      width: 4000px;
+      height: 4000px;
+    }
+  }
+  
+  .blob {
+    fill: white;
+  }

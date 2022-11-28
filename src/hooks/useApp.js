@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
@@ -234,7 +235,7 @@ export default function useApp() {
         // markers: true,
         start: "-30% 15%",
         end: "100% center",
-        toggleActions: "restart reverse restart pause",
+        toggleActions: "restart pause pause reverse",
         onEnter: () => {
           // console.log("enter");
           slide.value = 4;
@@ -256,6 +257,16 @@ export default function useApp() {
         // scrub: true,
       },
     });
+
+    slide4.fromTo(
+      ".background-blob",
+      {
+        opacity: 1,
+      },
+      {
+        opacity: 0,
+      }
+    );
 
     // eslint-disable-next-line no-unused-vars
     const slide5 = gsap.timeline({
@@ -314,6 +325,136 @@ export default function useApp() {
         },
       },
     });
+
+    const decoration = gsap.timeline({
+      scrollTrigger: {
+        scroller: ".container",
+        trigger: ".decoration",
+        start: "-30% 15%",
+        end: "100% center",
+        toggleActions: "restart reverse restart pause",
+        onEnter: () => {
+          headerNav.classList.remove("header-nav--color-white");
+          // slide.value = 6;
+          slide.value = 7;
+        },
+        onEnterBack: () => {
+          headerNav.classList.remove("header-nav--color-white");
+          slide.value = 7;
+          // slide.value = 6;
+        },
+        onLeave: () => {
+          // console.log("leave projects");
+        },
+        onLeaveBack: () => {
+          // console.log("onLeaveBack");
+          // slide.value = 6;
+        },
+        onToggle: () => {
+          // console.log("toggle");
+        },
+      },
+    });
+
+    const headerNav = document.querySelector(".header-nav");
+
+    const locked = gsap.timeline({
+      scrollTrigger: {
+        scroller: ".container",
+        // markers: true,
+        trigger: ".locked",
+        start: "-10% 15%",
+        end: "100% center",
+        toggleActions: "restart reverse restart pause",
+
+        onEnter: () => {
+          console.log("locked");
+          headerNav.classList.add("header-nav--color-white");
+          // console.log("enter");
+          // slide.value = 7;
+        },
+        onEnterBack: () => {
+          console.log("locked");
+          headerNav.classList.add("header-nav--color-white");
+          // console.log("onEnterLeave");
+          // slide.value = 7;
+        },
+        onLeave: () => {
+          console.log("OUT OF locked");
+          // headerNav.classList.remove("header-nav--color-white");
+          // conconsole.log("locked");sole.log("leave projects");
+        },
+        onLeaveBack: () => {
+          console.log("OUT OF locked");
+          // slide.value = 9;
+          // headerNav.classList.remove("header-nav--color-white");
+          // console.log("onLeaveBack");
+          // slide.value = 6;
+        },
+      },
+    });
+
+    const login = gsap.timeline({
+      scrollTrigger: {
+        scroller: ".container",
+        // markers: true,
+        trigger: ".login",
+        start: "-10% 15%",
+        end: "100% center",
+        toggleActions: "play pause pause pause",
+
+        onEnter: () => {
+          // console.log("locked");
+          // headerNav.classList.add("header-nav--color-white");
+          // console.log("enter");
+          // slide.value = 6;
+          slide.value = 9;
+        },
+        onEnterBack: () => {
+          // console.log("locked");
+          // headerNav.classList.add("header-nav--color-white");
+          // console.log("onEnterLeave");
+          // slide.value = 6;
+          slide.value = 9;
+        },
+        onLeave: () => {
+          // console.log("OUT OF locked");
+          // headerNav.classList.remove("header-nav--color-white");
+          // conconsole.log("locked");sole.log("leave projects");
+        },
+        onLeaveBack: () => {
+          // console.log("OUT OF locked");
+          // headerNav.classList.remove("header-nav--color-white");
+          // console.log("onLeaveBack");
+          // slide.value = 6;
+        },
+      },
+    });
+
+    login
+      .fromTo(
+        ".login__marquee",
+        { opacity: 1 },
+        {
+          opacity: 0,
+          delay: 6,
+          duration: 3,
+          onComplete: () => {
+            document
+              .querySelector(".login__marquee")
+              .classList.add("visually-hidden");
+          },
+        }
+      )
+      .to(".login__label", {
+        opacity: 1,
+      });
+
+    // locked.fromTo(
+    //   '.header-nav',
+    //   {},
+    //   {fill: '#fff'}
+    // )
   }
 
   return {

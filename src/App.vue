@@ -85,6 +85,9 @@ export default {
         case 6:
           thirdTab.value.classList.add(activeClass);
           break;
+        case 7:
+          thirdTab.value.classList.add(activeClass);
+          break;
       }
     });
 
@@ -147,6 +150,15 @@ export default {
   overflow: visible;
   opacity: 1;
   z-index: 10;
+
+  &--color-white {
+    fill: #fff;
+    color: #fff;
+  }
+
+  &--color-white .header-nav__item--active {
+    color: #000;
+  }
 
   @media (max-width: 820px) {
     top: 20px;

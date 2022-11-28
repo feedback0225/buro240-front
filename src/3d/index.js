@@ -22,6 +22,7 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
     antialias: true,
   });
 
+  console.log(document.querySelector(".spiral-disks"));
   const sizes = {
     width: window.innerWidth,
     height: document.querySelector(".spiral-disks").clientHeight,

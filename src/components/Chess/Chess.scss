@@ -1,0 +1,14 @@
+.chess {
+  @include section;
+
+  &__container {
+    @include section-container;
+    padding: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+}

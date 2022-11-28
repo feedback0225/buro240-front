@@ -1,0 +1,45 @@
+.spiral-disks {
+  @include section;
+
+  &__background {
+    @include background-blob;
+  }
+
+
+  @media (max-width: 820px) {
+    height: 100vh;
+  }
+
+  &__container {
+    @include section-container;
+    padding: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+
+    @media (max-width: 820px) {
+      padding: 0;
+    }
+  }
+  
+  &__svg {
+    position: absolute;
+    opacity: 0;
+
+    &--1 {
+      top: 4em;
+      right: 4em;
+      fill: #c6ceda;
+    }
+
+    &--2 {
+      bottom: 10em;
+      left: 10em;
+      fill: #c6ceda;
+    }
+  }
+
+
+}

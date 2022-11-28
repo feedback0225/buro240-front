@@ -10,6 +10,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "@/style/chess.scss";
-</style>
+<style lang="scss" src="./Chess.scss" />

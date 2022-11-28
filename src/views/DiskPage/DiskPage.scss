@@ -1,136 +1,121 @@
 .disk-page {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-
-    &__container {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      align-items: baseline;
-      padding: 30px 0 ;
-      overflow: hidden;
-    }
-
-    &__image {
-      display: block;
-      width: 100%;
-      margin: auto;
-
-      &-container {
-        width: 65%;
-        margin: auto;
-        opacity: 0;
-      }
-    }
-
-    &__marquee-container {
-        @include font-family-astralaga;
-        position: absolute;
-        width: 100vw;
-        height: 17vh;
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        margin: auto;
-      }
-      
-      &__marquee {
-        display: flex;
-        align-items: center;
-        width: auto;
-        height: 100%;
-        color: mediumseagreen;
-        white-space: nowrap;
-        font-size: 17vh; 
-        animation: marquee 10.5s 1 linear forwards;
-      }
-    
-      @keyframes marquee{
-        0% {
-          transform: translateX(50%);
-        }
-        90% {
-          opacity: 1,
-        }
-        100% {
-          transform: translateX(-100%);
-          opacity: 0
-        }
-      }
-}
-
-
-.label {
-  position: absolute;
-  width: 100vw;
+  position: relative;
+  width: 100%;
   height: 100vh;
+  overflow: hidden;
 
   &__container {
     width: 100%;
     height: 100%;
-  }
-
-  &__instance {
-
-    position: absolute;
-    width: 150px;
-    height: 250px;
     display: flex;
+    justify-content: center;
     flex-direction: column;
-    justify-content: space-between;
-    padding:  40px 15px 15px;
-    background-color: green;
-    z-index: 1;
-    border-radius: 20px;
-    opacity: 0;
+    align-items: baseline;
+    padding: 30px 0 ;
+    overflow: hidden;
+  }
 
-    &:nth-child(1) {
-      right: 80px;
-      top: 40px;
-      transform: rotate(40deg);
-    }
+  &__image {
+    display: block;
+    width: 100%;
+    margin: auto;
 
-    &:nth-child(2) {
-      left: 80px;
-      bottom: 40px;
-      transform: rotate(-40deg);
-    }
-
-    &::before {
-      top: 10px;
-      left: calc(50% - 7px);
-      content: '';
-      position: absolute;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background-color: #FFF;
-      // background-color: transparent;
-      background-image: url("../../assets/hole.png");
-      // background-position: center center;
-    }
-
-
-
-    &-text {
-      color: #000;
-      font-size: 3vh;
-      font-weight: 700;
-    }
-
-    &-logo {
-      align-self: flex-end;
+    &-container {
+      width: 65%;
+      margin: auto;
+      opacity: 0;
     }
   }
 
-  @media (max-width: 820px) {
-    &__label {
-      width: 75px;
-      height: 125px;
+  &__marquee-container {
+    @include font-family-astralaga;
+    position: absolute;
+    width: 100vw;
+    height: 17vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin: auto;
+  }
+    
+  &__marquee {
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: 100%;
+    color: rgb(162, 183, 158);
+    white-space: nowrap;
+    font-size: 17vh; 
+    animation: marqueeDisk 10.5s 1 linear forwards;
+  }
+  
+  @keyframes marqueeDisk {
+    0% {
+      transform: translateX(50%);
+    }
+    90% {
+      opacity: 1,
+    }
+    100% {
+      transform: translateX(-100%);
+      opacity: 0
+    }
+  }
+
+  &__label {
+    &-instance {
+      position: absolute;
+      width: 150px;
+      height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding:  40px 15px 15px;
+      background-color: rgb(162, 183, 158);
+      z-index: 1;
+      border-radius: 20px;
+      opacity: 0;
+  
+      &:nth-child(1) {
+        right: 80px;
+        top: 40px;
+        transform: rotate(40deg);
+      }
+  
+      &:nth-child(2) {
+        left: 80px;
+        bottom: 40px;
+        transform: rotate(-40deg);
+      }
+  
+      &::before {
+        top: 10px;
+        left: calc(50% - 7px);
+        content: '';
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background-color: #FFF;
+        background-image: url("../../assets/hole.png");
+      }
+  
+      &-text {
+        color: #000;
+        font-size: 3vh;
+        font-weight: 700;
+      }
+  
+      &-logo {
+        align-self: flex-end;
+      }
+    }
+
+    @media (max-width: 820px) {
+      &__instance {
+        width: 75px;
+        height: 125px;
+      }
     }
   }
 }

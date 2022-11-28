@@ -1,73 +1,74 @@
 <template>
   <div class="disk-page" ref="container" :style="background">
-    <div ref="containerSoundsSection" class="disk-page__container">
+    <div class="disk-page__container">
       <div class="disk-page__marquee-container">
         <div class="disk-page__marquee">{{ diskPhrase }}</div>
       </div>
       <div ref="imageContainer" class="disk-page__image-container">
         <img class="disk-page__image" :src="diskImage" alt="" />
       </div>
-      <div class="label">
-        <div class="label__instance">
-          <span class="label__instance-hole"></span>
-          <span class="label__instance-text">
+      <div class="disk-page__label">
+        <div class="disk-page__label-instance">
+          <span class="disk-page__label-hole"></span>
+          <span class="disk-page__label-text">
             Lorem ipsum dolor sit amet,
           </span>
           <SvgSprite
             symbol="logo"
-            class="label__instance-logo"
+            class="disk-page__label-logo"
             :size="iconState.logo"
           />
         </div>
-        <div class="label__instance">
-          <span class="label__instance-hole"></span>
-          <span class="label__instance-text">
+        <div class="disk-page__label-instance">
+          <span class="disk-page__label-hole"></span>
+          <span class="disk-page__label-text">
             Lorem ipsum dolor sit amet,
           </span>
           <SvgSprite
             symbol="logo"
-            class="label__instance-logo"
+            class="disk-page__label-logo"
             :size="iconState.logo"
           />
         </div>
       </div>
     </div>
   </div>
+  <!-- <SoundsSection class="sounds" />
+  <DecorationSection class="decoration" @toForm="lockedSection" />
+  <LockedSection class="locked" v-show="lockedState" />
+  <LoginSection class="login" /> -->
 </template>
 
 <script>
-// eslint-disable-next-line no-unused-vars
 import { PHRASE, TEXTURES } from "@/constants";
 import useBreakpoints from "@/hooks/useBreakpoints";
+// import SoundsSection from "@/components/Sounds/SoundsSection.vue";
+// import DecorationSection from "@/components/Decoration/DecorationSection.vue";
+// import LockedSection from "@/components/Locked/LockedSection.vue";
+// import LoginSection from "@/components/Login/LoginSection.vue";
 import interact from "interactjs";
-// eslint-disable-next-line no-unused-vars
 import { onMounted, ref, computed } from "vue";
 import { useRoute } from "vue-router";
 import gsap from "gsap";
-// import { COLORS } from "@/constants";
-// import // useRouter,
-// useRoute,
-// eslint-disable-next-line no-unused-vars
-// onBeforeRouteEnter,
-// beforeRouteEnter,
-// "vue-router";
+
 export default {
+  components: {
+    // HeaderSection,
+    // HeroSection,
+    // SpiralDisks,
+    // ProjectsPage,
+    // ChessSection,
+    // SoundsSection,
+    // DecorationSection,
+    // LockedSection,
+    // LoginSection,
+  },
   setup() {
     const phrase = PHRASE;
-    // eslint-disable-next-line no-unused-vars
     const $route = useRoute();
-    // const $router = useRouter();
     const imageContainer = ref(null);
     const container = ref(null);
     const width = useBreakpoints();
-    // const $route = useRoute();
-    // const indexDisk = ref(null);
-    // const backgroundColor = ref(null);
-    // const background = computed(() => {
-    //   return backgroundColor.value
-    //     ? `background-color:${backgroundColor.value};`
-    //     : "background-color: #fff;";
-    // });
 
     const iconState = computed(() => {
       if (width.value < 821)
@@ -87,7 +88,6 @@ export default {
       return TEXTURES[$route.params.id].photo;
     });
     onMounted(() => {
-      // setTimeout(() => {}, 9000);
       gsap.to(imageContainer.value, {
         delay: 7,
         duration: 1.4,
@@ -95,25 +95,13 @@ export default {
         zIndex: 1,
       });
 
-      gsap.to(document.querySelectorAll(".label__instance"), {
+      gsap.to(document.querySelectorAll(".disk-page__label-instance"), {
         delay: 8,
         duration: 2,
         opacity: 1,
       });
 
-      // interact(".label").draggable({
-      //   // enable inertial throwing
-      //   inertia: true,
-
-      //   modifiers: [
-      //     interact.modifiers.restrictRect({
-      //       restriction: "parent",
-      //       endOnly: true,
-      //     }),
-      //   ],
-      // });
-
-      interact(".label__instance").draggable({
+      interact(".disk-page__label-instance").draggable({
         onmove: dragMoveListener,
         inertia: true,
         modifiers: [
@@ -135,15 +123,6 @@ export default {
       }
     });
 
-    // beforeRouteEnter((to, from, next) => {
-    //   console.log($router);
-    //   next();
-    // });
-    // onBeforeRouteEnter((to, from, next) => {
-    //   console.log($router);
-    //   next();
-    // });
-
     return {
       phrase,
       container,
@@ -157,4 +136,4 @@ export default {
 };
 </script>
 
-<style lang="scss" src="./DiskPage.scss"></style>
+<style lang="scss" src="./DiskPage.scss" />
