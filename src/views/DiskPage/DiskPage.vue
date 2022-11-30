@@ -1,5 +1,5 @@
 <template>
-  <div class="disk-page" ref="container" :style="background">
+  <section class="disk-page" ref="container" :style="background">
     <div class="disk-page__container">
       <div class="disk-page__marquee-container">
         <div class="disk-page__marquee">{{ diskPhrase }}</div>
@@ -32,43 +32,52 @@
         </div>
       </div>
     </div>
-  </div>
-  <!-- <SoundsSection class="sounds" />
+  </section>
+  <SoundsSection class="sounds" />
   <DecorationSection class="decoration" @toForm="lockedSection" />
-  <LockedSection class="locked" v-show="lockedState" />
-  <LoginSection class="login" /> -->
+  <LockedSection class="locked" :locked-state="stateSection.lockedState" />
+  <LoginSection class="login" />
 </template>
 
 <script>
 import { PHRASE, TEXTURES } from "@/constants";
 import useBreakpoints from "@/hooks/useBreakpoints";
-// import SoundsSection from "@/components/Sounds/SoundsSection.vue";
-// import DecorationSection from "@/components/Decoration/DecorationSection.vue";
-// import LockedSection from "@/components/Locked/LockedSection.vue";
-// import LoginSection from "@/components/Login/LoginSection.vue";
+import SoundsSection from "@/components/Sounds/SoundsSection.vue";
+import DecorationSection from "@/components/Decoration/DecorationSection.vue";
+import LockedSection from "@/components/Locked/LockedSection.vue";
+import LoginSection from "@/components/Login/LoginSection.vue";
+import useDiskPage from "@/hooks/useDiskPage";
 import interact from "interactjs";
-import { onMounted, ref, computed } from "vue";
+// import scrollTo from "@/handlers/scrollTo";
+import { onMounted, ref, computed, watch, reactive } from "vue";
 import { useRoute } from "vue-router";
 import gsap from "gsap";
 
 export default {
   components: {
-    // HeaderSection,
-    // HeroSection,
-    // SpiralDisks,
-    // ProjectsPage,
-    // ChessSection,
-    // SoundsSection,
-    // DecorationSection,
-    // LockedSection,
-    // LoginSection,
+    SoundsSection,
+    DecorationSection,
+    LockedSection,
+    LoginSection,
   },
-  setup() {
+  setup(props, { emit }) {
+    const { doAnimate } = useDiskPage();
     const phrase = PHRASE;
     const $route = useRoute();
     const imageContainer = ref(null);
     const container = ref(null);
     const width = useBreakpoints();
+    const slide = ref(null);
+    const openAll = ref(false);
+    // const lockedState = ref(false);
+    const stateSection = reactive({
+      locked: false,
+      login: true,
+    });
+
+    function lockedSection() {
+      stateSection.lockedState = true;
+    }
 
     const iconState = computed(() => {
       if (width.value < 821)
@@ -81,13 +90,40 @@ export default {
         };
     });
 
+    watch(slide, () => {
+      emit("slideChange", slide.value);
+    });
+
     const diskPhrase = computed(() => {
       return PHRASE[$route.params.id];
     });
     const diskImage = computed(() => {
       return TEXTURES[$route.params.id].photo;
     });
+    window.scrollTo({
+      top: 500,
+      left: 0,
+      behavior: "smooth",
+    });
     onMounted(() => {
+      // document.fonts.ready.then(() => {
+      // window.scrollTo(0, 0);
+      // scrollTo(container.value, 10);
+      doAnimate(slide);
+
+      const root = document.querySelector(".container");
+      gsap.to(root, {
+        opacity: 1,
+        duration: 1,
+        onComplete: () => (openAll.value = true),
+      });
+      // });
+
+      // gsap.to(container.value, {
+      //   opacity: 1,
+      //   duration: 1.4,
+      // });
+
       gsap.to(imageContainer.value, {
         delay: 7,
         duration: 1.4,
@@ -131,6 +167,9 @@ export default {
       diskImage,
       imageContainer,
       iconState,
+      openAll,
+      lockedSection,
+      stateSection,
     };
   },
 };

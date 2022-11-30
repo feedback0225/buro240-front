@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="lockedState">
     <div class="locked__container">
       <h2 class="locked__title">LOCKED CLUB</h2>
       <p class="locked__paragraph">
@@ -14,7 +14,78 @@
 </template>
 
 <script>
-export default {};
+// import gsap from "gsap";
+import { onMounted } from "@vue/runtime-core";
+export default {
+  props: {
+    lockedState: {
+      default: false,
+      type: Boolean,
+    },
+  },
+  setup() {
+    onMounted(() => {
+      // const headerNav = document.querySelector(".header-nav");
+      // gsap.timeline({
+      //   scrollTrigger: {
+      //     scroller: ".container",
+      //     markers: true,
+      //     trigger: ".locked",
+      //     start: "-10% 15%",
+      //     end: "100% center",
+      //     toggleActions: "restart reverse restart pause",
+      //     onEnter: () => {
+      //       headerNav.classList.add("header-nav--color-white");
+      //     },
+      //     onEnterBack: () => {
+      //       headerNav.classList.add("header-nav--color-white");
+      //     },
+      //     onLeave: () => {
+      //       // headerNav.classList.add("header-nav--color-white");
+      //     },
+      //     onLeaveBack: () => {
+      //       // headerNav.classList.remove("header-nav--color-white");
+      //     },
+      //   },
+      // });
+    });
+
+    // watch(
+    //   () => props.lockedState,
+    //   () => {
+    //     if (props.lockedState) {
+    //       // const headerNav = document.querySelector(".header-nav");
+
+    //       // nextTick().then(() => {
+    //       gsap.timeline({
+    //         scrollTrigger: {
+    //           scroller: ".container",
+    //           markers: true,
+    //           trigger: ".locked",
+    //           start: "0% 15%",
+    //           end: "100% center",
+    //           toggleActions: "restart reverse restart pause",
+
+    //           onEnter: () => {
+    //             // headerNav.classList.add("header-nav--color-white");
+    //           },
+    //           onEnterBack: () => {
+    //             // headerNav.classList.add("header-nav--color-white");
+    //           },
+    //           onLeave: () => {
+    //             // headerNav.classList.add("header-nav--color-white");
+    //           },
+    //           onLeaveBack: () => {
+    //             // headerNav.classList.remove("header-nav--color-white");
+    //           },
+    //         },
+    //       });
+    //       // });
+    //     }
+    //   }
+    // );
+  },
+};
 </script>
 
 <style lang="scss" src="./Locked.scss" />

@@ -5,20 +5,10 @@ export default function useGlobalBlob(container, slide) {
   var canvas = document.createElement("canvas");
   var width = (canvas.width = window.innerWidth * 0.75);
   var height = (canvas.height = window.innerHeight * 0.75);
-  // const section = container.classList.value.split("__")[0];
   canvas.classList.add(`background-blob__canvas`);
   container.append(canvas);
 
   var gl = canvas.getContext("webgl");
-
-  // gl.clearColor(0.5, 0, 0, 0.5);
-  // gl.clear(gl.COLOR_BUFFER_BIT);
-  // console.log(canvas.c);
-  // gl.fillStyle = "rgba(255, 255, 255, 0.5)";
-  // gl.globalCompositeOperation = "lighter";
-  // gl.globalAlpha = 0.5;
-
-  // var mouse = { x: 0, y: 0 };
 
   var numMetaballs = 10;
   var metaballs = [];
@@ -163,7 +153,6 @@ gl_FragColor = vec4(1.0, 1.0, 1.0, 0);
 
   function normilizeValue(initial4fValue, target4fValue) {
     function colorLoop() {
-      // console.log("tick");
       requestAnimationFrame(() => {
         initial4fValue.r = changeValueOfUniform4f(
           initial4fValue.r,
@@ -194,13 +183,6 @@ gl_FragColor = vec4(1.0, 1.0, 1.0, 0);
       });
     }
     colorLoop();
-    // if (
-    //   initial4fValue.r === target4fValue.r &&
-    //   initial4fValue.g === target4fValue.g &&
-    //   initial4fValue.b === target4fValue.b
-    // )
-    //   return;
-    // else colorLoop();
   }
 
   loop();

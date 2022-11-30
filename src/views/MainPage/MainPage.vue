@@ -1,15 +1,15 @@
 <template>
-  <div class="container">
-    <HeaderSection class="header" />
-    <HeroSection class="hero" />
-    <SpiralDisks :can-pick-disk="canPickDisk" class="spiral-disks" />
-    <ProjectsPage class="projects" v-show="false" />
+  <!-- <div class="container"> -->
+  <HeaderSection class="header" />
+  <HeroSection class="hero" />
+  <SpiralDisks :can-pick-disk="canPickDisk" class="spiral-disks" />
+  <!-- <ProjectsPage class="projects" v-show="false" />
     <ChessSection class="chess" v-show="false" />
     <SoundsSection class="sounds" />
     <DecorationSection class="decoration" @toForm="lockedSection" />
     <LockedSection class="locked" v-show="lockedState" />
-    <LoginSection class="login" />
-  </div>
+    <LoginSection class="login" /> -->
+  <!-- </div> -->
   <div ref="backgroundCanvasContainer" class="background-blob"></div>
 </template>
 
@@ -19,29 +19,29 @@ import useGlobalBlob from "@/3d/blob";
 import HeaderSection from "@/components/Header/HeaderSection.vue";
 import HeroSection from "@/components/Hero/HeroSection.vue";
 import SpiralDisks from "@/components/SpiralDisks/SpiralDisks.vue";
-import ProjectsPage from "@/components/Projects/ProjectsSection.vue";
-import ChessSection from "@/components/Chess/СhessSection.vue";
-import SoundsSection from "@/components/Sounds/SoundsSection.vue";
-import DecorationSection from "@/components/Decoration/DecorationSection.vue";
-import LockedSection from "@/components/Locked/LockedSection.vue";
-import LoginSection from "@/components/Login/LoginSection.vue";
-import useApp from "@/hooks/useApp";
+// import ProjectsPage from "@/components/Projects/ProjectsSection.vue";
+// import ChessSection from "@/components/Chess/СhessSection.vue";
+// import SoundsSection from "@/components/Sounds/SoundsSection.vue";
+// import DecorationSection from "@/components/Decoration/DecorationSection.vue";
+// import LockedSection from "@/components/Locked/LockedSection.vue";
+// import LoginSection from "@/components/Login/LoginSection.vue";
+import useMainPage from "@/hooks/useMainPage";
 import { onMounted, ref, watch } from "vue";
 export default {
   components: {
     HeaderSection,
     HeroSection,
     SpiralDisks,
-    ProjectsPage,
-    ChessSection,
-    SoundsSection,
-    DecorationSection,
-    LockedSection,
-    LoginSection,
+    // ProjectsPage,
+    // ChessSection,
+    // SoundsSection,
+    // DecorationSection,
+    // LockedSection,
+    // LoginSection,
   },
   setup(props, { emit }) {
     const slide = ref(null);
-    const { doAnimate } = useApp();
+    const { doAnimate } = useMainPage();
     const canPickDisk = ref(false);
     const backgroundCanvasContainer = ref(null);
     const lockedState = ref(false);

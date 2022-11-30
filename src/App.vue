@@ -4,7 +4,7 @@
       <SvgSprite symbol="logo" :size="iconState.logo" />
       <SvgSprite
         symbol="decStar"
-        class="header-nav__svg-decoration icon--color-grey"
+        class="header-nav__svg-decoration icon--cPolor-grey"
         :size="iconState.decorationLogo"
       />
     </div>
@@ -30,11 +30,15 @@
     </ul>
     <!-- <span class="header-nav__label">CREATIVE AGENCY</span> -->
   </nav>
-  <router-view @slideChange="changeSlide" />
+  <div class="container">
+    <router-view @slideChange="changeSlide" />
+  </div>
+  <!-- <div ref="backgroundCanvasContainer" class="background-blob"></div> -->
 </template>
 
 <script>
 import useBreakpoints from "@/hooks/useBreakpoints";
+// import useGlobalBlob from "@/3d/blob";
 import { onMounted, ref, watch, computed } from "vue";
 import gsap from "gsap";
 // import useGlobalBlob from "@/3d/blob";

@@ -140,7 +140,6 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
     const intersects = rayCaster.intersectObjects(scene.children);
 
     if (intersects.length > 0) {
-      // console.log(selectedDiskUuid);
       if (selectedDiskUuid === intersects[0].object.uuid) return;
       if (selectedDiskUuid) {
         canPickDisk.value = false;
@@ -165,26 +164,13 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
               : instance.disk.position.y - 8.5,
           });
           instance.disk.material.forEach((material) => {
-            // console.log(material);
             gsap.to(material, {
               opacity: 0,
               duration: 4,
             });
-            // console.log(material);
-            if (material) {
-              // material.transparent = true;
-              // material.visible = false;
-            }
-            // gsap.to(material, {
-            //   transparent: true,
-            // });
           });
-          // gsap.to(instance.disk.color, {
-          //   a: 0,
-          // });
         } else if (instance.disk.uuid === selectedDiskUuid) {
           selectedDiskIsFouneded = true;
-          // canScroll = false;
           toVertialTween = gsap.to(instance.disk.rotation, {
             duration: 0.8,
             z: 3.14, // 1.55
@@ -213,19 +199,6 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
         }
       });
     }
-  }
-
-  // eslint-disable-next-line no-unused-vars
-  function opaictyDisks(exceptIndex) {
-    // console.log(y);
-    // console.log(camera.position);
-    // console.log(collectionDisk);
-    // collectionDisk.forEach((disk, index) => {
-    //   if (index === exceptIndex) return;
-    //   gsap.to(disk.color, {
-    //     a: 0,
-    //   });
-    // });
   }
 
   window.addEventListener("click", pickDisk);
