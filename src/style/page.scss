@@ -1,8 +1,10 @@
 @import 'normalize-scss';
+
 @include normalize();
 @import '@/style/fonts.scss';
 @import './mixin';
- 
+@import "./locomotive-scroll-base";
+
 *::before,
 *::after,
 * {
@@ -18,6 +20,7 @@
     overflow-x: hidden;
     min-width: 320px;
     font-family: 'UniversityRoman', 'georgia', 'sans-serif';
+    scroll-behavior: smooth;
   }
 }
 
@@ -43,8 +46,14 @@ svg:not(:root) {
   width: 100vw;
   height: 100vh;
   scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
   overflow-x: hidden;
   overflow-y: scroll;
+  padding: 0;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
   &--fixed {
     overflow-y: hidden;

@@ -1,8 +1,11 @@
 <template>
   <section>
-    <div class="header__container">
+    <div class="header__container" data-scroll>
       <div class="header__header">
-        <h1 class="header__title">БЮРО240</h1>
+        <h1 class="header__title">
+          БЮРО
+          <span class="header__title--font-astralaga">240</span>
+        </h1>
 
         <span class="header__subtitle header__subtitle--direction-left"
           >КРЕАТИВНОЕ</span
@@ -142,7 +145,7 @@
     </div>
     <div class="header__marquee-container">
       <p class="header__marquee">
-        · АГЕНСТВО · БЮРО · АГЕНСТВО · БЮРО · АГЕНСТВО · БЮРО
+        · АГЕНСТВО · БЮРО · АГЕНСТВО · БЮРО · АГЕНСТВО · БЮРО · АГЕНСТВО · БЮРО
       </p>
     </div>
   </section>
@@ -151,6 +154,7 @@
 <script>
 import useBlobsFlight from "@/hooks/useHeaderBlobsFlight";
 import { onMounted, ref } from "vue";
+
 export default {
   inheritAttrs: true,
 

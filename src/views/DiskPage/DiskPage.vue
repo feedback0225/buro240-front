@@ -1,5 +1,5 @@
 <template>
-  <section class="disk-page" ref="container" :style="background">
+  <section class="disk-page" ref="container">
     <div class="disk-page__container">
       <div class="disk-page__marquee-container">
         <div class="disk-page__marquee">{{ diskPhrase }}</div>
@@ -32,44 +32,57 @@
         </div>
       </div>
     </div>
+    <div class="projects__marquee-container">
+      <div class="projects__marquee">
+        <span class="projects__marquee-left"> SHOOTING </span>
+        <div class="projects__marquee-right">
+          <span class="projects__marquee-text">
+            ТУТ РАБОТЫ ХОРОШИЕ ТАКИЕ БУДУТ ЭТО НЕ МОЖЕТ НЕ РАДОВАТЬ
+          </span>
+          <span class="projects__marquee-text">
+            ЕЩЕ ЧЕТ НАПИСАТЬ НАДО НУ КАК У ВАС ДЕЛА КАК ЖИЗНЬ В
+          </span>
+        </div>
+        <span class="projects__marquee-left"> SHOOTING </span>
+        <div class="projects__marquee-right">
+          <span class="projects__marquee-text">
+            ТУТ РАБОТЫ ХОРОШИЕ ТАКИЕ БУДУТ ЭТО НЕ МОЖЕТ НЕ РАДОВАТЬ
+          </span>
+          <span class="projects__marquee-text">
+            ЕЩЕ ЧЕТ НАПИСАТЬ НАДО НУ КАК У ВАС ДЕЛА КАК ЖИЗНЬ В
+          </span>
+        </div>
+        <span class="projects__marquee-left"> SHOOTING </span>
+        <div class="projects__marquee-right">
+          <span class="projects__marquee-text">
+            ТУТ РАБОТЫ ХОРОШИЕ ТАКИЕ БУДУТ ЭТО НЕ МОЖЕТ НЕ РАДОВАТЬ
+          </span>
+          <span class="projects__marquee-text">
+            ЕЩЕ ЧЕТ НАПИСАТЬ НАДО НУ КАК У ВАС ДЕЛА КАК ЖИЗНЬ В
+          </span>
+        </div>
+      </div>
+    </div>
   </section>
-  <SoundsSection class="sounds" />
-  <DecorationSection class="decoration" @toForm="lockedSection" />
-  <LockedSection class="locked" :locked-state="stateSection.lockedState" />
-  <LoginSection class="login" />
 </template>
 
 <script>
 import { PHRASE, TEXTURES } from "@/constants";
 import useBreakpoints from "@/hooks/useBreakpoints";
-import SoundsSection from "@/components/Sounds/SoundsSection.vue";
-import DecorationSection from "@/components/Decoration/DecorationSection.vue";
-import LockedSection from "@/components/Locked/LockedSection.vue";
-import LoginSection from "@/components/Login/LoginSection.vue";
-import useDiskPage from "@/hooks/useDiskPage";
-import interact from "interactjs";
-// import scrollTo from "@/handlers/scrollTo";
-import { onMounted, ref, computed, watch, reactive } from "vue";
+import { onMounted, ref, computed, reactive } from "vue";
 import { useRoute } from "vue-router";
 import gsap from "gsap";
+import useBlobsFlight from "@/hooks/useHeaderBlobsFlight";
 
 export default {
-  components: {
-    SoundsSection,
-    DecorationSection,
-    LockedSection,
-    LoginSection,
-  },
-  setup(props, { emit }) {
-    const { doAnimate } = useDiskPage();
+  setup() {
     const phrase = PHRASE;
     const $route = useRoute();
     const imageContainer = ref(null);
     const container = ref(null);
     const width = useBreakpoints();
-    const slide = ref(null);
     const openAll = ref(false);
-    // const lockedState = ref(false);
+    const { animateBlobs } = useBlobsFlight();
     const stateSection = reactive({
       locked: false,
       login: true,
@@ -90,42 +103,30 @@ export default {
         };
     });
 
-    watch(slide, () => {
-      emit("slideChange", slide.value);
-    });
-
     const diskPhrase = computed(() => {
       return PHRASE[$route.params.id];
     });
+
     const diskImage = computed(() => {
       return TEXTURES[$route.params.id].photo;
     });
+
     window.scrollTo({
       top: 500,
       left: 0,
       behavior: "smooth",
     });
-    onMounted(() => {
-      // document.fonts.ready.then(() => {
-      // window.scrollTo(0, 0);
-      // scrollTo(container.value, 10);
-      doAnimate(slide);
 
+    onMounted(() => {
       const root = document.querySelector(".container");
       gsap.to(root, {
         opacity: 1,
         duration: 1,
         onComplete: () => (openAll.value = true),
       });
-      // });
-
-      // gsap.to(container.value, {
-      //   opacity: 1,
-      //   duration: 1.4,
-      // });
 
       gsap.to(imageContainer.value, {
-        delay: 7,
+        delay: 10,
         duration: 1.4,
         opacity: 1,
         zIndex: 1,
@@ -137,26 +138,11 @@ export default {
         opacity: 1,
       });
 
-      interact(".disk-page__label-instance").draggable({
-        onmove: dragMoveListener,
-        inertia: true,
-        modifiers: [
-          interact.modifiers.restrictRect({
-            restriction: "parent",
-            endOnly: true,
-          }),
-        ],
-      });
-
-      function dragMoveListener(event) {
-        var target = event.target,
-          x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx,
-          y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
-        target.style.webkitTransform = target.style.transform =
-          "translate(" + x + "px, " + y + "px)" + "rotate(" + y / 2 + "deg)";
-        target.setAttribute("data-x", x);
-        target.setAttribute("data-y", y);
-      }
+      document
+        .querySelectorAll(".disk-page__label-instance")
+        .forEach((label) => {
+          animateBlobs(label);
+        });
     });
 
     return {

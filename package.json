@@ -13,12 +13,14 @@
     "dat.gui": "^0.7.9",
     "gsap": "^3.11.3",
     "interactjs": "^1.10.17",
+    "locomotive-scroll": "^4.1.4",
     "normalize-scss": "^7.0.1",
     "three": "^0.145.0",
     "vue": "^3.2.13",
     "vue-router": "^4.1.6",
     "vue-simple-svg": "^2.0.2",
-    "vue-svg-sprite": "^2.2.1"
+    "vue-svg-sprite": "^2.2.1",
+    "vue3-smooth-scroll": "^0.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

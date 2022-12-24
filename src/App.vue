@@ -4,7 +4,7 @@
       <SvgSprite symbol="logo" :size="iconState.logo" />
       <SvgSprite
         symbol="decStar"
-        class="header-nav__svg-decoration icon--cPolor-grey"
+        class="header-nav__svg-decoration icon--color-grey"
         :size="iconState.decorationLogo"
       />
     </div>
@@ -39,6 +39,7 @@
 <script>
 import useBreakpoints from "@/hooks/useBreakpoints";
 // import useGlobalBlob from "@/3d/blob";
+// import LocomotiveScroll from "locomotive-scroll";
 import { onMounted, ref, watch, computed } from "vue";
 import gsap from "gsap";
 // import useGlobalBlob from "@/3d/blob";
@@ -119,10 +120,22 @@ export default {
           ease: "power",
         }
       );
+
+      // eslint-disable-next-line no-unused-vars
+      // const scroll = new LocomotiveScroll({
+      //   el: document.querySelector("[data-scroll-container]"),
+      //   smooth: true,
+      // });
+
+      // console.log(scroll);
+
+      // let y = 0;
+      // document.addEventListener("wheel", (ev) => {
+      //   y = ev.deltaY * 0.0007;
+      // });
     });
 
     return {
-      // backgroundCanvasContainer,
       changeSlide,
       iconState,
       firstTab,

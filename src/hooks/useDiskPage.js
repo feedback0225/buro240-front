@@ -108,7 +108,7 @@ export default function useDiskPage() {
         scroller: ".container",
         trigger: ".decoration",
         start: "100% 15%",
-        markers: true,
+        // markers: true,
         end: "100% center",
         toggleActions: "restart reverse restart pause",
         onEnter: () => {
@@ -130,8 +130,9 @@ export default function useDiskPage() {
       scrollTrigger: {
         scroller: ".container",
         trigger: ".login",
+        // markers: true,
         start: "-30% 15%",
-        end: "100% center",
+        end: "200% center",
         toggleActions: "play pause pause pause",
 
         onEnter: () => {

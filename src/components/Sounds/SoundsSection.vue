@@ -50,12 +50,14 @@
 
 <script>
 import useBreakpoints from "@/hooks/useBreakpoints";
-import { computed } from "vue";
-import interact from "interactjs";
+import { computed, onMounted } from "vue";
+import useBlobsFlight from "@/hooks/useHeaderBlobsFlight";
+
 export default {
   inheritAttrs: true,
   components: {},
   setup() {
+    const { animateBlobs } = useBlobsFlight();
     const width = useBreakpoints();
     const iconState = computed(() => {
       if (width.value < 821)
@@ -68,26 +70,11 @@ export default {
         };
     });
 
-    interact(".label__instance").draggable({
-      onmove: dragMoveListener,
-      inertia: true,
-      modifiers: [
-        interact.modifiers.restrictRect({
-          restriction: "parent",
-          endOnly: true,
-        }),
-      ],
+    onMounted(() => {
+      document.querySelectorAll(".sounds__label-instance").forEach((label) => {
+        animateBlobs(label);
+      });
     });
-
-    function dragMoveListener(event) {
-      var target = event.target,
-        x = (parseFloat(target.getAttribute("data-x")) || 0) + event.dx,
-        y = (parseFloat(target.getAttribute("data-y")) || 0) + event.dy;
-      target.style.webkitTransform = target.style.transform =
-        "translate(" + x + "px, " + y + "px)" + "rotate(" + y / 2 + "deg)";
-      target.setAttribute("data-x", x);
-      target.setAttribute("data-y", y);
-    }
 
     return {
       iconState,

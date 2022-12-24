@@ -3,7 +3,7 @@
     <div class="decoration__container"></div>
 
     <div class="decoration__label">
-      <div
+      <a
         ref="labels"
         class="decoration__label-instance"
         v-for="i in 6"
@@ -18,7 +18,7 @@
           class="decoration__label-logo"
           :size="iconState.logo"
         />
-      </div>
+      </a>
     </div>
   </section>
 </template>
@@ -26,8 +26,11 @@
 <script>
 import { computed, onMounted, ref } from "vue";
 import useBreakpoints from "@/hooks/useBreakpoints";
+import useBlobsFlight from "@/hooks/useHeaderBlobsFlight";
+
 export default {
   setup(props, { emit }) {
+    const { animateBlobs } = useBlobsFlight();
     const width = useBreakpoints();
     const labels = ref(null);
     const iconState = computed(() => {
@@ -42,9 +45,14 @@ export default {
     });
 
     onMounted(() => {
-      labels.value.forEach((label) => {
-        label.addEventListener("click", () => emit("toForm"));
-      });
+      document
+        .querySelectorAll(".decoration__label-instance")
+        .forEach((label) => {
+          animateBlobs(label);
+          label.addEventListener("click", () => {
+            emit("unlock", true);
+          });
+        });
     });
 
     return {

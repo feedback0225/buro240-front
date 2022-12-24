@@ -1,15 +1,13 @@
 <template>
-  <!-- <div class="container"> -->
   <HeaderSection class="header" />
   <HeroSection class="hero" />
   <SpiralDisks :can-pick-disk="canPickDisk" class="spiral-disks" />
-  <!-- <ProjectsPage class="projects" v-show="false" />
-    <ChessSection class="chess" v-show="false" />
-    <SoundsSection class="sounds" />
-    <DecorationSection class="decoration" @toForm="lockedSection" />
-    <LockedSection class="locked" v-show="lockedState" />
-    <LoginSection class="login" /> -->
-  <!-- </div> -->
+  <ProjectsPage class="projects" v-show="false" />
+  <ChessSection class="chess" v-show="false" />
+  <SoundsSection class="sounds" />
+  <DecorationSection class="decoration" @unlock="unlockSection" />
+  <LockedSection ref="lockedSection" class="locked" v-show="lockedState" />
+  <LoginSection class="login" />
   <div ref="backgroundCanvasContainer" class="background-blob"></div>
 </template>
 
@@ -19,32 +17,35 @@ import useGlobalBlob from "@/3d/blob";
 import HeaderSection from "@/components/Header/HeaderSection.vue";
 import HeroSection from "@/components/Hero/HeroSection.vue";
 import SpiralDisks from "@/components/SpiralDisks/SpiralDisks.vue";
-// import ProjectsPage from "@/components/Projects/ProjectsSection.vue";
-// import ChessSection from "@/components/Chess/СhessSection.vue";
-// import SoundsSection from "@/components/Sounds/SoundsSection.vue";
-// import DecorationSection from "@/components/Decoration/DecorationSection.vue";
-// import LockedSection from "@/components/Locked/LockedSection.vue";
-// import LoginSection from "@/components/Login/LoginSection.vue";
+import ProjectsPage from "@/components/Projects/ProjectsSection.vue";
+import ChessSection from "@/components/Chess/СhessSection.vue";
+import SoundsSection from "@/components/Sounds/SoundsSection.vue";
+import DecorationSection from "@/components/Decoration/DecorationSection.vue";
+import LockedSection from "@/components/Locked/LockedSection.vue";
+import LoginSection from "@/components/Login/LoginSection.vue";
 import useMainPage from "@/hooks/useMainPage";
 import { onMounted, ref, watch } from "vue";
+
 export default {
   components: {
     HeaderSection,
     HeroSection,
     SpiralDisks,
-    // ProjectsPage,
-    // ChessSection,
-    // SoundsSection,
-    // DecorationSection,
-    // LockedSection,
-    // LoginSection,
+    ProjectsPage,
+    ChessSection,
+    SoundsSection,
+    DecorationSection,
+    LockedSection,
+    LoginSection,
   },
+
   setup(props, { emit }) {
     const slide = ref(null);
     const { doAnimate } = useMainPage();
     const canPickDisk = ref(false);
     const backgroundCanvasContainer = ref(null);
     const lockedState = ref(false);
+    const lockedSection = ref(false);
     onMounted(() => {
       useGlobalBlob(backgroundCanvasContainer.value, slide);
     });
@@ -55,8 +56,20 @@ export default {
       else removeActiveSpiral();
     });
 
-    function lockedSection() {
+    function unlockSection() {
       lockedState.value = true;
+      // nextTick(() => {
+      //   window.scrollBy({
+      //     top: 100,
+      //     left: 100,
+      //     behavior: "smooth",
+      //   });
+      //   window.scrollTo({
+      //     top: 1000,
+      //     left: 50,
+      //     behavior: "smooth",
+      //   });
+      // });
     }
 
     function doActiveSpiral() {
@@ -76,8 +89,9 @@ export default {
     return {
       backgroundCanvasContainer,
       canPickDisk,
-      lockedSection,
+      unlockSection,
       lockedState,
+      lockedSection,
     };
   },
 };

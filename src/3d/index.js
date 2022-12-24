@@ -60,10 +60,10 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
   // ----
 
   const rayCaster = new THREE.Raycaster();
-  const mousePositon = new THREE.Vector2();
+  const mousePosition = new THREE.Vector2();
   window.addEventListener("mousemove", function (e) {
-    mousePositon.x = (e.clientX / sizes.width) * 2 - 1;
-    mousePositon.y = -(e.clientY / sizes.height) * 2 + 1;
+    mousePosition.x = (e.clientX / sizes.width) * 2 - 1;
+    mousePosition.y = -(e.clientY / sizes.height) * 2 + 1;
   });
 
   const collectionDisk = [];
@@ -111,22 +111,6 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
   let y = 0;
   let position = 0;
 
-  // function doScroll(event) {
-  //   if (canScroll) {
-  //     y = event.deltaY * 0.0055;
-  //     if (selectedDiskUuid) {
-  //       backToCommonFlow(collectionTween);
-  //       setTimeout(() => {
-  //         doFlow();
-  //         selectedDiskUuid = null;
-  //         canPickDisk = true;
-  //       }, 2000);
-  //     }
-  //   }
-  // }
-
-  // addEventListener("wheel", doScroll);
-
   let toVertialTween;
   // let toHorizontalTween;
 
@@ -135,9 +119,15 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
   });
 
   function pickDisk() {
+    // console.log("watch for mouse");
     if (!canPickDisk.value) return false;
-    rayCaster.setFromCamera(mousePositon, camera);
+    rayCaster.setFromCamera(mousePosition, camera);
     const intersects = rayCaster.intersectObjects(scene.children);
+
+    if (!intersects.length) {
+      backToCommonFlow(collectionTween);
+      return;
+    }
 
     if (intersects.length > 0) {
       if (selectedDiskUuid === intersects[0].object.uuid) return;
@@ -154,14 +144,15 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
       if (disksIsMove) stopFlow();
       selectedDiskUuid = intersects[0].object.uuid;
 
-      let selectedDiskIsFouneded = false;
+      let selectedDiskIsFounded = false;
+      // eslint-disable-next-line no-unused-vars
       collectionTween.forEach((instance, index) => {
         if (instance.disk.uuid !== selectedDiskUuid) {
           gsap.to(instance.disk.position, {
             duration: 1,
-            y: selectedDiskIsFouneded
-              ? instance.disk.position.y + 8.5
-              : instance.disk.position.y - 8.5,
+            y: selectedDiskIsFounded
+              ? instance.disk.position.y + 6.5
+              : instance.disk.position.y - 6.5,
           });
           instance.disk.material.forEach((material) => {
             gsap.to(material, {
@@ -170,7 +161,7 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
             });
           });
         } else if (instance.disk.uuid === selectedDiskUuid) {
-          selectedDiskIsFouneded = true;
+          selectedDiskIsFounded = true;
           toVertialTween = gsap.to(instance.disk.rotation, {
             duration: 0.8,
             z: 3.14, // 1.55
@@ -201,6 +192,13 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
     }
   }
 
+  // function openDisk() {
+  //   rayCaster.setFromCamera(mousePosition, camera);
+  //   const intersects = rayCaster.intersectObjects(scene.children);
+  //
+  //
+  // }
+  //
   window.addEventListener("click", pickDisk);
 
   window.addEventListener("resize", () => {
@@ -212,40 +210,9 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   });
 
-  // eslint-disable-next-line no-unused-vars
-  function smoothScroll(cls) {
-    console.log(
-      document.querySelector(cls).scrollIntoView({
-        behavior: "smooth",
-      })
-    );
-  }
-
   function tick() {
     position += y;
     y *= 0.9;
-    // console.log(position, topEdge, bottomEdge);
-    // if (position <= topEdge) {
-    // camera.position.y = topEdge;
-    // emit("unlockScrollMain", true);
-    // smoothScroll(".hero");
-    // position *= 0.0001;
-    // setTimeout(() => {
-    // position = topEdge + 1;
-    // }, 200);
-    // position = topEdge + 1;
-    // emit("lockScrollSpiral", true);
-    // } else if (position >= bottomEdge) {
-    // camera.position.y = bottomEdge;
-    // position = bottomEdge;
-    // emit("unlockScrollMain", true);
-    // smoothScroll(".projects");
-    // position = topEdge - 1;
-    // setTimeout(() => {
-    // position *= 0.0001;
-    // }, 200);
-    // emit("lockScrollSpiral", true);
-    // }
     camera.position.y = -position;
 
     renderer.render(scene, camera);
