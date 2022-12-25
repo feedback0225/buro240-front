@@ -71,7 +71,7 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
   const interval = sizes.width > 850 ? 1 : 0.4;
   const baseOffsetY = sizes.width > 850 ? 9.5 : 6;
   let positionInternal = 0;
-  console.log(baseOffsetY);
+
   for (let i = 0; i < QUANTITY_DISKS; i++) {
     positionInternal += interval;
     const position = { x: 0, y: positionInternal + 4 - baseOffsetY, z: 0 };
@@ -80,11 +80,6 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
     collectionDisk.push(currentDisk);
     scene.add(currentDisk);
   }
-
-  // const topEdge = collectionDiskPosition[0].y - 0.5;
-  // const bottomEdge =
-  //   collectionDiskPosition[collectionDiskPosition.length - 1].y + 0.5;
-
   let delay = 0;
 
   const collectionTween = [];
@@ -105,8 +100,6 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
     collectionTween.push({ disk, tween: currentTween });
   });
 
-  // let canScroll = true;
-  // let canPickDisk = true;
   let selectedDiskUuid = null;
   let y = 0;
   let position = 0;
@@ -145,14 +138,14 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
       selectedDiskUuid = intersects[0].object.uuid;
 
       let selectedDiskIsFounded = false;
-      // eslint-disable-next-line no-unused-vars
+
       collectionTween.forEach((instance, index) => {
         if (instance.disk.uuid !== selectedDiskUuid) {
           gsap.to(instance.disk.position, {
             duration: 1,
             y: selectedDiskIsFounded
-              ? instance.disk.position.y + 6.5
-              : instance.disk.position.y - 6.5,
+              ? instance.disk.position.y + 8.5
+              : instance.disk.position.y - 8.5,
           });
           instance.disk.material.forEach((material) => {
             gsap.to(material, {
@@ -182,6 +175,7 @@ export default function render(elContainer, canPickDisk, chooseDisk) {
               z: sizes.width > 850 ? 11 : 6,
               y: instance.disk.position.y,
               onComplete: () => {
+                console.log(index);
                 chooseDisk.value = index;
               },
             });

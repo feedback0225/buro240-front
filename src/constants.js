@@ -8,11 +8,11 @@ export const COLORS = [
   // "#6C4644",
   // "#454C65",
   "#E3BEBC",
+  "#8B00FF",
   "#E3BEBC",
+  "#8B00FF",
   "#E3BEBC",
-  "#E3BEBC",
-  "#E3BEBC",
-  "#E3BEBC",
+  "#8B00FF",
   "#E3BEBC",
   "#E3BEBC",
   "#E3BEBC",
@@ -28,31 +28,33 @@ export const COLORS = [
 
 export const PHRASE = [
   "ROKLUMROKLUMROKLUMROKLUM",
+  "ОТБИЛАСЬ_ОТ_РУК",
   "ROKLUMROKLUMROKLUMROKLUM",
+  "ОТБИЛАСЬ_ОТ_РУК",
   "ROKLUMROKLUMROKLUMROKLUM",
+  "ОТБИЛАСЬ_ОТ_РУК",
   "ROKLUMROKLUMROKLUMROKLUM",
-  "ROKLUMROKLUMROKLUMROKLUM",
-  "ROKLUMROKLUMROKLUMROKLUM",
-  "ROKLUMROKLUMROKLUMROKLUM",
-  "ROKLUMROKLUMROKLUMROKLUM",
+  "ОТБИЛАСЬ_ОТ_РУК",
   "ROKLUMROKLUMROKLUMROKLUM",
   "ROKLUMROKLUMROKLUMROKLUM",
 ];
 
-import topTexture from "@/assets/coverTrue.png";
-import topPhoto from "@/assets/topPhoto.png";
+import topTexture1 from "@/assets/diskTopSide1.png";
+import topTexture2 from "@/assets/diskTopSide2.png";
+import topPhoto from "@/assets/topPhoto1.png";
+import sideTextureCommon from "@/assets/sidePhoto.png";
 
 export const TEXTURES = [
-  { top: topTexture, photo: topPhoto },
-  { top: topTexture, photo: topPhoto },
-  { top: topTexture, photo: topPhoto },
-  { top: topTexture, photo: topPhoto },
-  { top: topTexture, photo: topPhoto },
-  { top: topTexture, photo: topPhoto },
-  { top: topTexture, photo: topPhoto },
-  { top: topTexture, photo: topPhoto },
-  { top: topTexture, photo: topPhoto },
-  { top: topTexture, photo: topPhoto },
+  { top: topTexture1, left: sideTextureCommon, photo: topPhoto },
+  { top: topTexture2, left: sideTextureCommon, photo: topPhoto },
+  { top: topTexture1, left: sideTextureCommon, photo: topPhoto },
+  { top: topTexture2, left: sideTextureCommon, photo: topPhoto },
+  { top: topTexture1, left: sideTextureCommon, photo: topPhoto },
+  { top: topTexture2, left: sideTextureCommon, photo: topPhoto },
+  { top: topTexture1, left: sideTextureCommon, photo: topPhoto },
+  { top: topTexture2, left: sideTextureCommon, photo: topPhoto },
+  { top: topTexture1, left: sideTextureCommon, photo: topPhoto },
+  { top: topTexture2, left: sideTextureCommon, photo: topPhoto },
 ];
 
 export const TIME_BACK_DISK_TO_FLOW = 2;

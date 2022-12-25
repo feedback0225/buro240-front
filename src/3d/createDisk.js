@@ -13,18 +13,19 @@ export default function crateDisk(position, color, texture) {
   //   color: color ? color : parsedColor("#c3c3c3"),
   //   map: texture.top ? texture.top : null,
   // };
-  const diskMultyMaterial = [
+  const diskMultiMaterial = [
     new THREE.MeshStandardMaterial({
       color: parsedColor,
       alphaTest: 0,
-      transparent: true,
+      // transparent: true,
       // map: texture?.top ? textureLoader.load(texture?.top) ,
     }),
     new THREE.MeshStandardMaterial({
       color: parsedColor,
       alphaTest: 0,
-      transparent: true,
-      // map: textureLoader.load(texture?.top) || null,
+      // transparent: true,
+
+      map: textureLoader.load(texture?.left) || null,
     }),
     new THREE.MeshStandardMaterial({
       color: parsedColor,
@@ -35,30 +36,23 @@ export default function crateDisk(position, color, texture) {
     new THREE.MeshStandardMaterial({
       color: parsedColor,
       alphaTest: 0,
-      // transparent: true,
-      // map: textureLoader.load(texture?.top) || null,
     }), // нижняя грань
     new THREE.MeshStandardMaterial({
       color: parsedColor,
       alphaTest: 0,
-      // transparent: true,
-      // map: textureLoader.load(texture?.top) || null,
     }),
     new THREE.MeshStandardMaterial({
       color: parsedColor,
       alphaTest: 0,
-      transparent: true,
-      // map: textureLoader.load(texture?.top) || null,
     }),
-    // console.log("createDisk"),
   ];
-  const diskGeomtry = new THREE.BoxGeometry(
+  const diskGeometry = new THREE.BoxGeometry(
     DISK_WIDTH,
     DISK_HEIGHT,
     DISK_DEPTH
   );
   // const box2Material = new THREE.MeshStandardMaterial({color: 0xFFFFFF});
-  const disk = new THREE.Mesh(diskGeomtry, diskMultyMaterial);
+  const disk = new THREE.Mesh(diskGeometry, diskMultiMaterial);
   // box2.castShadow = true;
 
   disk.position.set(position.x, position.y, position.z);

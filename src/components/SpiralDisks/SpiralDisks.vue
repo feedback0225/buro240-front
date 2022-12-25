@@ -24,6 +24,7 @@ import render from "@/3d/index";
 import { onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { gsap } from "gsap";
+
 export default {
   inheritAttrs: true,
   props: {
@@ -42,9 +43,7 @@ export default {
 
     watch(
       () => props.canPickDisk,
-      (value) => {
-        console.log("changeCanPickDisk");
-        console.log(value);
+      () => {
         cPickDisk.value = props.canPickDisk;
       },
       {
@@ -54,7 +53,7 @@ export default {
     );
 
     watch(chooseDisk, (value) => {
-      if (value) {
+      if (value !== null && value !== undefined) {
         const root = document.querySelector(".container");
         const backgroundBlob = document.querySelector(".background-blob");
         gsap.to([root, backgroundBlob], {
