@@ -15,6 +15,7 @@
     "interactjs": "^1.10.17",
     "locomotive-scroll": "^4.1.4",
     "normalize-scss": "^7.0.1",
+    "smooth-scrollbar": "^8.8.1",
     "three": "^0.145.0",
     "vue": "^3.2.13",
     "vue-router": "^4.1.6",

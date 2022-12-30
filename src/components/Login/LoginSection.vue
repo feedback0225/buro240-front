@@ -131,7 +131,6 @@ export default {
         let timeout;
         input.addEventListener("input", function () {
           inputField.textContent = this.value;
-          console.log("type");
           if (!inputField.classList.contains("show-carriage")) {
             inputField.classList.add("show-carriage");
           }

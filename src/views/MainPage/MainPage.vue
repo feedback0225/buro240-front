@@ -1,18 +1,18 @@
 <template>
-  <HeaderSection class="header" />
-  <HeroSection class="hero" />
-  <SpiralDisks :can-pick-disk="canPickDisk" class="spiral-disks" />
-  <ProjectsPage class="projects" v-show="false" />
-  <ChessSection class="chess" v-show="false" />
-  <SoundsSection class="sounds" />
-  <DecorationSection class="decoration" @unlock="unlockSection" />
-  <LockedSection ref="lockedSection" class="locked" v-show="lockedState" />
-  <LoginSection class="login" />
-  <div ref="backgroundCanvasContainer" class="background-blob"></div>
+  <div class="scroller">
+    <HeaderSection class="header" />
+    <HeroSection class="hero" />
+    <SpiralDisks :can-pick-disk="canPickDisk" class="spiral-disks" />
+    <ProjectsPage class="projects" v-show="false" />
+    <ChessSection class="chess" v-show="false" />
+    <SoundsSection class="sounds" />
+    <DecorationSection class="decoration" @unlock="unlockSection" />
+    <LockedSection ref="lockedSection" class="locked" v-show="lockedState" />
+    <LoginSection class="login" />
+  </div>
 </template>
 
 <script>
-// import useBreakpoints from "@/hooks/useBreakpoints";
 import useGlobalBlob from "@/3d/blob";
 import HeaderSection from "@/components/Header/HeaderSection.vue";
 import HeroSection from "@/components/Hero/HeroSection.vue";
@@ -25,6 +25,7 @@ import LockedSection from "@/components/Locked/LockedSection.vue";
 import LoginSection from "@/components/Login/LoginSection.vue";
 import useMainPage from "@/hooks/useMainPage";
 import { onMounted, ref, watch } from "vue";
+import Scrollbar from "smooth-scrollbar";
 
 export default {
   components: {
@@ -47,7 +48,7 @@ export default {
     const lockedState = ref(false);
     const lockedSection = ref(false);
     onMounted(() => {
-      useGlobalBlob(backgroundCanvasContainer.value, slide);
+      useGlobalBlob(document.querySelector(".background-blob"), slide);
     });
 
     watch(slide, () => {
@@ -58,18 +59,6 @@ export default {
 
     function unlockSection() {
       lockedState.value = true;
-      // nextTick(() => {
-      //   window.scrollBy({
-      //     top: 100,
-      //     left: 100,
-      //     behavior: "smooth",
-      //   });
-      //   window.scrollTo({
-      //     top: 1000,
-      //     left: 50,
-      //     behavior: "smooth",
-      //   });
-      // });
     }
 
     function doActiveSpiral() {
@@ -83,6 +72,13 @@ export default {
     onMounted(() => {
       document.fonts.ready.then(() => {
         doAnimate(slide);
+      });
+
+      Scrollbar.init(document.querySelector(".scroller"), {
+        damping: 0.1,
+        thumbMinSize: 20,
+        renderByPixels: true,
+        alwaysShowTracks: true,
       });
     });
 

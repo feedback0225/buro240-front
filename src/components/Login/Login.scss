@@ -48,6 +48,10 @@
     flex-direction: column;
     opacity: 1;
     transition: max-height 0.3s ease-in-out;
+
+    @media (max-width: 1235px) {
+      width: 85%;
+    }
   }
 
   &__label {
@@ -173,7 +177,7 @@
           width: 15px;
           height: 8px;
           right: -15px;
-          top: calc(100% - 20px);
+          top: calc(100% - 15px);
         }
       }
     }
@@ -189,6 +193,7 @@
     bottom: 5%;
     width: 50px;
     height: 50px;
+    padding: 0;
     background-image: url("@/assets/arrow.svg");
     background-size: cover;
     transform: rotate(-90deg);
@@ -197,6 +202,8 @@
     cursor: pointer;
 
     @media (max-width: 1235px) {
+      right: 5px;
+      bottom: 7%;
       width: 30px;
       height: 30px;
     }

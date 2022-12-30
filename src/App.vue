@@ -28,21 +28,20 @@
         SOUND
       </li>
     </ul>
-    <!-- <span class="header-nav__label">CREATIVE AGENCY</span> -->
   </nav>
   <div class="container">
     <router-view @slideChange="changeSlide" />
   </div>
-  <!-- <div ref="backgroundCanvasContainer" class="background-blob"></div> -->
+  <div ref="backgroundCanvasContainer" class="background-blob"></div>
 </template>
 
 <script>
 import useBreakpoints from "@/hooks/useBreakpoints";
-// import useGlobalBlob from "@/3d/blob";
-// import LocomotiveScroll from "locomotive-scroll";
+// import Scrollbar from "smooth-scrollbar";
 import { onMounted, ref, watch, computed } from "vue";
 import gsap from "gsap";
 // import useGlobalBlob from "@/3d/blob";
+
 export default {
   name: "App",
   components: {},
@@ -53,9 +52,8 @@ export default {
     const activeClass = "header-nav__item--active";
     const slide = ref(null);
     // const backgroundCanvasContainer = ref(null);
-    // onMounted(() => {
-    //   useGlobalBlob(backgroundCanvasContainer.value, slide);
-    // });
+
+    // const scroller = ref(null);
 
     function changeSlide(s) {
       slide.value = s;
@@ -121,17 +119,12 @@ export default {
         }
       );
 
-      // eslint-disable-next-line no-unused-vars
-      // const scroll = new LocomotiveScroll({
-      //   el: document.querySelector("[data-scroll-container]"),
-      //   smooth: true,
-      // });
-
-      // console.log(scroll);
-
-      // let y = 0;
-      // document.addEventListener("wheel", (ev) => {
-      //   y = ev.deltaY * 0.0007;
+      // useGlobalBlob(backgroundCanvasContainer.value, slide);
+      // Scrollbar.init(document.querySelector(".scroller"), {
+      //   damping: 0.1,
+      //   thumbMinSize: 20,
+      //   renderByPixels: true,
+      //   alwaysShowTracks: true,
       // });
     });
 
@@ -141,6 +134,8 @@ export default {
       firstTab,
       secondTab,
       thirdTab,
+      // backgroundCanvasContainer,
+      // scroller,
     };
   },
 };

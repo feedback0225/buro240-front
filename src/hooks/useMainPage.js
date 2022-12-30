@@ -276,22 +276,10 @@ export default function useMainPage() {
         end: "100% center",
         toggleActions: "restart reverse restart pause",
         onEnter: () => {
-          // console.log("enter");
           slide.value = 5;
         },
         onEnterBack: () => {
-          // console.log("onEnterLeave");
           slide.value = 5;
-        },
-        onLeave: () => {
-          // console.log("leave projects");
-        },
-        onLeaveBack: () => {
-          // console.log("onLeaveBack");
-          // slide.value = 5;
-        },
-        onToggle: () => {
-          // console.log("toggle");
         },
       },
     });
@@ -305,25 +293,14 @@ export default function useMainPage() {
         end: "100% center",
         toggleActions: "restart reverse restart pause",
         onEnter: () => {
-          // console.log("enter");
           slide.value = 6;
         },
         onEnterBack: () => {
-          // console.log("onEnterLeave");
           slide.value = 6;
-        },
-        onLeave: () => {
-          // console.log("leave projects");
-        },
-        onLeaveBack: () => {
-          // console.log("onLeaveBack");
-          // slide.value = 6;
-        },
-        onToggle: () => {
-          // console.log("toggle");
         },
       },
     });
+
     const headerNav = document.querySelector(".header-nav");
     // decoration section
     gsap.timeline({
@@ -332,7 +309,6 @@ export default function useMainPage() {
         trigger: ".decoration",
         start: "100% 15%",
         // markers: true,
-        end: "100% center",
         toggleActions: "restart reverse restart pause",
         onEnter: () => {
           slide.value = 7;
@@ -351,6 +327,7 @@ export default function useMainPage() {
 
     const login = gsap.timeline({
       scrollTrigger: {
+        // markers: true,
         scroller: ".container",
         trigger: ".login",
         start: "-30% 15%",
@@ -386,13 +363,11 @@ export default function useMainPage() {
       .to(".login__form .login__label:nth-child(1)", {
         opacity: 1,
       });
-    // .to(".login__form .login__label:nth-child(2)", {
-    //   opacity: 1,
-    // })
-    // .to(".login__form .login__label:nth-child(3)", {
-    //   opacity: 1,
-    // });
   }
+
+  // const fadeLogoOnForm = gsap.timeline({
+  //
+  // })
 
   return {
     doAnimate,
