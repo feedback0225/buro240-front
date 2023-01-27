@@ -1,15 +1,13 @@
 <template>
-  <div class="scroller">
-    <HeaderSection class="header" />
-    <HeroSection class="hero" />
-    <SpiralDisks :can-pick-disk="canPickDisk" class="spiral-disks" />
-    <ProjectsPage class="projects" v-show="false" />
-    <ChessSection class="chess" v-show="false" />
-    <SoundsSection class="sounds" />
-    <DecorationSection class="decoration" @unlock="unlockSection" />
-    <LockedSection ref="lockedSection" class="locked" v-show="lockedState" />
-    <LoginSection class="login" />
-  </div>
+  <HeaderSection class="header" />
+  <HeroSection class="hero" />
+  <SpiralDisks :can-pick-disk="canPickDisk" class="spiral-disks" />
+  <ProjectsPage class="projects" v-show="false" />
+  <ChessSection class="chess" v-show="false" />
+  <SoundsSection class="sounds" />
+  <DecorationSection class="decoration" @unlock="unlockSection" />
+  <LockedSection ref="lockedSection" class="locked" v-show="lockedState" />
+  <LoginSection class="login" />
 </template>
 
 <script>
@@ -25,7 +23,7 @@ import LockedSection from "@/components/Locked/LockedSection.vue";
 import LoginSection from "@/components/Login/LoginSection.vue";
 import useMainPage from "@/hooks/useMainPage";
 import { onMounted, ref, watch } from "vue";
-import Scrollbar from "smooth-scrollbar";
+// import Scrollbar from "smooth-scrollbar";
 
 export default {
   components: {
@@ -47,6 +45,9 @@ export default {
     const backgroundCanvasContainer = ref(null);
     const lockedState = ref(false);
     const lockedSection = ref(false);
+    // let smoothScrollbar;
+    let lockedElement;
+    let lockedElementPosition;
     onMounted(() => {
       useGlobalBlob(document.querySelector(".background-blob"), slide);
     });
@@ -59,6 +60,10 @@ export default {
 
     function unlockSection() {
       lockedState.value = true;
+      document.querySelector(".container").scroll({
+        top: lockedElementPosition.y,
+        behavior: "smooth",
+      });
     }
 
     function doActiveSpiral() {
@@ -73,13 +78,18 @@ export default {
       document.fonts.ready.then(() => {
         doAnimate(slide);
       });
-
-      Scrollbar.init(document.querySelector(".scroller"), {
-        damping: 0.1,
-        thumbMinSize: 20,
-        renderByPixels: true,
-        alwaysShowTracks: true,
-      });
+      lockedElement = document.querySelector(".locked");
+      if (lockedElement) {
+        lockedElement.style.display = "block";
+        lockedElementPosition = lockedElement.getBoundingClientRect();
+        lockedElement.style.display = "none";
+      }
+      // smoothScrollbar = Scrollbar.init(document.querySelector(".scroller"), {
+      //   damping: 0.1,
+      //   thumbMinSize: 20,
+      //   renderByPixels: true,
+      //   alwaysShowTracks: true,
+      // });
     });
 
     return {
