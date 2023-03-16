@@ -1,7 +1,7 @@
 const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
   transpileDependencies: true,
-  publicPath: "/buro-240-build/",
+  publicPath: "/buro-240-build2/",
   css: {
     loaderOptions: {
       scss: {

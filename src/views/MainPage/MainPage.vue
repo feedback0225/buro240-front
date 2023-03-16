@@ -98,6 +98,9 @@ export default {
       document.fonts.ready.then(() => {
         doAnimate(e);
       });
+      if (document.querySelector("body").classList.contains("fp-viewing-2")) {
+        doActiveSpiral();
+      } else removeActiveSpiral();
     };
     onMounted(() => {
       useGlobalBlob(document.querySelector(".background-blob"), slide);
@@ -126,7 +129,6 @@ export default {
     }
 
     onMounted(() => {
-      console.log(slide);
       lockedElement = document.querySelector(".locked");
       if (lockedElement) {
         lockedElement.style.display = "block";

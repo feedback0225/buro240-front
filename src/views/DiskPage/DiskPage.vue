@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import { PHRASE, TEXTURES } from "@/constants";
+import { PHRASE, TEXTURES } from "../../constants";
 import useBreakpoints from "@/hooks/useBreakpoints";
 import { onMounted, ref, computed, reactive } from "vue";
 import { useRoute } from "vue-router";

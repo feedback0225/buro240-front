@@ -39,10 +39,10 @@ export const PHRASE = [
   "ROKLUMROKLUMROKLUMROKLUM",
 ];
 
-import topTexture1 from "@/assets/diskTopSide1.png";
-import topTexture2 from "@/assets/diskTopSide2.png";
-import topPhoto from "@/assets/topPhoto1.png";
-import sideTextureCommon from "@/assets/sidePhoto.png";
+import topTexture1 from "./assets/diskTopSide1.png";
+import topTexture2 from "./assets/diskTopSide2.png";
+import topPhoto from "./assets/topPhoto1.png";
+import sideTextureCommon from "./assets/sidePhoto.png";
 
 export const TEXTURES = [
   { top: topTexture1, left: sideTextureCommon, photo: topPhoto },
