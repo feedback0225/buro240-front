@@ -1,46 +1,53 @@
 {
-  "name": "buro240",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "start": "vue-cli-service serve --mode production --open",
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
-  "dependencies": {
-    "core-js": "^3.8.3",
-    "dat.gui": "^0.7.9",
-    "gsap": "^3.11.3",
-    "interactjs": "^1.10.17",
-    "locomotive-scroll": "^4.1.4",
-    "normalize-scss": "^7.0.1",
-    "smooth-scrollbar": "^8.8.1",
-    "three": "^0.145.0",
-    "vue": "^3.2.13",
-    "vue-router": "^4.1.6",
-    "vue-simple-svg": "^2.0.2",
-    "vue-svg-sprite": "^2.2.1",
-    "vue3-smooth-scroll": "^0.8.1"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
-    "@vue/cli-plugin-babel": "~5.0.0",
-    "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-service": "~5.0.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-vue": "^8.7.1",
-    "prettier": "^2.7.1",
-    "sass": "^1.55.0",
-    "sass-loader": "^13.1.0"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead",
-    "not ie 11"
-  ]
+    "name": "buro240",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "start": "vue-cli-service serve --mode production --open",
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint"
+    },
+    "dependencies": {
+        "animate.css": "^4.1.1",
+        "core-js": "^3.8.3",
+        "dat.gui": "^0.7.9",
+        "fullpage.js": "^4.0.18",
+        "gsap": "^3.11.3",
+        "interactjs": "^1.10.17",
+        "locomotive-scroll": "^4.1.4",
+        "normalize-scss": "^7.0.1",
+        "smooth-scrollbar": "^8.8.1",
+        "swiper": "^9.1.0",
+        "three": "^0.145.0",
+        "vue": "^3.2.13",
+        "vue-fullpage.js": "^0.2.13",
+        "vue-router": "^4.1.6",
+        "vue-scroll-snap": "^0.1.11",
+        "vue-simple-svg": "^2.0.2",
+        "vue-svg-sprite": "^2.2.1",
+        "vue3-smooth-scroll": "^0.8.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.12.16",
+        "@babel/eslint-parser": "^7.12.16",
+        "@vue/cli-plugin-babel": "~5.0.0",
+        "@vue/cli-plugin-eslint": "~5.0.0",
+        "@vue/cli-service": "~5.0.0",
+        "eslint": "^7.32.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-vue": "^8.7.1",
+        "prettier": "^2.7.1",
+        "sass": "^1.55.0",
+        "sass-loader": "^13.1.0",
+        "vue-fullscreen": "^2.6.1",
+        "vue-plain-slider": "^1.1.1"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not dead",
+        "not ie 11"
+    ]
 }

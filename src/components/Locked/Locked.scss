@@ -1,57 +1,50 @@
 .locked {
-  @include section;
-  padding: 50px 50px;
-  background-image: url('@/assets/soundRow.svg'), url('@/assets/lockedCenter.png'), url('@/assets/Rectangle35.png');
-  background-size: 50%, 25%, cover;
-  background-position: center bottom 20%, center bottom 23%, top center;
-  background-repeat: repeat-x, no-repeat, no-repeat;
-  
-  &__header {
-    height: 60%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  &__container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 68%;
-    height: 100%;
-    margin: auto;
-  }
-
-  //&__img {
-  //  position: absolute;
-  //  bottom: calc(40% - (298px / 2));
-  //  left: calc(50% - (298px / 2));
-  //  max-width: 298px;
-  //  max-height: 298px;
-  //  display: block;
-  //}
-
-  &__title {
-    @include title-reset;
-    width: 100%;
-    display: block;
-    text-align: center;
-    font-size: max(10vw, 50px);
-    color: #fff;
-  }
-
-
-  &__paragraph {
-    @include p-reset;
-    align-self: flex-start;
-    width: 100%;
-    max-width: 900px;
-    font-weight: 700;
-    font-size: max(2vw, 8px);
-    color: #fff;
-    margin-bottom: 40px;
-  }
-
+    @include section;
+    padding: 50px 50px;
+    background-image: url('@/assets/soundRow.svg'), url('@/assets/lockedCenter.png'), url('@/assets/Rectangle35.png');
+    background-size: 50%, 25%, cover;
+    background-position: center bottom 20%, center bottom 23%, top center;
+    background-repeat: repeat-x, no-repeat, no-repeat;
+    &__header {
+        height: 60%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    &__container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 68%;
+        height: 100%;
+        margin: auto;
+    }
+    //&__img {
+    //  position: absolute;
+    //  bottom: calc(40% - (298px / 2));
+    //  left: calc(50% - (298px / 2));
+    //  max-width: 298px;
+    //  max-height: 298px;
+    //  display: block;
+    //}
+    &__title {
+        @include title-reset;
+        width: 100%;
+        display: block;
+        text-align: start;
+        font-size: max(10vw, 50px);
+        color: #fff;
+    }
+    &__paragraph {
+        @include p-reset;
+        align-self: flex-start;
+        width: 100%;
+        max-width: 900px;
+        font-weight: 700;
+        font-size: max(2vw, 8px);
+        color: #fff;
+        margin-bottom: 40px;
+    }
 }

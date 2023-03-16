@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="ru" class="page">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body class="page__body">
+    <link rel="stylesheet" type="text/css" href="fullpage.css" />
+
+    <!-- This following line is optional. Only necessary if you use the option css3:false and you want to use other easing effects rather than "easeInOutCubic". -->
+    <script src="vendors/easings.min.js"></script>
+
+    <script type="text/javascript" src="fullpage.js"></script>
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+
+</head>
+
+<body class="page__body">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
     <!-- <script type="module" src="../src/3d/index.js"></script> -->
-  </body>
+</body>
+
 </html>

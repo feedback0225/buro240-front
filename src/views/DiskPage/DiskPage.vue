@@ -9,6 +9,21 @@
       </div>
       <div class="disk-page__label">
         <div class="disk-page__label-instance">
+          <svg
+            class="card"
+            width="150"
+            height="250"
+            viewBox="0 0 150 250"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M20 0C8.95431 0 0 8.9543 0 20V230C0 241.046 8.9543 250 20 250H130C141.046 250 150 241.046 150 230V20C150 8.9543 141.046 0 130 0H20ZM75 28C78.3137 28 81 25.3137 81 22C81 18.6863 78.3137 16 75 16C71.6863 16 69 18.6863 69 22C69 25.3137 71.6863 28 75 28Z"
+              fill="#A2B79E"
+            />
+          </svg>
           <span class="disk-page__label-hole"></span>
           <span class="disk-page__label-text">
             Lorem ipsum dolor sit amet,
@@ -20,6 +35,21 @@
           />
         </div>
         <div class="disk-page__label-instance">
+          <svg
+            class="card"
+            width="150"
+            height="250"
+            viewBox="0 0 150 250"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M20 0C8.95431 0 0 8.9543 0 20V230C0 241.046 8.9543 250 20 250H130C141.046 250 150 241.046 150 230V20C150 8.9543 141.046 0 130 0H20ZM75 28C78.3137 28 81 25.3137 81 22C81 18.6863 78.3137 16 75 16C71.6863 16 69 18.6863 69 22C69 25.3137 71.6863 28 75 28Z"
+              fill="#A2B79E"
+            />
+          </svg>
           <span class="disk-page__label-hole"></span>
           <span class="disk-page__label-text">
             Lorem ipsum dolor sit amet,

@@ -30,7 +30,7 @@
     </ul>
   </nav>
   <div class="container">
-    <router-view @slideChange="changeSlide" />
+    <router-view @slideChange="changeSlide" @changeActive="changeActiveItem" />
   </div>
   <div ref="backgroundCanvasContainer" class="background-blob"></div>
 </template>
@@ -38,7 +38,7 @@
 <script>
 import useBreakpoints from "@/hooks/useBreakpoints";
 // import Scrollbar from "smooth-scrollbar";
-import { onMounted, ref, watch, computed } from "vue";
+import { onMounted, ref, computed } from "vue";
 import gsap from "gsap";
 // import useGlobalBlob from "@/3d/blob";
 
@@ -51,6 +51,7 @@ export default {
     const thirdTab = ref(null);
     const activeClass = "header-nav__item--active";
     const slide = ref(null);
+
     // const backgroundCanvasContainer = ref(null);
 
     // const scroller = ref(null);
@@ -66,34 +67,19 @@ export default {
         item.classList.remove(activeClass)
       );
     }
-
-    watch(slide, () => {
+    function changeActiveItem() {
       removeActiveNavItem();
-      switch (slide.value) {
-        case 1:
-          // firstTab.value.classList.add(activeClass);
-          break;
-        case 2:
-          firstTab.value.classList.add(activeClass);
-          break;
-        case 3:
-          firstTab.value.classList.add(activeClass);
-          break;
-        case 4:
-          secondTab.value.classList.add(activeClass);
-          break;
-        case 5:
-          secondTab.value.classList.add(activeClass);
-          break;
-        case 6:
-          thirdTab.value.classList.add(activeClass);
-          break;
-        case 7:
-          thirdTab.value.classList.add(activeClass);
-          break;
+      let bodyClass = document.querySelector("body").classList;
+      if (bodyClass.contains("fp-viewing-1")) {
+        firstTab.value.classList.add(activeClass);
+      } else if (bodyClass.contains("fp-viewing-2")) {
+        secondTab.value.classList.add(activeClass);
+      } else if (bodyClass.contains("fp-viewing-5")) {
+        thirdTab.value.classList.add(activeClass);
+      } else if (bodyClass.contains("fp-viewing-6")) {
+        thirdTab.value.classList.add(activeClass);
       }
-    });
-
+    }
     const iconState = computed(() => {
       if (width.value < 821)
         return {
@@ -129,6 +115,7 @@ export default {
     });
 
     return {
+      changeActiveItem,
       changeSlide,
       iconState,
       firstTab,

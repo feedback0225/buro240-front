@@ -1,72 +1,66 @@
 @import 'normalize-scss';
-
 @include normalize();
 @import '@/style/fonts.scss';
 @import './mixin';
 @import "./locomotive-scroll-base";
-
 *::before,
 *::after,
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .page {
-  &__body {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    // overflow-y: hidden;
-    overflow-x: hidden;
-    min-width: 320px;
-    font-family: 'UniversityRoman', 'georgia', 'sans-serif';
-    scroll-behavior: smooth;
-  }
+    &__body {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        // overflow-y: hidden;
+        overflow-x: hidden;
+        min-width: 320px;
+        font-family: 'UniversityRoman', 'georgia', 'sans-serif';
+        scroll-behavior: smooth;
+    }
 }
 
 .visually-hidden {
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  border: 0;
-  padding: 0;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  margin: -1px;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    margin: -1px;
 }
 
-
 svg:not(:root) {
-  overflow: visible;
+    overflow: visible;
 }
 
 .container {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  //scroll-snap-type: y mandatory;
-  //scroll-behavior: smooth;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  padding: 0;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  &--fixed {
-    overflow-y: hidden;
-  }
-
-  @media (max-width: 820px) {
-    scroll-snap-type: none;
-  }
+    // position: relative;
+    // width: 100vw;
+    // height: 100vh;
+    // //scroll-snap-type: y mandatory;
+    // //scroll-behavior: smooth;
+    // overflow-x: hidden;
+    // overflow-y: scroll;
+    // padding: 0;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    &--fixed {
+        overflow-y: hidden;
+    }
+    @media (max-width: 820px) {
+        scroll-snap-type: none;
+    }
 }
 
 .icon {
-  &--color-grey {
-    fill: rgba(200, 200, 200);
-  }
+    &--color-grey {
+        fill: rgba(200, 200, 200);
+    }
 }

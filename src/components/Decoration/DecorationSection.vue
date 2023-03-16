@@ -9,7 +9,7 @@
         v-for="i in 6"
         :key="i"
       >
-        <span class="decoration__label-hole"></span>
+        <span class="decoration__label-hole">ascasc</span>
         <span class="decoration__label-text">
           Lorem ipsum dolor sit amet,
         </span>

@@ -1,13 +1,35 @@
 <template>
-  <HeaderSection class="header" />
-  <HeroSection class="hero" />
-  <SpiralDisks :can-pick-disk="canPickDisk" class="spiral-disks" />
-  <ProjectsPage class="projects" v-show="false" />
-  <ChessSection class="chess" v-show="false" />
-  <SoundsSection class="sounds" />
-  <DecorationSection class="decoration" @unlock="unlockSection" />
-  <LockedSection ref="lockedSection" class="locked" v-show="lockedState" />
-  <LoginSection class="login" />
+  <!-- <vue-scroll-snap :fullscreen="true"> -->
+  <full-page :options="options" id="fullpage" ref="fullpage">
+    <div class="section">
+      <HeaderSection class="header" />
+    </div>
+    <!-- <div class="section"> -->
+    <div class="section">
+      <HeroSection class="hero" />
+    </div>
+    <!-- </div> -->
+    <div class="section">
+      <SpiralDisks :can-pick-disk="canPickDisk" class="spiral-disks" />
+    </div>
+    <ProjectsPage class="projects" v-show="false" />
+    <ChessSection class="chess" v-show="false" />
+    <div class="section">
+      <SoundsSection class="sounds" />
+    </div>
+    <!-- <div class="section"> -->
+    <div class="section">
+      <DecorationSection class="decoration" @unlock="unlockSection" />
+    </div>
+    <!-- </div> -->
+    <!-- <div class="section"> -->
+    <div v-if="lockedState" class="section">
+      <LockedSection ref="lockedSection" class="locked" v-show="lockedState" />
+    </div>
+    <div class="section">
+      <LoginSection class="login" />
+    </div>
+  </full-page>
 </template>
 
 <script>
@@ -23,10 +45,17 @@ import LockedSection from "@/components/Locked/LockedSection.vue";
 import LoginSection from "@/components/Login/LoginSection.vue";
 import useMainPage from "@/hooks/useMainPage";
 import { onMounted, ref, watch } from "vue";
-// import Scrollbar from "smooth-scrollbar";
-
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import Slider from "vue-plain-slider";
 export default {
   components: {
+    // eslint-disable-next-line vue/no-unused-components
+    Swiper,
+    // eslint-disable-next-line vue/no-unused-components
+    SwiperSlide,
+    // eslint-disable-next-line vue/no-unused-components
+    Slider,
     HeaderSection,
     HeroSection,
     SpiralDisks,
@@ -38,7 +67,22 @@ export default {
     LoginSection,
   },
 
-  setup(props, { emit }) {
+  data() {
+    return {
+      options: {
+        afterLoad: this.afterLoad,
+        scrollOverflow: true,
+        scrollBar: false,
+      },
+      inMove: false,
+      inMoveDelay: 400,
+      activeSection: 0,
+      offsets: [],
+      touchStartY: 0,
+      startY: 0,
+    };
+  },
+  setup(_props, { emit }) {
     const slide = ref(null);
     const { doAnimate } = useMainPage();
     const canPickDisk = ref(false);
@@ -48,6 +92,13 @@ export default {
     // let smoothScrollbar;
     let lockedElement;
     let lockedElementPosition;
+
+    const afterLoad = (e) => {
+      emit("changeActive", e);
+      document.fonts.ready.then(() => {
+        doAnimate(e);
+      });
+    };
     onMounted(() => {
       useGlobalBlob(document.querySelector(".background-blob"), slide);
     });
@@ -75,9 +126,7 @@ export default {
     }
 
     onMounted(() => {
-      document.fonts.ready.then(() => {
-        doAnimate(slide);
-      });
+      console.log(slide);
       lockedElement = document.querySelector(".locked");
       if (lockedElement) {
         lockedElement.style.display = "block";
@@ -96,6 +145,7 @@ export default {
       backgroundCanvasContainer,
       canPickDisk,
       unlockSection,
+      afterLoad,
       lockedState,
       lockedSection,
     };
